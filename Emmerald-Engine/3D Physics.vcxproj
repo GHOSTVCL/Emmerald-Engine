@@ -14,12 +14,13 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>EngineSol</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -81,26 +82,9 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_allegro5.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_android.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_dx10.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_dx11.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_dx12.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_dx9.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_glut.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_metal.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_opengl2.h" />
     <ClInclude Include="ImGUI\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="ImGUI\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_osx.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_sdl2.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_sdl3.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_sdlrenderer2.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_sdlrenderer3.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_vulkan.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_wgpu.h" />
-    <ClInclude Include="ImGUI\backends\imgui_impl_win32.h" />
+    <ClInclude Include="ImGUI\backends\imgui_impl_sdl.h" />
     <ClInclude Include="ImGUI\imconfig.h" />
     <ClInclude Include="ImGUI\imgui.h" />
     <ClInclude Include="ImGUI\imgui_internal.h" />
@@ -180,23 +164,8 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="glmath.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_allegro5.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_android.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_dx10.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_dx11.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_dx12.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_dx9.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_glut.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_opengl2.cpp" />
     <ClCompile Include="ImGUI\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_sdl2.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_sdl3.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_sdlrenderer2.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_sdlrenderer3.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_vulkan.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_wgpu.cpp" />
-    <ClCompile Include="ImGUI\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGUI\backends\imgui_impl_sdl.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />
     <ClCompile Include="ImGUI\imgui_demo.cpp" />
     <ClCompile Include="ImGUI\imgui_draw.cpp" />
@@ -245,11 +214,6 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ImGUI\backends\imgui_impl_metal.mm" />
-    <None Include="ImGUI\backends\imgui_impl_osx.mm" />
-    <None Include="ImGUI\backends\vulkan\generate_spv.sh" />
-    <None Include="ImGUI\backends\vulkan\glsl_shader.frag" />
-    <None Include="ImGUI\backends\vulkan\glsl_shader.vert" />
     <None Include="MathGeoLib\include\Geometry\KDTree.inl" />
     <None Include="MathGeoLib\include\Geometry\QuadTree.inl" />
     <None Include="MathGeoLib\include\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
