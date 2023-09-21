@@ -1,5 +1,6 @@
 #include "Application.h"
-
+#include "ModuleInput.h"
+#include "ImGUI/imgui.h"
 Application::Application()
 {
 	window = new ModuleWindow(this);
@@ -82,7 +83,9 @@ update_status Application::Update()
 	{
 		(*it)->PostUpdate(dt);
 	}
-
+	if (quitapp) {
+		ret = UPDATE_STOP;
+	}
 	FinishUpdate();
 	return ret;
 }

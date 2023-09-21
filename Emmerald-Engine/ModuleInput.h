@@ -18,7 +18,7 @@ public:
 	
 	ModuleInput(Application* app, bool start_enabled = true);
 	~ModuleInput();
-
+	bool quitinput = false;
 	bool Init();
 	update_status PreUpdate(float dt);
 	bool CleanUp();
@@ -66,5 +66,6 @@ private:
 	int mouse_z;
 	int mouse_x_motion;
 	int mouse_y_motion;
+	
 	//int mouse_z_motion;
 };

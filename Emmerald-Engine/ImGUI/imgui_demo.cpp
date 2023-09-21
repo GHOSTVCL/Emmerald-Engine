@@ -6708,7 +6708,10 @@ static void ShowExampleMenuFile()
     }
     if (ImGui::MenuItem("Checked", NULL, true)) {}
     ImGui::Separator();
-    if (ImGui::MenuItem("Quit", "Alt+F4")) {}
+    if (ImGui::MenuItem("Quit", "Alt+F4")) {
+    
+        
+    }
 }
 
 //-----------------------------------------------------------------------------
