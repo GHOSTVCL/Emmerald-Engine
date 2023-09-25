@@ -7,11 +7,12 @@ class ModuleEditor : public Module
 {
 public:
 	ModuleEditor(Application* app, bool start_enabled = true);
+
 	~ModuleEditor();
 
 	bool Init() override;
 	void DrawEditor();
-	bool Cleanup() override;
+	bool CleanUp() override;
 
 };
 

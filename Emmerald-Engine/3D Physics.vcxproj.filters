@@ -288,6 +288,9 @@
     <ClInclude Include="ImGUI\backends\imgui_impl_sdl2.h">
       <Filter>Sources\ImGUI\backends</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleEditor.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -442,6 +445,9 @@
     </ClCompile>
     <ClCompile Include="ImGUI\backends\imgui_impl_sdl2.cpp">
       <Filter>Sources\ImGUI\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditor.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
