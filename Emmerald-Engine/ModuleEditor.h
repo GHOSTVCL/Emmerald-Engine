@@ -2,6 +2,9 @@
 #define MODULE_EDITOR
 
 #include "Module.h"
+#include <vector>
+#include <string.h>
+
 
 class ModuleEditor : public Module
 {
@@ -13,6 +16,10 @@ public:
 	bool Init() override;
 	void DrawEditor();
 	bool CleanUp() override;
+	void AddFPS(const float aFPS);
+
+	std::vector <float> mFPSLog;
+	
 
 };
 
