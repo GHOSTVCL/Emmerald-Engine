@@ -28,7 +28,44 @@ ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Modul
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
 {}
-
+static const GLfloat g_vertex_buffer_data[] = {
+-1.0f,-1.0f,-1.0f, // triangle 1 : begin
+-1.0f,-1.0f, 1.0f,
+-1.0f, 1.0f, 1.0f, // triangle 1 : end
+1.0f, 1.0f,-1.0f, // triangle 2 : begin
+-1.0f,-1.0f,-1.0f,
+-1.0f, 1.0f,-1.0f, // triangle 2 : end
+1.0f,-1.0f, 1.0f,
+-1.0f,-1.0f,-1.0f,
+1.0f,-1.0f,-1.0f,
+1.0f, 1.0f,-1.0f,
+1.0f,-1.0f,-1.0f,
+-1.0f,-1.0f,-1.0f,
+-1.0f,-1.0f,-1.0f,
+-1.0f, 1.0f, 1.0f,
+-1.0f, 1.0f,-1.0f,
+1.0f,-1.0f, 1.0f,
+-1.0f,-1.0f, 1.0f,
+-1.0f,-1.0f,-1.0f,
+-1.0f, 1.0f, 1.0f,
+-1.0f,-1.0f, 1.0f,
+1.0f,-1.0f, 1.0f,
+1.0f, 1.0f, 1.0f,
+1.0f,-1.0f,-1.0f,
+1.0f, 1.0f,-1.0f,
+1.0f,-1.0f,-1.0f,
+1.0f, 1.0f, 1.0f,
+1.0f,-1.0f, 1.0f,
+1.0f, 1.0f, 1.0f,
+1.0f, 1.0f,-1.0f,
+-1.0f, 1.0f,-1.0f,
+1.0f, 1.0f, 1.0f,
+-1.0f, 1.0f,-1.0f,
+-1.0f, 1.0f, 1.0f,
+1.0f, 1.0f, 1.0f,
+-1.0f, 1.0f, 1.0f,
+1.0f,-1.0f, 1.0f
+};
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
@@ -108,9 +145,12 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
 	}
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3,GL_FLOAT,0,NULL);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 
-	// Projection matrix for
-	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	Grid.axis = true;
 
@@ -141,6 +181,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	App->editor->DrawEditor();
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	Grid.Render();
 
