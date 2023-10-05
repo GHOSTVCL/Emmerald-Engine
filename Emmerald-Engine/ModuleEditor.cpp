@@ -5,6 +5,8 @@
 #include "ImGui/imgui.h"
 #include "ImGui/backends/imgui_impl_opengl3.h"
 #include "ImGui/backends/imgui_impl_sdl2.h"
+#include "SDL/include/SDL.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
 
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -41,6 +43,7 @@ void ModuleEditor::DrawEditor()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
+
 
     if (ImGui::BeginMainMenuBar())
     {
@@ -79,6 +82,56 @@ void ModuleEditor::DrawEditor()
                     ShellExecute(NULL, "open", "https://github.com/GHOSTVCL", NULL, NULL, SW_SHOW);
                 }
                 ImGui::Text(" ");
+                ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
+                ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+                ImGui::Text("GLSL: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+                ImGui::Text("OpenGL version supported %s", glGetString(GL_VERSION));
+                if (ImGui::MenuItem("   https://www.opengl.org/"))
+                {
+                    ShellExecute(NULL, "open", "https://www.opengl.org/", NULL, NULL, SW_SHOW);
+                }
+                ImGui::Text("Using Glew %s", glewGetString(GLEW_VERSION));
+                if (ImGui::MenuItem("   https://glew.sourceforge.net/"))
+                {
+                    ShellExecute(NULL, "open", "https://glew.sourceforge.net/", NULL, NULL, SW_SHOW);
+                }
+                SDL_version version;
+                SDL_GetVersion(&version);
+                ImGui::Text("Using SDL %i.%i.%i", version.major, version.minor, version.patch);
+                if (ImGui::MenuItem("   https://www.libsdl.org/"))
+                {
+                    ShellExecute(NULL, "open", "https://www.libsdl.org/", NULL, NULL, SW_SHOW);
+                }
+                const char* version_gui = ImGui::GetVersion();
+                ImGui::Text("Using ImGui %s", version_gui);
+                if (ImGui::MenuItem("   https://github.com/ocornut/imgui"))
+                {
+                    ShellExecute(NULL, "open", "https://github.com/ocornut/imgui", NULL, NULL, SW_SHOW);
+                }
+                ImGui::Text("");
+                ImGui::Text("");
+                ImGui::Text("MIT License");
+                ImGui::Text("");
+                ImGui::Text("Copyright (c) 2023 GHOSTVCL");
+                ImGui::Text("");
+                ImGui::Text("Permission is hereby granted, free of charge, to any person obtaining a copy");
+                ImGui::Text("of this software and associated documentation files (the \"Software\"), to deal");
+                ImGui::Text("in the Software without restriction, including without limitation the rights");
+                ImGui::Text("to use, copy, modify, merge, publish, distribute, sublicense, and/or sell");
+                ImGui::Text("copies of the Software, and to permit persons to whom the Software is");
+                ImGui::Text("furnished to do so, subject to the following conditions:");
+                ImGui::Text("The above copyright notice and this permission notice shall be included in all");
+                ImGui::Text("copies or substantial portions of the Software.");
+                ImGui::Text("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR");
+                ImGui::Text("IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,");
+                ImGui::Text("FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE");
+                ImGui::Text("AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER");
+                ImGui::Text("LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,");
+                ImGui::Text("OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE");
+                ImGui::Text("SOFTWARE.");
+                
+            
+
                 ImGui::EndMenu();
             }
             ImGui::EndMenu();
