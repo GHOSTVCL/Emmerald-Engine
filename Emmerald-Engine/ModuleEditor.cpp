@@ -59,9 +59,28 @@ void ModuleEditor::DrawEditor()
             ImGui::Text("Hello world!");
             ImGui::EndMenu();
         }
-        if (ImGui::BeginMenu("About"))
+        if (ImGui::BeginMenu("Help"))
         {
-            ImGui::Text("Hello world!");
+            if (ImGui::BeginMenu("About"))
+            {
+                ImGui::Text("Emmerald Engine");
+                ImGui::Text(" ");
+                ImGui::Text("An engine made by two students cursing the third year of Design and Development degree at CITM.");
+                ImGui::Text(" ");
+                ImGui::Text("Engine made by: ");
+                ImGui::Text("Xavi Prats Paredes:  ");
+                if (ImGui::MenuItem("   Github: https://github.com/Xarderos"))
+                {
+                   ShellExecute(NULL, "open", "https://github.com/Xarderos", NULL, NULL, SW_SHOW);
+                }
+                ImGui::Text("Joan Giol Pozo: ");
+                if (ImGui::MenuItem("   Github:  https://github.com/GHOSTVCL"))
+                {
+                    ShellExecute(NULL, "open", "https://github.com/GHOSTVCL", NULL, NULL, SW_SHOW);
+                }
+                ImGui::Text(" ");
+                ImGui::EndMenu();
+            }
             ImGui::EndMenu();
         }
         ImGui::EndMainMenuBar();
