@@ -33,6 +33,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool quitapp = false;
+	float GetDT();
 private:
 
 	void AddModule(Module* mod);
