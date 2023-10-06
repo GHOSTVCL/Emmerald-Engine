@@ -133,7 +133,7 @@ bool ModuleRenderer3D::Init()
 	VAO = 0;
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
-	glGenVertexArrays(1, &VAO);
+	/*glGenVertexArrays(1, &VAO);*/
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(CubeVertices), CubeVertices, GL_STATIC_DRAW);
@@ -143,10 +143,6 @@ bool ModuleRenderer3D::Init()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(CubeIndices), CubeIndices, GL_STATIC_DRAW);
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	glBindVertexArray(VAO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glBindVertexArray(0);
 
 
 	return ret;
@@ -190,9 +186,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	glLineWidth(1.0f);
 
 
-	glBindVertexArray(VAO);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 
 	App->editor->DrawEditor();
 
