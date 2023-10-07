@@ -84,11 +84,33 @@ void ModuleEditor::DrawEditor()
                 App->window->SetScreenSize(winWidth, winHeight);
 
             }
+            
+            ImGui::EndMenu();
+        }
+        
+        if (ImGui::BeginMenu("Renderer")) {
+          
+            if (ImGui::Checkbox("Depth Test", &dtest))
+                (dtest) ? glDisable(GL_DEPTH_TEST) : glEnable(GL_DEPTH_TEST);
+
+            if (ImGui::Checkbox("Cull Face", &cface))
+                (cface) ? glDisable(GL_CULL_FACE) : glEnable(GL_CULL_FACE);
+
+            if (ImGui::Checkbox("Lighting", &lighting))
+                (lighting) ? glDisable(GL_LIGHTING) : glEnable(GL_LIGHTING);
+
+            if (ImGui::Checkbox("Color Material", &cmaterial))
+                (cmaterial) ? glDisable(GL_COLOR_MATERIAL) : glEnable(GL_COLOR_MATERIAL);
+
+            if (ImGui::Checkbox("Texture 2D", &txt2d))
+                (txt2d) ? glDisable(GL_TEXTURE_2D) : glEnable(GL_TEXTURE_2D);
+
+            if (ImGui::Checkbox("Wireframe", &wframe))
+                (wframe) ? glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) : glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
             ImGui::EndMenu();
         }
         ImGui::End();
-
     }
 
     ImGui::ShowDemoWindow();
@@ -233,3 +255,4 @@ void ModuleEditor::DisplayMainMenuBar()
         ImGui::EndMainMenuBar();
     }
 }
+
