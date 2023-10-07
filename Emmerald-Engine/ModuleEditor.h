@@ -24,6 +24,11 @@ public:
 	bool fullscreen = false;
 	bool resizeable = true;
 	bool bordered = true;
+
+	float setbrightness;
+	int winWidth;
+
+	int winHeight;
 };
 
 #endif //MODULE_EDITOR

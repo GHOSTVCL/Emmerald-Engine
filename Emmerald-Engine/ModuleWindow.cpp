@@ -123,3 +123,17 @@ void ModuleWindow::SetBorder(bool setborder)
 	}
 	SDL_SetWindowBordered(window, temp);
 }
+
+void ModuleWindow::SetBrightness(float brightness)
+{
+
+	SDL_SetWindowBrightness(window, brightness);
+
+}
+
+void ModuleWindow::SetScreenSize(int w, int h)
+{
+
+	SDL_SetWindowSize(window, w, h);
+
+}

@@ -23,6 +23,8 @@ public:
 	void SetFullscreen(bool ffullscreen);
 	void SetResizable(bool resize);
 	void SetBorder(bool setborder);
+	void SetBrightness(float brightness);
+	void SetScreenSize(int w, int h);
 
 public:
 	//The window we'll be rendering to

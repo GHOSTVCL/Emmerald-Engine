@@ -33,7 +33,9 @@ bool ModuleEditor::Init()
     ImGui_ImplOpenGL3_Init();
 
     mFPSLog.reserve(30);
-
+    setbrightness = 1.f;
+    winWidth = SCREEN_WIDTH;
+    winHeight = SCREEN_HEIGHT;
     return true;
 }
 
@@ -50,7 +52,19 @@ void ModuleEditor::DrawEditor()
 
     if (ImGui::Begin("Configuration"))
     {
-        if (ImGui::Begin("Window")) {
+        if (ImGui::BeginMenu("Application")) {
+
+            
+            ImGui::PlotHistogram("FPS", mFPSLog.data(), mFPSLog.size());
+            ImGui::EndMenu();
+
+        }
+        if (ImGui::BeginMenu("Window")) {
+            ImGui::SliderFloat("Brightness", &setbrightness, 0.00f, 1.00f);
+            ImGui::SliderInt("Width", &winWidth, 0, 1920);
+            ImGui::SliderInt("Height", &winHeight, 0, 1080);
+
+
             if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
                 App->window->SetFullscreen(fullscreen);
             }
@@ -64,9 +78,14 @@ void ModuleEditor::DrawEditor()
                 App->window->SetBorder(bordered);
             }
 
-            ImGui::PlotHistogram("FPS", mFPSLog.data(), mFPSLog.size());
+            if (ImGui::Button("APPLY")) {
 
-            ImGui::End();
+                App->window->SetBrightness(setbrightness);
+                App->window->SetScreenSize(winWidth, winHeight);
+
+            }
+
+            ImGui::EndMenu();
         }
         ImGui::End();
 
