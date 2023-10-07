@@ -21,8 +21,9 @@ public:
 	void AddFPS(const float aFPS);
 
 	std::vector <float> mFPSLog;
-	
-
+	bool fullscreen = false;
+	bool resizeable = true;
+	bool bordered = true;
 };
 
 #endif //MODULE_EDITOR

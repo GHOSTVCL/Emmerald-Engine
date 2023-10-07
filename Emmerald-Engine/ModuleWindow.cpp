@@ -68,7 +68,6 @@ bool ModuleWindow::Init()
 			screen_surface = SDL_GetWindowSurface(window);
 		}
 	}
-
 	return ret;
 }
 
@@ -91,4 +90,36 @@ bool ModuleWindow::CleanUp()
 void ModuleWindow::SetTitle(const char* title)
 {
 	SDL_SetWindowTitle(window, title);
+}
+
+void ModuleWindow::SetFullscreen(bool ffullscreen)
+{
+
+	SDL_SetWindowFullscreen(window, ffullscreen);
+
+
+}
+
+void ModuleWindow::SetResizable(bool resize)
+{
+	SDL_bool temp;
+	if (resize == true) {
+		temp = SDL_TRUE;
+	}
+	else {
+		temp = SDL_FALSE;
+	}
+	SDL_SetWindowResizable(window, temp);
+}
+
+void ModuleWindow::SetBorder(bool setborder)
+{
+	SDL_bool temp;
+	if (setborder == true) {
+		temp = SDL_TRUE;
+	}
+	else {
+		temp = SDL_FALSE;
+	}
+	SDL_SetWindowBordered(window, temp);
 }

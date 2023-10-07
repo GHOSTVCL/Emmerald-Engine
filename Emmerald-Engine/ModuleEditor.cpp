@@ -50,8 +50,26 @@ void ModuleEditor::DrawEditor()
 
     if (ImGui::Begin("Configuration"))
     {
-        ImGui::PlotHistogram("FPS", mFPSLog.data(), mFPSLog.size());
+        if (ImGui::Begin("Window")) {
+            if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
+                App->window->SetFullscreen(fullscreen);
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Resizable", &resizeable)) {
+                App->window->SetResizable(resizeable);
+            }
+
+            if (ImGui::Checkbox("Borderless", &bordered)) {
+                App->window->SetBorder(bordered);
+            }
+
+            ImGui::PlotHistogram("FPS", mFPSLog.data(), mFPSLog.size());
+
+            ImGui::End();
+        }
         ImGui::End();
+
     }
 
     ImGui::ShowDemoWindow();
@@ -171,6 +189,7 @@ void ModuleEditor::DisplayHelp()
         ImGui::EndMenu();
     }
 }
+
 void ModuleEditor::DisplayMainMenuBar()
 {
     if (ImGui::BeginMainMenuBar())
