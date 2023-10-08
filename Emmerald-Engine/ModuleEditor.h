@@ -25,12 +25,7 @@ public:
 	bool resizeable = true;
 	bool bordered = true;
 
-	bool dtest = false;
-	bool cface = false;
-	bool lighting = false;
-	bool cmaterial = false;
-	bool txt2d = false;
-	bool wframe = false;
+	
 
 	float setbrightness;
 	int winWidth;

@@ -22,6 +22,7 @@ public:
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
+	void RendererMenu();
 
 	void OnResize(int width, int height);
 
@@ -36,4 +37,11 @@ public:
 	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int EBO;
+
+	bool dtest = false;
+	bool cface = false;
+	bool lighting = false;
+	bool cmaterial = false;
+	bool txt2d = false;
+	bool wframe = false;
 };
