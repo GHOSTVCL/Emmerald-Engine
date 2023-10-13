@@ -8,6 +8,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+#include "ModuleImporter.h"
 #include<vector>
 
 class Application
@@ -18,6 +19,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
+	ModuleImporter* importer;
 private:
 
 	Timer	ms_timer;

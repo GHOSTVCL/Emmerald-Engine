@@ -53,9 +53,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #ifdef __cplusplus
-#include <assimp/quaternion.h>
+#include "quaternion.h"
 
-#include <cmath>
+#include "cmath"
 
 // ------------------------------------------------------------------------------------------------
 /** Transformation of a quaternion by a 4x4 matrix */

@@ -51,12 +51,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #ifdef __cplusplus
-#include <assimp/matrix3x3.h>
-#include <assimp/matrix4x4.h>
+#include "matrix3x3.h"
+#include "matrix4x4.h"
 
-#include <algorithm>
-#include <cmath>
-#include <limits>
+#include "algorithm"
+#include "cmath"
+#include "limits"
 
 // ------------------------------------------------------------------------------------------------
 // Construction from a 4x4 matrix. The remaining parts of the matrix are ignored.
