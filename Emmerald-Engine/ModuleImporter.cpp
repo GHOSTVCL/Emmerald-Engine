@@ -18,10 +18,16 @@ ModuleImporter::~ModuleImporter()
 {
 }
 
+update_status Update()
+{
+	return UPDATE_CONTINUE;
+}
 
 bool ModuleImporter::Init()
 {
 	bool ret = true;
+
+
 	return ret;
 }
 

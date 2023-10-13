@@ -12,6 +12,7 @@ public:
 	~ModuleImporter();
 
 	bool Init() override;
+	update_status Update();
 	bool CleanUp();
 
 
