@@ -3,7 +3,7 @@
 #include "ModuleRenderer3D.h"
 #include "SDL\include\SDL_opengl.h"
 #include "ImGui/imgui.h"
-
+#include "ModuleImporter.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -25,24 +25,7 @@ ModuleRenderer3D::~ModuleRenderer3D()
 {}
 
 // Called before render is available
-static const GLfloat CubeVertices[] = {
-	-1, -1, -1,
-	1, -1, -1,
-	1, 1, -1,
-	-1, 1, -1,
-	-1, -1, 1,
-	1, -1, 1,
-	1, 1, 1,
-	-1, 1, 1
-};
-static const GLuint CubeIndices[] = {
-	0, 1, 3, 3, 1, 2,
-	1, 5, 2, 2, 5, 6,
-	5, 4, 6, 6, 4, 7,
-	4, 0, 7, 7, 0, 3,
-	3, 2, 7, 7, 2, 6,
-	4, 5, 0, 0, 5, 1
-};
+
 bool ModuleRenderer3D::Init()
 {
 	LOG("Creating 3D Renderer context");
@@ -128,19 +111,7 @@ bool ModuleRenderer3D::Init()
 
 	Grid.axis = true;
 
-	VBO = 0;
-	EBO = 0;
-	VAO = 0;
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	/*glGenVertexArrays(1, &VAO);*/
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(CubeVertices), CubeVertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(CubeIndices), CubeIndices, GL_STATIC_DRAW);
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 
@@ -173,25 +144,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	Grid.Render();
 	//Draw test here
-	glLineWidth(2.0f);
-	glBegin(GL_TRIANGLES);
-
-	glVertex3d(0,0,0); glVertex3d(1,1,0); glVertex3d(1,0,0);
-	glVertex3d(0,0,0); glVertex3d(0,1,0); glVertex3d(1,1,0);
-
-	glVertex3d(0, 0, 0); glVertex3d(0, 1, 1); glVertex3d(0, 1, 0);
-	glVertex3d(0, 0, 1); glVertex3d(0, 1, 1); glVertex3d(0, 0, 0);
-
-	glEnd();
-	glLineWidth(1.0f);
-
-
-	
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+	for (int i = 0; i < App->importer->ourMeshes.size()-1; i++) {
+		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes.at(i).num_index, GL_UNSIGNED_INT, App->importer->ourMeshes.at(i).index);
+	}
 
 	App->editor->DrawEditor();
 

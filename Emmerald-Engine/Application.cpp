@@ -17,10 +17,10 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(importer);
 	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(editor);
-	AddModule(importer);
 
 }
 
