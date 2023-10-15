@@ -19,6 +19,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
+	void BindVBO();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
@@ -44,4 +45,5 @@ public:
 	bool cmaterial = false;
 	bool txt2d = false;
 	bool wframe = false;
+
 };

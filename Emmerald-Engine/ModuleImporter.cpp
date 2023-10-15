@@ -28,8 +28,9 @@ ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(ap
 			{
 				temp.num_index = scene->mMeshes[i]->mNumFaces * 3;
 				
-				temp.index = new unsigned int[scene->mMeshes[i]->mNumFaces * 3]; // assume each face is a triangle
+				temp.index = new unsigned int[temp.num_index]; // assume each face is a triangle
 
+				
 				for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; y++)
 				{
 					if (scene->mMeshes[i]->mFaces[y].mNumIndices != 3)
@@ -39,13 +40,13 @@ ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(ap
 					else {
 
 						memcpy(&temp.index[y * 3], scene->mMeshes[i]->mFaces[y].mIndices, 3 * sizeof(unsigned int));
-						
+
 					}
 				}
 			}
 			ourMeshes.push_back(temp);
-		}
 
+		}
 		aiReleaseImport(scene);
 
 	}

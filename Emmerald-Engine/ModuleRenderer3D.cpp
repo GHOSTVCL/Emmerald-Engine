@@ -110,13 +110,31 @@ bool ModuleRenderer3D::Init()
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	Grid.axis = true;
+	BindVBO();
 
-
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
+	
 
 
 	return ret;
+}
+
+void ModuleRenderer3D::BindVBO()
+{
+	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
+
+		const ModuleImporter::Vdata mesh = App->importer->ourMeshes[i];
+		glGenBuffers(1, &App->importer->ourMeshes[i].VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh.num_vertex * 3, mesh.vertex, GL_STATIC_DRAW);
+
+		glGenBuffers(1, &App->importer->ourMeshes[i].EBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.num_index, mesh.index, GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+	
 }
 
 // PreUpdate: clear buffer
@@ -144,8 +162,15 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	Grid.Render();
 	//Draw test here
-	for (int i = 0; i < App->importer->ourMeshes.size()-1; i++) {
-		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes.at(i).num_vertex, GL_UNSIGNED_INT, App->importer->ourMeshes.at(i).index);
+	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
+		const ModuleImporter::Vdata& mesh = App->importer->ourMeshes[i];
+
+		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(mesh.vertex), (void*)0);
+
+		glDrawElements(GL_TRIANGLES, mesh.num_index, GL_UNSIGNED_INT, 0);
 	}
 
 	App->editor->DrawEditor();
