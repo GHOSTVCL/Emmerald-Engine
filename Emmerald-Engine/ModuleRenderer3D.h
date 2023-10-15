@@ -35,9 +35,6 @@ public:
 	
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
-	unsigned int VAO;
-	unsigned int VBO;
-	unsigned int EBO;
 
 	bool dtest = false;
 	bool cface = false;
