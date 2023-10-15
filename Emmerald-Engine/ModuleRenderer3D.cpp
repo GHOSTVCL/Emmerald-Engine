@@ -145,7 +145,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	Grid.Render();
 	//Draw test here
 	for (int i = 0; i < App->importer->ourMeshes.size()-1; i++) {
-		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes.at(i).num_index, GL_UNSIGNED_INT, App->importer->ourMeshes.at(i).index);
+		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes.at(i).num_vertex, GL_UNSIGNED_INT, App->importer->ourMeshes.at(i).index);
 	}
 
 	App->editor->DrawEditor();

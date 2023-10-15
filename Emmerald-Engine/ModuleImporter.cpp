@@ -9,9 +9,8 @@ ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(ap
 {
 	const char* file_path = "../Assets/Models/BakerHouse.fbx";
 
-	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate|aiProcess_FlipUVs);
 
-	
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
@@ -28,20 +27,25 @@ ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(ap
 			if (scene->mMeshes[i]->HasFaces())
 			{
 				temp.num_index = scene->mMeshes[i]->mNumFaces * 3;
-				temp.index = new unsigned int[scene->mMeshes[i]->mMaterialIndex]; // assume each face is a triangle
-				for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; ++y)
+				
+				temp.index = new unsigned int[scene->mMeshes[i]->mNumFaces * 3]; // assume each face is a triangle
+
+				for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; y++)
 				{
 					if (scene->mMeshes[i]->mFaces[y].mNumIndices != 3)
 					{
 						LOG("WARNING, geometry face with != 3 indices!");
 					}
 					else {
-						memcpy(&temp.index[i * 3], scene->mMeshes[i]->mFaces[i].mIndices, 3 * sizeof(uint));
+
+						memcpy(&temp.index[y * 3], scene->mMeshes[i]->mFaces[y].mIndices, 3 * sizeof(unsigned int));
+						
 					}
 				}
 			}
 			ourMeshes.push_back(temp);
 		}
+
 		aiReleaseImport(scene);
 
 	}
