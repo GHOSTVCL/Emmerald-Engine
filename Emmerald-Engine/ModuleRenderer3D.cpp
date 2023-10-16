@@ -130,8 +130,7 @@ void ModuleRenderer3D::BindVBO()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * App->importer->ourMeshes[i].num_index, App->importer->ourMeshes[i].index, GL_STATIC_DRAW);
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(App->importer->ourMeshes[i].vertex), (void*)0);
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -166,10 +165,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	Grid.Render();
 	//Draw test here
 	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
-
+		
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
-
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3, GL_FLOAT, 0, NULL);
 		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].num_index, GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
