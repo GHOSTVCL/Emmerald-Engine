@@ -1,11 +1,11 @@
-#include "ModuleImporter.h"
+#include "ModuleMesh.h"
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 #include <vector>
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
-ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	const char* file_path = "../Assets/Models/BakerHouse.fbx";
 
@@ -55,7 +55,7 @@ ModuleImporter::ModuleImporter(Application* app, bool start_enabled) : Module(ap
 
 }
 
-ModuleImporter::~ModuleImporter()
+ModuleMesh::~ModuleMesh()
 {
 }
 
@@ -64,7 +64,7 @@ update_status Update()
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleImporter::CleanUp()
+bool ModuleMesh::CleanUp()
 {
 	return true;
 }

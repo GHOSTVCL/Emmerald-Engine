@@ -297,7 +297,7 @@
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleImporter.h">
+    <ClInclude Include="ModuleMesh.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Assimp\Assimp\include\texture.h">
@@ -422,6 +422,9 @@
     </ClInclude>
     <ClInclude Include="DevIL\include\ilut_config.h">
       <Filter>Sources\DevIL</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTexture.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -581,7 +584,10 @@
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleImporter.cpp">
+    <ClCompile Include="ModuleMesh.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>

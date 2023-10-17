@@ -3,7 +3,8 @@
 #include "ModuleRenderer3D.h"
 #include "SDL\include\SDL_opengl.h"
 #include "ImGui/imgui.h"
-#include "ModuleImporter.h"
+#include "ModuleMesh.h"
+#include "ModuleTexture.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -130,8 +131,6 @@ void ModuleRenderer3D::BindVBO()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * App->importer->ourMeshes[i].num_index, App->importer->ourMeshes[i].index, GL_STATIC_DRAW);
 
-		
-
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
@@ -173,6 +172,13 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].num_index, GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_COORD_ARRAY);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].id_vertex);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
 	}
 
 	App->editor->DrawEditor();
