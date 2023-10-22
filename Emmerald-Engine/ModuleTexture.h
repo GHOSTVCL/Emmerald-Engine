@@ -8,24 +8,33 @@
 #include <string>
 
 
+struct Texture
+{
+	Texture(GLuint* id, uint* _width, uint* _height)
+	{
+		textID = *id;
+		width = *_width;
+		height = *_height;
+	}
 
+	GLuint textID;
+	uint width;
+	uint height;
+};
 class ModuleTexture : public Module
 {
 public:
-
+	
 	ModuleTexture(Application* app, bool start_enabled = true);
 	~ModuleTexture() {}
-	bool Init();
+	bool Start();
 	bool CleanUp();
 
 	bool GenTexture(GLuint* imgData, GLuint width, GLuint height);
 
-	bool LoadTexture(std::string path);
-
-	void FreeTexture();
+	static Texture* LoadTexture(std::string textfile);
 
 	std::string texturePath;
-	GLuint texID;
-	GLuint texWidth, texHeight;
+
 
 };

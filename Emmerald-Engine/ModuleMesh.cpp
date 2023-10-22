@@ -20,20 +20,46 @@ void ModuleMesh::LoadMesh(const char* file_path)
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 
-			Vdata temp;
+			MeshData temp;
 			temp.num_vertex = scene->mMeshes[i]->mNumVertices;
 			temp.vertex = new float[temp.num_vertex * 3];
 			memcpy(temp.vertex, scene->mMeshes[i]->mVertices, sizeof(float) * temp.num_vertex * 3);
 
-
 			LOG("New mesh with %d vertices", temp.num_vertex);
+			
+			for (unsigned int o = 0; o < scene->mMeshes[i]->mNumVertices; o++)
+			{
+				Normals temp2;
+				TextCoords coords;
+				if (scene->mMeshes[i]->HasNormals())
+				{
+					temp2.x = scene->mMeshes[i]->mNormals[o].x;
+					temp2.y = scene->mMeshes[i]->mNormals[o].y;
+					temp2.z = scene->mMeshes[i]->mNormals[o].z;
+					
+				}
+				if (scene->mMeshes[i]->HasTextureCoords(0))
+				{
+					coords.x = scene->mMeshes[i]->mTextureCoords[0][o].x;
+					coords.y = scene->mMeshes[i]->mTextureCoords[0][o].y;
+
+				}
+				else
+				{
+					coords.x = 0.0f;
+					coords.y = 0.0f;
+				}
+				temp.normals.push_back(temp2);
+				temp.textCoords.push_back(coords);
+
+			}
+
 
 			if (scene->mMeshes[i]->HasFaces())
 			{
 				temp.num_index = scene->mMeshes[i]->mNumFaces * 3;
 
 				temp.index = new unsigned int[temp.num_index]; // assume each face is a triangle
-
 
 				for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; y++)
 				{

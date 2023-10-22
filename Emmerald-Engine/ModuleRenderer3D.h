@@ -2,7 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Light.h"
-
+#include "ModuleTexture.h"
 #include "MathGeoLib/include/Math/float3x3.h"
 #include "MathGeoLib/include/Math/float4x4.h"
 #include "Primitive.h"
@@ -48,5 +48,7 @@ public:
 	bool cmaterial = false;
 	bool txt2d = false;
 	bool wframe = false;
+	Texture* house;
+	
 
 };

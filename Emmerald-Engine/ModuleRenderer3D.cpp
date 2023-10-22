@@ -29,10 +29,13 @@ ModuleRenderer3D::~ModuleRenderer3D()
 
 bool ModuleRenderer3D::Init()
 {
+
+
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 	App->importer->LoadMesh("../Assets/Models/BakerHouse.fbx");
-	App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
+	house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
+	
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if (context == NULL)
@@ -195,6 +198,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		
+
 
 		//glEnable(GL_TEXTURE_2D);
 		//glEnable(GL_TEXTURE_COORD_ARRAY);
