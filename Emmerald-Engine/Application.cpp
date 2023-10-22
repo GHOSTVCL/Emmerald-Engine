@@ -19,8 +19,8 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(textures);
 	AddModule(importer);
+	AddModule(textures);
 	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(editor);

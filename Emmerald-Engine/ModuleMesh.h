@@ -10,6 +10,8 @@ class ModuleMesh : public Module
 public:
 	ModuleMesh(Application* app, bool start_enabled = true);
 
+	void LoadMesh(const char* file_path);
+
 	~ModuleMesh();
 	update_status Update();
 	bool CleanUp();

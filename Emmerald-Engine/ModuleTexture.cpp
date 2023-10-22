@@ -15,36 +15,9 @@ ModuleTexture::ModuleTexture(Application* app, bool start_enabled) : Module(app,
 	//textureID = 0;
 }
 
-bool ModuleTexture::Start()
+bool ModuleTexture::Init()
 {
-	texWidth = 0;
-	texHeight = 0;
-	texturePath = "";
-	texID = 0;
 
-	//Initialize checker image
-	for (int i = 0; i < CHECKERS_HEIGHT; i++) {
-		for (int j = 0; j < CHECKERS_WIDTH; j++) {
-			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
-			checkerImage[i][j][0] = (GLubyte)c;
-			checkerImage[i][j][1] = (GLubyte)c;
-			checkerImage[i][j][2] = (GLubyte)c;
-			checkerImage[i][j][3] = (GLubyte)255;
-		}
-	}
-
-	glEnable(GL_TEXTURE_2D);
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &texID);
-	glBindTexture(GL_TEXTURE_2D, texID);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //GL_CLAMP
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
-	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
 
@@ -82,7 +55,6 @@ bool ModuleTexture::GenTexture(GLuint* imgData, GLuint width, GLuint height)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	//Resize the texture (MIN->make it smaller ; MAG->make it bigger)
-	//Nearest -> pixelat / Linear -> borros
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
@@ -90,12 +62,7 @@ bool ModuleTexture::GenTexture(GLuint* imgData, GLuint width, GLuint height)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
 		0, GL_RGBA, GL_UNSIGNED_BYTE, imgData);
 
-	//Mipmap can be added or not
-	glGenerateMipmap(GL_TEXTURE_2D);
-
 	//cleaning texture
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_TEXTURE_2D);
 
 
 	return true;
@@ -110,7 +77,6 @@ bool ModuleTexture::LoadTexture(std::string path)
 	ILuint imgID = 0;
 	ilGenImages(1, &imgID);
 	ilBindImage(imgID);
-
 	//Load image
 	ILboolean success = ilLoadImage(path.c_str());
 

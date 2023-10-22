@@ -31,7 +31,8 @@ bool ModuleRenderer3D::Init()
 {
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
-
+	App->importer->LoadMesh("../Assets/Models/BakerHouse.fbx");
+	App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if (context == NULL)
@@ -110,6 +111,27 @@ bool ModuleRenderer3D::Init()
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
+	for (int i = 0; i < CHECKERS_WIDTH; i++) {
+		for (int j = 0; j < CHECKERS_HEIGHT; j++) {
+			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
+			checkerImage[i][j][0] = (GLubyte)c;
+			checkerImage[i][j][1] = (GLubyte)c;
+			checkerImage[i][j][2] = (GLubyte)c;
+			checkerImage[i][j][3] = (GLubyte)255;
+		}
+	}
+
+	glEnable(GL_TEXTURE_2D);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &checkersTexture);
+	glBindTexture(GL_TEXTURE_2D, checkersTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	Grid.axis = true;
 	BindVBO();
 
@@ -172,13 +194,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].num_index, GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_TEXTURE_COORD_ARRAY);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].id_vertex);
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
+		//glEnable(GL_TEXTURE_2D);
+		//glEnable(GL_TEXTURE_COORD_ARRAY);
+		//glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].id_vertex);
+		//glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
+		//glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
+
 	}
 
 	App->editor->DrawEditor();

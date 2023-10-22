@@ -11,7 +11,8 @@
 #include "glmath.h"
 
 #define MAX_LIGHTS 8
-
+#define CHECKERS_WIDTH 64
+#define CHECKERS_HEIGHT 64
 class ModuleRenderer3D : public Module
 {
 public:
@@ -33,6 +34,11 @@ public:
 	SDL_GLContext context;
 	CPlane Grid;
 	
+
+	GLuint checkersTexture;
+	GLuint texWidth, texHeight;
+	GLubyte checkerImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
+
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
 

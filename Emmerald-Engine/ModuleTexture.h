@@ -8,8 +8,6 @@
 #include <string>
 
 
-#define CHECKERS_WIDTH 64
-#define CHECKERS_HEIGHT 64
 
 class ModuleTexture : public Module
 {
@@ -17,7 +15,7 @@ public:
 
 	ModuleTexture(Application* app, bool start_enabled = true);
 	~ModuleTexture() {}
-	bool Start();
+	bool Init();
 	bool CleanUp();
 
 	bool GenTexture(GLuint* imgData, GLuint width, GLuint height);
@@ -29,11 +27,5 @@ public:
 	std::string texturePath;
 	GLuint texID;
 	GLuint texWidth, texHeight;
-	GLubyte checkerImage[CHECKERS_HEIGHT][CHECKERS_WIDTH][4];
-
-	
-
-	
-
 
 };
