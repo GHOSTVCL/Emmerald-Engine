@@ -194,17 +194,19 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+		glBindTexture(GL_ARRAY_BUFFER, checkersTexture);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
+
 		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].num_index, GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		
+
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_COORD_ARRAY);
 
 
-		//glEnable(GL_TEXTURE_2D);
-		//glEnable(GL_TEXTURE_COORD_ARRAY);
-		//glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].id_vertex);
-		//glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
-		//glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
 
 	}
 
