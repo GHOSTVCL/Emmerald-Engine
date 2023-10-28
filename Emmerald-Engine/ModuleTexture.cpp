@@ -61,9 +61,8 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height,
             0, GL_RGBA, GL_UNSIGNED_BYTE, textdata);
-        glBindTexture(GL_TEXTURE_2D, 0);
 
-        ilDeleteImages(1, &_texture);
+        ilDeleteImages(1, &imageToTextID);
         glBindTexture(GL_TEXTURE_2D, 0);
 
         return new Texture(&_texture, &width, &height);

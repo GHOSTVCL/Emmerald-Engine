@@ -30,7 +30,8 @@ void ModuleMesh::LoadMesh(const char* file_path)
 			for (unsigned int o = 0; o < scene->mMeshes[i]->mNumVertices; o++)
 			{
 				Normals temp2;
-				TextCoords coords;
+				vec2 vec;
+
 				if (scene->mMeshes[i]->HasNormals())
 				{
 					temp2.x = scene->mMeshes[i]->mNormals[o].x;
@@ -40,18 +41,17 @@ void ModuleMesh::LoadMesh(const char* file_path)
 				}
 				if (scene->mMeshes[i]->HasTextureCoords(0))
 				{
-					coords.x = scene->mMeshes[i]->mTextureCoords[0][o].x;
-					coords.y = scene->mMeshes[i]->mTextureCoords[0][o].y;
-
+					vec.x = scene->mMeshes[i]->mTextureCoords[0][o].x;
+					vec.y = scene->mMeshes[i]->mTextureCoords[0][o].y;
+					
 				}
 				else
 				{
-					coords.x = 0.0f;
-					coords.y = 0.0f;
+					vec.x = 0.0f;
+					vec.y = 0.0f;
 				}
 				temp.normals.push_back(temp2);
-				temp.textCoords.push_back(coords);
-
+				temp.textCoords = vec;
 			}
 
 

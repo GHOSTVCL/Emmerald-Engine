@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "glmath.h"
 #include <vector>
 
 class ModuleMesh : public Module
@@ -15,9 +16,6 @@ public:
 	~ModuleMesh();
 	update_status Update();
 	bool CleanUp();
-	struct TextCoords {
-		float x = 0, y = 0;
-	};
 	struct Normals {
 		float x = 0, y = 0, z = 0;
 	};
@@ -29,7 +27,8 @@ public:
 		unsigned int id_vertex = 0; // unique vertex in VRAM
 		unsigned int num_vertex = 0;
 		float* vertex = nullptr;
-		std::vector<TextCoords> textCoords;
+		
+		vec2 textCoords;
 		std::vector<Normals> normals;
 		unsigned int VBO = 0, EBO = 0;
 	};

@@ -190,21 +190,24 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//Draw test here
 	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
 		
+		//Bind Mesh
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-		glBindTexture(GL_ARRAY_BUFFER, checkersTexture);
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
-
+		//Bind Textures
+		glActiveTexture(GL_TEXTURE_2D);
+		
+		glBindTexture(GL_TEXTURE_2D, house->textID);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(App->importer->ourMeshes[i].vertex), (void*)(6 * sizeof(float)));
 		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].num_index, GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_TEXTURE_COORD_ARRAY);
 
 
 
