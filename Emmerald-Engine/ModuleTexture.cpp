@@ -50,6 +50,8 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         GLuint height = ilGetInteger(IL_IMAGE_HEIGHT);
         ILubyte* textdata = ilGetData();
 
+        glEnable(GL_TEXTURE_2D);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glGenTextures(1, &_texture);
         glBindTexture(GL_TEXTURE_2D, _texture);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -58,8 +60,7 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textdata);
         glBindTexture(GL_TEXTURE_2D, 0);
-
-        glDeleteTextures(1, &_texture);
+        glDisable(GL_TEXTURE_2D);
 
         ilDeleteImages(1, &imageToTextID);
 

@@ -134,10 +134,10 @@ bool ModuleRenderer3D::Init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-	Grid.axis = true;
+	glDisable(GL_TEXTURE_2D);
 	BindVBO();
 
+	Grid.axis = true;
 	
 	ilInit();
 	house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
@@ -188,10 +188,10 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	Grid.Render();
 	//Draw test here
 	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
-		
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_COORD_ARRAY);
 		//Bind Mesh
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
@@ -200,15 +200,20 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 		//Bind Textures
 		glBindTexture(GL_TEXTURE_2D, house->textID);
-		glActiveTexture(GL_TEXTURE_2D);
 		glNormalPointer(GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, Normal));
 		glTexCoordPointer(2, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, TexCoords));
 
-		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].indices.size(), GL_UNSIGNED_INT, NULL);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+		glDisable(GL_TEXTURE_2D);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glDisable(GL_TEXTURE_COORD_ARRAY);
+
 	}
+	Grid.Render();
 
 	App->editor->DrawEditor();
 
