@@ -10,11 +10,11 @@
 
 struct Texture
 {
-	Texture(GLuint* id, uint* _width, uint* _height)
+	Texture(GLuint id, uint _width, uint _height)
 	{
-		textID = *id;
-		width = *_width;
-		height = *_height;
+		textID = id;
+		width = _width;
+		height = _height;
 	}
 
 	GLuint textID;
@@ -32,7 +32,7 @@ public:
 
 	bool GenTexture(GLuint* imgData, GLuint width, GLuint height);
 
-	static Texture* LoadTexture(std::string textfile);
+	Texture* LoadTexture(std::string textfile);
 
 	std::string texturePath;
 

@@ -34,7 +34,7 @@ bool ModuleRenderer3D::Init()
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 	App->importer->LoadMesh("../Assets/Models/BakerHouse.fbx");
-	house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
+	
 	
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
@@ -139,7 +139,8 @@ bool ModuleRenderer3D::Init()
 	BindVBO();
 
 	
-
+	ilInit();
+	house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
 
 	return ret;
 }
@@ -150,11 +151,12 @@ void ModuleRenderer3D::BindVBO()
 
 		glGenBuffers(1, &App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * App->importer->ourMeshes[i].num_vertex * 3, App->importer->ourMeshes[i].vertex, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(ModuleMesh::Vertex) * App->importer->ourMeshes[i].ourVertex.size(), &App->importer->ourMeshes[i].ourVertex[0], GL_STATIC_DRAW);
 
 		glGenBuffers(1, &App->importer->ourMeshes[i].EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * App->importer->ourMeshes[i].num_index, App->importer->ourMeshes[i].index, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * App->importer->ourMeshes[i].indices.size(), &App->importer->ourMeshes[i].indices[0], GL_STATIC_DRAW);
+
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -194,22 +196,17 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, 0, NULL);
+		glVertexPointer(3, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)0);
 
 		//Bind Textures
-		glActiveTexture(GL_TEXTURE_2D);
-		
 		glBindTexture(GL_TEXTURE_2D, house->textID);
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(App->importer->ourMeshes[i].vertex), (void*)(6 * sizeof(float)));
-		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].num_index, GL_UNSIGNED_INT, 0);
+		glActiveTexture(GL_TEXTURE_2D);
+		glNormalPointer(GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, Normal));
+		glTexCoordPointer(2, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, TexCoords));
+
+		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].indices.size(), GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-
-
 
 	}
 

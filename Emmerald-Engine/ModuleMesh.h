@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 #include <vector>
 
 class ModuleMesh : public Module
@@ -16,24 +17,18 @@ public:
 	~ModuleMesh();
 	update_status Update();
 	bool CleanUp();
-	struct Normals {
-		float x = 0, y = 0, z = 0;
+	struct Vertex {
+		float3 Position;
+		float3 Normal;
+		float2 TexCoords;
 	};
 
 	struct MeshData {
-		unsigned int id_index = 0; // index in VRAM
-		unsigned int num_index = 0;
-		unsigned int* index = nullptr;
-		unsigned int id_vertex = 0; // unique vertex in VRAM
-		unsigned int num_vertex = 0;
-		float* vertex = nullptr;
-		
-		vec2 textCoords;
-		std::vector<Normals> normals;
+		std::vector<unsigned int> indices;
+		std::vector<Vertex> ourVertex;
 		unsigned int VBO = 0, EBO = 0;
 	};
 	std::vector<MeshData> ourMeshes;
-
 
 };
 

@@ -18,6 +18,7 @@ ModuleTexture::ModuleTexture(Application* app, bool start_enabled) : Module(app,
 bool ModuleTexture::Start()
 {
 
+    
 
 
 
@@ -34,17 +35,13 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
 {
     ILenum imageToTextID;
     ILboolean done;
-    ilInit();
 
     ilGenImages(1, &imageToTextID);
     ilBindImage(imageToTextID);
 
     done = ilLoadImage(textfile.c_str());
 
-    if (done)
-    {
-   
-   
+    if (done == IL_TRUE) {
         ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
         GLuint _texture;
@@ -59,14 +56,14 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height,
-            0, GL_RGBA, GL_UNSIGNED_BYTE, textdata);
-
-        ilDeleteImages(1, &imageToTextID);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textdata);
         glBindTexture(GL_TEXTURE_2D, 0);
 
-        return new Texture(&_texture, &width, &height);
+        glDeleteTextures(1, &_texture);
 
+        ilDeleteImages(1, &imageToTextID);
+
+        return new Texture(_texture, width, height);
     }
 }
 
