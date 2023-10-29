@@ -33,7 +33,6 @@ bool ModuleRenderer3D::Init()
 
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
-	App->importer->LoadMesh("../Assets/Models/BakerHouse.fbx");
 	
 	
 	//Create context
@@ -140,7 +139,7 @@ bool ModuleRenderer3D::Init()
 	Grid.axis = true;
 	
 	ilInit();
-	house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
+	//house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
 
 	return ret;
 }
