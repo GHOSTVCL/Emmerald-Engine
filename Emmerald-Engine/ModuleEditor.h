@@ -24,7 +24,12 @@ public:
 	bool fullscreen = false;
 	bool resizeable = true;
 	bool bordered = true;
-
+	bool depthEnabled = false;
+	bool cullEnabled = false;
+	bool lightsEnabled = false;
+	bool colorMaterialEnabled = false;
+	bool textureMappingEnabled = false;
+	bool wireframeEnabled = false;
 	
 
 	float setbrightness;

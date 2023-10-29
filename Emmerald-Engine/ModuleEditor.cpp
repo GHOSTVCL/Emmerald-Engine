@@ -87,8 +87,35 @@ void ModuleEditor::DrawEditor()
             
             ImGui::EndMenu();
         }
-        
-        App->renderer3D->RendererMenu();
+        if (ImGui::BeginMenu("Renderer")) {
+            if (ImGui::Checkbox("Depth Test", &depthEnabled))
+            {
+                App->renderer3D->SetDepthTest(depthEnabled);
+            }
+            if (ImGui::Checkbox("Cull Face", &cullEnabled))
+            {
+                App->renderer3D->SetCullFace(cullEnabled);  
+            }
+            if (ImGui::Checkbox("Lightning", &lightsEnabled))
+            {
+                App->renderer3D->SetLightning(lightsEnabled);
+            }
+            if (ImGui::Checkbox("Color Material", &colorMaterialEnabled))
+            {
+                App->renderer3D->SetColorMaterial(colorMaterialEnabled);
+            }
+            if (ImGui::Checkbox("Texture 2D", &textureMappingEnabled))
+            {
+                App->renderer3D->SetTextureMapping(textureMappingEnabled);
+            }
+            if (ImGui::Checkbox("Wireframe", &wireframeEnabled))
+            {
+                App->renderer3D->SetWireframe(wireframeEnabled);
+            }
+            ImGui::EndMenu();
+        }
+
+      /*  App->renderer3D->RendererMenu();*/
 
         ImGui::End();
     }

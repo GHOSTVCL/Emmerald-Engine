@@ -13,6 +13,7 @@
 #define MAX_LIGHTS 8
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -26,7 +27,17 @@ public:
 	bool CleanUp();
 	void RendererMenu();
 
+
+
 	void OnResize(int width, int height);
+
+
+	void SetDepthTest(bool depth);
+	void SetCullFace(bool cull);
+	void SetLightning(bool setlights);
+	void SetColorMaterial(bool colorMaterial);
+	void SetTextureMapping(bool textureMapping);
+	void SetWireframe(bool wireframe);
 
 public:
 
@@ -42,13 +53,10 @@ public:
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
 
-	bool dtest = false;
-	bool cface = false;
-	bool lighting = false;
-	bool cmaterial = false;
+	
 	bool txt2d = false;
-	bool wframe = false;
+	
 	Texture* house;
 	
-
+	
 };

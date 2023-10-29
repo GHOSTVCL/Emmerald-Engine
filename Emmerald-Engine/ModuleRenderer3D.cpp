@@ -251,28 +251,69 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 }
 
-void ModuleRenderer3D::RendererMenu()
+void ModuleRenderer3D::SetDepthTest(bool depth)
 {
-	if (ImGui::BeginMenu("Renderer")) {
-
-		if (ImGui::Checkbox("Depth Test", &dtest))
-			(dtest) ? glDisable(GL_DEPTH_TEST) : glEnable(GL_DEPTH_TEST);
-
-		if (ImGui::Checkbox("Cull Face", &cface))
-			(cface) ? glDisable(GL_CULL_FACE) : glEnable(GL_CULL_FACE);
-
-		if (ImGui::Checkbox("Lighting", &lighting))
-			(lighting) ? glDisable(GL_LIGHTING) : glEnable(GL_LIGHTING);
-
-		if (ImGui::Checkbox("Color Material", &cmaterial))
-			(cmaterial) ? glDisable(GL_COLOR_MATERIAL) : glEnable(GL_COLOR_MATERIAL);
-
-		if (ImGui::Checkbox("Texture 2D", &txt2d))
-			(txt2d) ? glDisable(GL_TEXTURE_2D) : glEnable(GL_TEXTURE_2D);
-
-		if (ImGui::Checkbox("Wireframe", &wframe))
-			(wframe) ? glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) : glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-		ImGui::EndMenu();
+	if (depth)
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
+	else
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+}
+void ModuleRenderer3D::SetCullFace(bool cull)
+{
+	if (cull)
+	{
+		glDisable(GL_CULL_FACE);
+	}
+	else
+	{
+		glEnable(GL_CULL_FACE);
+	}
+}
+void ModuleRenderer3D::SetLightning(bool lights)
+{
+	if (lights)
+	{
+		glDisable(GL_LIGHTING);
+	}
+	else
+	{
+		glEnable(GL_LIGHTING);
+	}
+}
+void ModuleRenderer3D::SetColorMaterial(bool colorMaterial)
+{
+	if (colorMaterial)
+	{
+		glEnable(GL_COLOR_MATERIAL);
+	}
+	else
+	{
+		glDisable(GL_COLOR_MATERIAL);
+	}
+}
+void ModuleRenderer3D::SetTextureMapping(bool textureMapping)
+{
+	if (textureMapping)
+	{
+		glEnable(GL_TEXTURE_2D);
+	}
+	else
+	{
+		glDisable(GL_TEXTURE_2D);
+	}
+}
+void ModuleRenderer3D::SetWireframe(bool wireframe)
+{
+	if (wireframe)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	else
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 }
