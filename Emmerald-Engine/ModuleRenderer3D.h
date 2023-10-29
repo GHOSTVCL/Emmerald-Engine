@@ -56,7 +56,7 @@ public:
 	
 	bool txt2d = false;
 	
-	Texture* house;
+	Texture* texture;
 	
 	
 };

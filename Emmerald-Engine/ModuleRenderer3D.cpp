@@ -139,8 +139,7 @@ bool ModuleRenderer3D::Init()
 	Grid.axis = true;
 	
 	ilInit();
-	//house = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
-
+	//texture = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
 	return ret;
 }
 
@@ -198,7 +197,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glVertexPointer(3, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)0);
 
 		//Bind Textures
-		glBindTexture(GL_TEXTURE_2D, house->textID);
+		if (texture->textID != NULL) {
+			glBindTexture(GL_TEXTURE_2D, texture->textID);
+		}
 		glNormalPointer(GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, Normal));
 		glTexCoordPointer(2, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, TexCoords));
 
