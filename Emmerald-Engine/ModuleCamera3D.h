@@ -21,6 +21,7 @@ public:
 	void LookAt(const float3&Spot);
 	void Move(const float3&Movement);
 	float* GetViewMatrix();
+	float Scrollzoom();
 
 private:
 
@@ -30,7 +31,7 @@ public:
 	
 	//You won't need this after using Frustum
 	float3 X, Y, Z, Position, Reference;
-	
+	float mousez = 60.0f;
 
 private:
 

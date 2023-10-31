@@ -180,6 +180,8 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	App->editor->AddFPS(App->GetDT());
 
+	OnZoom();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -246,7 +248,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 
 	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
-	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
+	ProjectionMatrix = perspective(App->camera->Scrollzoom(), (float)width / (float)height, 0.125f, 512.0f);
 	glLoadMatrixf(ProjectionMatrix.M);
 
 	glMatrixMode(GL_MODELVIEW);
@@ -318,4 +320,14 @@ void ModuleRenderer3D::SetWireframe(bool wireframe)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
+}
+void ModuleRenderer3D::OnZoom()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
+	ProjectionMatrix = perspective(App->camera->Scrollzoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);
+	glLoadMatrixf(ProjectionMatrix.M);
+
 }

@@ -60,10 +60,25 @@ update_status ModuleCamera3D::Update(float dt)
 			newPos += X * speed;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	{
+		float3 dir_cam_to_go;
+
+		dir_cam_to_go = float3(0, 0, 0) - Position;
+		while(dir_cam_to_go.Length() > 15)
+		{
+			dir_cam_to_go = float3(0, 0, 0) - Position;
+			Position = (float3(0, 0, 0) - Position) / 2;
+		}
+
+		LookAt(float3(0, 0, 0));
+	}
+
+	
 
 
-	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) newPos.y += speed;
-	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) newPos.y -= speed;
+	if(App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT) newPos.y += speed;
+	if(App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) newPos.y -= speed;
 
 
 	Position += newPos;
@@ -164,6 +179,17 @@ void ModuleCamera3D::Move(const float3&Movement)
 float* ModuleCamera3D::GetViewMatrix()
 {
 	return ViewMatrix.M;
+}
+
+float ModuleCamera3D::Scrollzoom()
+{
+	mousez -= (float)App->input->GetMouseZ();
+	if (mousez < 1.0f)
+		mousez = 1.0f;
+	if (mousez > 45.0f)
+		mousez = 45.0f;
+
+	return mousez;
 }
 
 // -----------------------------------------------------------------

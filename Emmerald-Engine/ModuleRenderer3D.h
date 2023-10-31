@@ -38,6 +38,7 @@ public:
 	void SetColorMaterial(bool colorMaterial);
 	void SetTextureMapping(bool textureMapping);
 	void SetWireframe(bool wireframe);
+	void OnZoom();
 
 public:
 
