@@ -202,6 +202,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		if (texture->textID != NULL) {
 			glBindTexture(GL_TEXTURE_2D, texture->textID);
 		}
+		else {
+			glBindTexture(GL_TEXTURE_2D, checkersTexture);
+
+		}
 		glNormalPointer(GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, Normal));
 		glTexCoordPointer(2, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, TexCoords));
 

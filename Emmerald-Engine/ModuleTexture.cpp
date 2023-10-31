@@ -66,5 +66,7 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
 
         return new Texture(_texture, width, height);
     }
+    return new Texture(NULL, 0, 0);
+
 }
 
