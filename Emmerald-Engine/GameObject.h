@@ -1,42 +1,13 @@
 #ifndef _GAMEOBJECT_H__
 #define _GAMEOBJECT_H__
 
+#include "Component.h"
 #include <vector>
-#include <string.h>
+#include <string>
 
+class Component;
 class Application;
 
-enum COMP_TYPE
-{
-	NONE,
-	TRANSFORM,
-	MESH,
-	TEXTURE
-};
-
-class Component
-{
-public:
-
-	Component(GameObject* _go);
-
-	virtual ~Component();
-
-	virtual void OnEnable();
-	virtual void Update();
-	virtual void OnDisable();
-
-	virtual void OnUIController();
-
-public:
-
-	COMP_TYPE type;
-	GameObject* comp_owner;
-	bool active;
-	std::string name;
-
-
-};
 class GameObject
 {
 public:

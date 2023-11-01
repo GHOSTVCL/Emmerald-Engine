@@ -5,6 +5,7 @@
 #include "ImGui/imgui.h"
 #include "ModuleMesh.h"
 #include "ModuleTexture.h"
+#include "CompMesh.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -19,6 +20,7 @@
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	
 }
 
 // Destructor
@@ -29,8 +31,6 @@ ModuleRenderer3D::~ModuleRenderer3D()
 
 bool ModuleRenderer3D::Init()
 {
-
-
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
 	

@@ -52,6 +52,12 @@
     <Filter Include="Sources\GameObject">
       <UniqueIdentifier>{e094d7d4-6b46-42e4-9a97-80a1cd062617}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Component">
+      <UniqueIdentifier>{5f837bea-10dc-4ea1-8d6f-e0ae7807b7b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Component\CompTypes">
+      <UniqueIdentifier>{b74a57ec-c243-4084-b273-22b43b631cab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -432,6 +438,18 @@
     <ClInclude Include="GameObject.h">
       <Filter>Sources\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Sources\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CompTexture.h">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="CompTransform.h">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="CompMesh.h">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -598,6 +616,18 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Sources\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Sources\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CompTexture.cpp">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompTransform.cpp">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompMesh.cpp">
+      <Filter>Sources\Component\CompTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

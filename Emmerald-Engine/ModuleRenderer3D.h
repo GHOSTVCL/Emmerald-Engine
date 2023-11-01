@@ -9,6 +9,7 @@
 #include "Glew/include/glew.h"
 //todo: REMOVE this before 1st delivery!!
 #include "glmath.h"
+#include "GameObject.h"
 
 #define MAX_LIGHTS 8
 #define CHECKERS_WIDTH 64
@@ -58,6 +59,5 @@ public:
 	bool txt2d = false;
 	
 	Texture* texture;
-	
 	
 };

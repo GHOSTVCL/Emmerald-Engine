@@ -1,6 +1,11 @@
 #include "GameObject.h"
 #include "Application.h"
-#include <string.h>
+
+
+#include "CompMesh.h"
+#include "CompTexture.h"
+#include "CompTransform.h"
+#include <string>
 
 GameObject::GameObject(std::string name)
 {
@@ -11,10 +16,10 @@ GameObject::GameObject(std::string name)
 	this->name = name;
 
 	this->AddComponent(COMP_TYPE::TRANSFORM);
-
+	//this->AddComponent(COMP_TYPE::MESH);
+	//this->AddComponent(COMP_TYPE::TEXTURE);
 
 }
-
 
 GameObject::~GameObject()
 {
@@ -62,7 +67,30 @@ void GameObject::PostUpdate()
 Component* GameObject::AddComponent(COMP_TYPE type)
 {
 
-	
+	Component* comp = nullptr;
+	switch (type)
+	{
+	case NONE:
+
+		break;
+	case MESH:
+		comp = new CompMesh(this);
+		comp->type = type;
+		break;
+	case TRANSFORM:
+		comp = new CompTransform(this);
+		comp->type = type;
+		break;
+	case TEXTURE:
+		comp = new CompTexture(this);
+		comp->type = type;
+		break;
+	}
+	if (comp != nullptr)
+	{
+		components.push_back(comp);
+	}
+	return comp;
 
 }
 
@@ -72,7 +100,7 @@ Component* GameObject::GetComponent(COMP_TYPE _type)
 
 	for (int i = 0; i < components.size(); i++)
 	{
-		if (this->components[i]->type = _type)
+		if (this->components[i]->type == _type)
 		{
 			comp = components[i];
 			return comp;
