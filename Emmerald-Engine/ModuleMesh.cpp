@@ -10,7 +10,7 @@ ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start
 
 }
 
-void ModuleMesh::LoadMesh(const char* file_path)
+std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -82,8 +82,10 @@ void ModuleMesh::LoadMesh(const char* file_path)
 
 
 	}
-	else
+	else {
 		LOG("Error loading scene % s", file_path);
+	}
+	return ourMeshes;
 }
 
 ModuleMesh::~ModuleMesh()

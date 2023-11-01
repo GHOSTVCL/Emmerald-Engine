@@ -149,7 +149,7 @@ void ModuleRenderer3D::BindVBO()
 
 		glGenBuffers(1, &App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(ModuleMesh::Vertex) * App->importer->ourMeshes[i].ourVertex.size(), &App->importer->ourMeshes[i].ourVertex[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * App->importer->ourMeshes[i].ourVertex.size(), &App->importer->ourMeshes[i].ourVertex[0], GL_STATIC_DRAW);
 
 		glGenBuffers(1, &App->importer->ourMeshes[i].EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
@@ -196,7 +196,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glBindBuffer(GL_ARRAY_BUFFER, App->importer->ourMeshes[i].VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, App->importer->ourMeshes[i].EBO);
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)0);
+		glVertexPointer(3, GL_FLOAT, sizeof(Vertex), (void*)0);
 
 		//Bind Textures
 		if (texture->textID != NULL) {
@@ -206,8 +206,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 			glBindTexture(GL_TEXTURE_2D, checkersTexture);
 
 		}
-		glNormalPointer(GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, Normal));
-		glTexCoordPointer(2, GL_FLOAT, sizeof(ModuleMesh::Vertex), (void*)offsetof(ModuleMesh::Vertex, TexCoords));
+		glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
+		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
 		glDrawElements(GL_TRIANGLES, App->importer->ourMeshes[i].indices.size(), GL_UNSIGNED_INT, NULL);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
