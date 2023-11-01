@@ -10,7 +10,7 @@ Application::Application()
 	editor = new ModuleEditor(this);
 	importer = new ModuleMesh(this);
 	textures = new ModuleTexture(this);
-
+	scene = new ModuleScene(this);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -22,6 +22,7 @@ Application::Application()
 	AddModule(importer);
 	AddModule(textures);
 	// Renderer last!
+	AddModule(scene);
 	AddModule(renderer3D);
 	AddModule(editor);
 

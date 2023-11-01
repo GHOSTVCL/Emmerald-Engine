@@ -10,6 +10,7 @@
 #include "ModuleEditor.h"
 #include "ModuleMesh.h"
 #include "ModuleTexture.h"
+#include "ModuleScene.h"
 
 #include<vector>
 
@@ -23,6 +24,7 @@ public:
 	ModuleEditor* editor;
 	ModuleMesh* importer;
 	ModuleTexture* textures;
+	ModuleScene* scene;
 private:
 
 	Timer	ms_timer;

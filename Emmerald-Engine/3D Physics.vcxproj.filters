@@ -450,6 +450,9 @@
     <ClInclude Include="CompMesh.h">
       <Filter>Sources\Component\CompTypes</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -628,6 +631,9 @@
     </ClCompile>
     <ClCompile Include="CompMesh.cpp">
       <Filter>Sources\Component\CompTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
