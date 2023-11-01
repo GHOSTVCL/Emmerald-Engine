@@ -35,6 +35,8 @@ public:
 
 private:
 
+
+
 	mat4x4 ViewMatrix;
 	//Frustum mMainCamera; Some help here :)
 };
