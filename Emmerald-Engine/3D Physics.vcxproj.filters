@@ -49,9 +49,6 @@
     <Filter Include="Sources\DevIL">
       <UniqueIdentifier>{64ebdc58-0903-4bb2-95ac-97aae3a77bce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\GameObject">
-      <UniqueIdentifier>{e094d7d4-6b46-42e4-9a97-80a1cd062617}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -429,9 +426,6 @@
     <ClInclude Include="ModuleTexture.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Sources\GameObject</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -595,9 +589,6 @@
     </ClCompile>
     <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Sources\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
