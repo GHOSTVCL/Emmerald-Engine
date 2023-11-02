@@ -23,20 +23,17 @@ bool ModuleHierarchy::Start()
 
 void ModuleHierarchy::Draw()
 {
-	ImVec2 windowSize = ImGui::GetWindowSize();
 	//Window
-	if (isEnabled)
+
+
+	if (ImGui::Begin(name.c_str()))
 	{
 
-		if (ImGui::Begin("Hierarchy", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
-		{
-			ImGui::SetWindowPos(ImVec2(0, 18));
-			ImGui::SetWindowSize(ImVec2(windowSize.x * 0.7f, windowSize.y * 2.5f));
-			ShowGameObjects(App->scene->root);
+		ShowGameObjects(App->scene->root);
 
-		}
-		ImGui::End();
 	}
+	ImGui::End();
+
 }
 
 void ModuleHierarchy::PrimitivesMenu()

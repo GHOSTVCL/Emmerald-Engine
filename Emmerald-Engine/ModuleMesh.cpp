@@ -6,6 +6,7 @@
 #include "CompMesh.h"
 #include "Application.h"
 #include "ModuleTexture.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
@@ -161,6 +162,60 @@ void MeshData::Draw(GLuint checkers) {
 	glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
 	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, NULL);
+
+	if (printVertexNormals) {
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glLineWidth(2.0f);
+
+		glBegin(GL_LINES);
+
+		for (unsigned int i = 0; i < ourVertex.size(); i++) {
+			const Vertex& vertex = ourVertex[i];
+			const float3& position = vertex.Position;
+			const float3& normal = vertex.Normal;
+
+			glVertex3f(position.x, position.y, position.z);
+
+			float scale = 0.1f; 
+			glVertex3f(position.x + scale * normal.x, position.y + scale * normal.y, position.z + scale * normal.z);
+		}
+
+		glEnd();
+	}
+	if (printFaceNormals) {
+
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glLineWidth(2.0f);
+
+		glBegin(GL_LINES);
+
+		for (unsigned int i = 0; i < indices.size(); i += 3) {
+			// Obtener los índices de los vértices de la cara
+			unsigned int index1 = indices[i];
+			unsigned int index2 = indices[i + 1];
+			unsigned int index3 = indices[i + 2];
+
+			// Calcular el punto medio de la cara (usamos la posición promedio de los vértices)
+			float3 midPoint = (ourVertex[index1].Position + ourVertex[index2].Position + ourVertex[index3].Position) / 3.0f;
+
+			// Obtener la normal de la cara
+			float3 faceNormal = (ourVertex[index2].Position - ourVertex[index1].Position).Cross(ourVertex[index3].Position - ourVertex[index1].Position);
+
+			// Normalizar la normal de la cara
+			faceNormal = faceNormal.Normalized();
+
+			// Punto inicial de la línea en el punto medio de la cara
+			glVertex3f(midPoint.x, midPoint.y, midPoint.z);
+
+			// Punto final de la línea desplazado según la normal de la cara
+			float scale = 0.1f;  // Factor de escala para las líneas de las normales
+			glVertex3f(midPoint.x + scale * faceNormal.x, midPoint.y + scale * faceNormal.y, midPoint.z + scale * faceNormal.z);
+		}
+		glEnd();
+
+	}
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(1.0f);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 

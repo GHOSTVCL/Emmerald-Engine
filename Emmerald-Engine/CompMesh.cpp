@@ -26,7 +26,10 @@ void CompMesh::ShowCompUI()
 	{
 		if (mesh != nullptr)
 		{
-			ImGui::Checkbox("PrintCheckers ", &mesh->printcheckers);
+			ImGui::Checkbox("Print Checkers ", &mesh->printcheckers);
+			ImGui::Checkbox("Print Vertex Normals ", &mesh->printVertexNormals);
+			ImGui::Checkbox("Print Face Normals ", &mesh->printFaceNormals);
+
 			//ImGui::Image((ImTextureID)_mesh->textureID, ImVec2(128, 128));
 			std::string tempvertices = std::to_string(mesh->ourVertex.size());
 			std::string tempindices = std::to_string(mesh->indices.size());

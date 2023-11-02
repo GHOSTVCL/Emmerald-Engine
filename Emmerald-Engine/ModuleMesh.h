@@ -25,6 +25,9 @@ struct MeshData {
 	void InitBuffers();
 	Texture* textid = nullptr;
 	bool printcheckers = false;
+	bool printFaceNormals = false;
+	bool printVertexNormals = false;
+
 };
 
 
