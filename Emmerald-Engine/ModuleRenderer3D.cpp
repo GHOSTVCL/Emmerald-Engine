@@ -250,28 +250,6 @@ void ModuleRenderer3D::SetLightning(bool lights)
 		glEnable(GL_LIGHTING);
 	}
 }
-void ModuleRenderer3D::SetColorMaterial(bool colorMaterial)
-{
-	if (colorMaterial)
-	{
-		glEnable(GL_COLOR_MATERIAL);
-	}
-	else
-	{
-		glDisable(GL_COLOR_MATERIAL);
-	}
-}
-void ModuleRenderer3D::SetTextureMapping(bool textureMapping)
-{
-	if (textureMapping)
-	{
-		glEnable(GL_TEXTURE_2D);
-	}
-	else
-	{
-		glDisable(GL_TEXTURE_2D);
-	}
-}
 void ModuleRenderer3D::SetWireframe(bool wireframe)
 {
 	if (wireframe)

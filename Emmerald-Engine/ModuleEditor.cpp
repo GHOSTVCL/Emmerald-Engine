@@ -49,82 +49,11 @@ void ModuleEditor::DrawEditor()
 
     DisplayMainMenuBar();
 
-
-    if (ImGui::Begin("Configuration"))
-    {
-        if (ImGui::BeginMenu("Application")) {
-
-            
-            ImGui::PlotHistogram("FPS", mFPSLog.data(), mFPSLog.size());
-            ImGui::EndMenu();
-
-        }
-        if (ImGui::BeginMenu("Window")) {
-            ImGui::SliderFloat("Brightness", &setbrightness, 0.00f, 1.00f);
-            ImGui::SliderInt("Width", &winWidth, 0, 1920);
-            ImGui::SliderInt("Height", &winHeight, 0, 1080);
-
-
-            if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
-                App->window->SetFullscreen(fullscreen);
-            }
-
-            ImGui::SameLine();
-            if (ImGui::Checkbox("Resizable", &resizeable)) {
-                App->window->SetResizable(resizeable);
-            }
-
-            if (ImGui::Checkbox("Borderless", &bordered)) {
-                App->window->SetBorder(bordered);
-            }
-
-            if (ImGui::Button("APPLY")) {
-
-                App->window->SetBrightness(setbrightness);
-                App->window->SetScreenSize(winWidth, winHeight);
-
-            }
-            
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Renderer")) {
-            if (ImGui::Checkbox("Depth Test", &depthEnabled))
-            {
-                App->renderer3D->SetDepthTest(depthEnabled);
-            }
-            if (ImGui::Checkbox("Cull Face", &cullEnabled))
-            {
-                App->renderer3D->SetCullFace(cullEnabled);  
-            }
-            if (ImGui::Checkbox("Lightning", &lightsEnabled))
-            {
-                App->renderer3D->SetLightning(lightsEnabled);
-            }
-            if (ImGui::Checkbox("Color Material", &colorMaterialEnabled))
-            {
-                App->renderer3D->SetColorMaterial(colorMaterialEnabled);
-            }
-            if (ImGui::Checkbox("Texture 2D", &textureMappingEnabled))
-            {
-                App->renderer3D->SetTextureMapping(textureMappingEnabled);
-            }
-            if (ImGui::Checkbox("Wireframe", &wireframeEnabled))
-            {
-                App->renderer3D->SetWireframe(wireframeEnabled);
-            }
-            ImGui::EndMenu();
-        }
-
-      /*  App->renderer3D->RendererMenu();*/
-
-        ImGui::End();
-    }
-
-    ImGui::ShowDemoWindow();
-
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+
 
 
 bool ModuleEditor::CleanUp()
@@ -155,7 +84,6 @@ void ModuleEditor::AddFPS(const float aFPS)
         mFPSLog[mFPSLog.capacity() - 1] = aFPS;
     }
 }
-
 
 void ModuleEditor::DisplayHelp()
 {
@@ -234,7 +162,70 @@ void ModuleEditor::DisplayHelp()
         ImGui::EndMenu();
     }
 }
+void ModuleEditor::DisplayConfigMenu()
+{
+    if (ImGui::BeginMenu("Configuration"))
+    {
+        if (ImGui::BeginMenu("Application")) {
 
+
+            ImGui::PlotHistogram("FPS", mFPSLog.data(), mFPSLog.size());
+            ImGui::EndMenu();
+
+        }
+        if (ImGui::BeginMenu("Window")) {
+            ImGui::SliderFloat("Brightness", &setbrightness, 0.00f, 1.00f);
+            ImGui::SliderInt("Width", &winWidth, 0, 1920);
+            ImGui::SliderInt("Height", &winHeight, 0, 1080);
+
+
+            if (ImGui::Checkbox("Fullscreen", &fullscreen)) {
+                App->window->SetFullscreen(fullscreen);
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Resizable", &resizeable)) {
+                App->window->SetResizable(resizeable);
+            }
+
+            if (ImGui::Checkbox("Borderless", &bordered)) {
+                App->window->SetBorder(bordered);
+            }
+
+            if (ImGui::Button("APPLY")) {
+
+                App->window->SetBrightness(setbrightness);
+                App->window->SetScreenSize(winWidth, winHeight);
+
+            }
+
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Renderer")) {
+            if (ImGui::Checkbox("Depth Test", &depthEnabled))
+            {
+                App->renderer3D->SetDepthTest(depthEnabled);
+            }
+            if (ImGui::Checkbox("Cull Face", &cullEnabled))
+            {
+                App->renderer3D->SetCullFace(cullEnabled);
+            }
+            if (ImGui::Checkbox("Lightning", &lightsEnabled))
+            {
+                App->renderer3D->SetLightning(lightsEnabled);
+            }
+            if (ImGui::Checkbox("Wireframe", &wireframeEnabled))
+            {
+                App->renderer3D->SetWireframe(wireframeEnabled);
+            }
+            ImGui::EndMenu();
+        }
+
+        /*  App->renderer3D->RendererMenu();*/
+
+        ImGui::EndMenu();
+    }
+}
 void ModuleEditor::DisplayMainMenuBar()
 {
     if (ImGui::BeginMainMenuBar())
@@ -254,8 +245,11 @@ void ModuleEditor::DisplayMainMenuBar()
             ImGui::Text("Hello world!");
             ImGui::EndMenu();
         }
-
+        DisplayConfigMenu();
         DisplayHelp();
+        if (ImGui::Button("Quit")) {
+            exit(0);
+        }
         ImGui::EndMainMenuBar();
     }
 }

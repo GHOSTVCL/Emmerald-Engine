@@ -26,7 +26,7 @@ public:
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
-	void RendererMenu();
+
 
 
 
@@ -36,8 +36,6 @@ public:
 	void SetDepthTest(bool depth);
 	void SetCullFace(bool cull);
 	void SetLightning(bool setlights);
-	void SetColorMaterial(bool colorMaterial);
-	void SetTextureMapping(bool textureMapping);
 	void SetWireframe(bool wireframe);
 	void OnZoom();
 

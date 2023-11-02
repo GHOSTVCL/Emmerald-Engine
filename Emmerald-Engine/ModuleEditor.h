@@ -16,6 +16,7 @@ public:
 	bool Init() override;
 	void DrawEditor();
 	void DisplayMainMenuBar();
+	void DisplayConfigMenu();
 	void DisplayHelp();
 	bool CleanUp() override;
 	void AddFPS(const float aFPS);

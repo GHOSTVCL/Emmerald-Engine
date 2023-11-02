@@ -63,8 +63,12 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         glDisable(GL_TEXTURE_2D);
      
         ilDeleteImages(1, &imageToTextID);
-        App->scene->selectedGO->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
-        App->scene->selectedGO->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
+        if (App->scene->selectedGO->GetComponent<CompMesh>()->mesh != NULL)
+        {
+            App->scene->selectedGO->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
+            App->scene->selectedGO->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
+        }
+        
         return new Texture(_texture, width, height);
     }
 }
