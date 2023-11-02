@@ -15,6 +15,7 @@ public:
 
 	bool Start();
 	update_status Update(float dt);
+	void Rotation();
 	bool CleanUp();
 
 	void Look(const float3 &Position, const float3&Reference, bool RotateAroundReference = false);
@@ -22,6 +23,7 @@ public:
 	void Move(const float3&Movement);
 	float* GetViewMatrix();
 	float Scrollzoom();
+
 
 private:
 

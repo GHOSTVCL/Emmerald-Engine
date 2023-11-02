@@ -253,11 +253,11 @@ void ModuleRenderer3D::SetWireframe(bool wireframe)
 {
 	if (wireframe)
 	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	else
 	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 void ModuleRenderer3D::OnZoom()
