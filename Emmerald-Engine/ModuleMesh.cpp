@@ -93,7 +93,7 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 			if (App->scene->selectedGO->parent != nullptr) {
 				GameObject* go;
 				go = new GameObject("Mesh" + i);
-				go->GetComponent<CompMesh>()->SetMesh(&temp);
+				go->GetComponent<CompMesh>()->SetMesh(&ourMeshes.at(i));
 				go->GetComponent<CompMesh>()->name = ("Mesh" + i);
 				App->scene->selectedGO->AddChild(go);
 				App->scene->selectedGO = go;
@@ -137,8 +137,8 @@ void MeshData::Draw(GLuint checkers) {
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), (void*)0);
 
 	//Bind Textures
-	if (textid != NULL) {
-		glBindTexture(GL_TEXTURE_2D, textid);
+	if (textid != nullptr) {
+		glBindTexture(GL_TEXTURE_2D, textid->textID);
 	}
 	else {
 		glBindTexture(GL_TEXTURE_2D, checkers);

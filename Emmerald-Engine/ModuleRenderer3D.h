@@ -58,6 +58,5 @@ public:
 	
 	bool txt2d = false;
 	
-	Texture* texture;
 	
 };

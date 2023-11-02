@@ -119,7 +119,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			case SDL_DROPFILE:
 				dropfile = e.drop.file;
 				App->importer->LoadMesh(dropfile);
-				App->renderer3D->texture = App->textures->LoadTexture(dropfile);
+				App->textures->LoadTexture(dropfile);
 				SDL_free(dropfile);
 				break;
 

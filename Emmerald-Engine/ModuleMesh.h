@@ -14,6 +14,7 @@ struct Vertex {
 	float3 Normal;
 	float2 TexCoords;
 };
+class Texture;
 struct MeshData {
 
 	std::vector<unsigned int> indices;
@@ -21,7 +22,7 @@ struct MeshData {
 	unsigned int VBO = 0, EBO = 0;
 	void Draw(GLuint checkers);
 	void InitBuffers();
-	GLuint textid  = NULL;
+	Texture* textid = nullptr;
 
 };
 
