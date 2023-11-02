@@ -28,8 +28,8 @@ void ModuleHierarchy::Draw()
 	{
 		if (ImGui::Begin(name.c_str(), &isEnabled))
 		{
-
-			ShowGameObjects(app->scene->root);
+			
+			ShowGameObjects(App->scene->root);
 
 			PrimitivesMenu();
 		}
@@ -48,7 +48,7 @@ void ModuleHierarchy::PrimitivesMenu()
 				if (ImGui::MenuItem("Empty"))
 				{
 					GameObject* empty = new GameObject("Empty" + std::to_string(emptycounter));
-					empty->SetParent(app->scene->root);
+					empty->SetParent(App->scene->root);
 					emptycounter++;
 
 				}
@@ -58,27 +58,27 @@ void ModuleHierarchy::PrimitivesMenu()
 			{
 				if (ImGui::MenuItem("Cube"))
 				{
-					app->importer->LoadMesh("Assets/Primitives/Cube.fbx");
+					App->importer->LoadMesh("Assets/Primitives/Cube.fbx");
 				}
 				if (ImGui::MenuItem("Sphere"))
 				{
-					app->importer->LoadMesh("Assets/Primitives/Sphere.fbx");
+					App->importer->LoadMesh("Assets/Primitives/Sphere.fbx");
 				}
 				if (ImGui::MenuItem("Monkey"))
 				{
-					app->importer->LoadMesh("Assets/Primitives/Monkey.fbx");
+					App->importer->LoadMesh("Assets/Primitives/Monkey.fbx");
 				}
 				if (ImGui::MenuItem("Plane"))
 				{
-					app->importer->LoadMesh("Assets/Primitives/Plane.fbx");
+					App->importer->LoadMesh("Assets/Primitives/Plane.fbx");
 				}
 				if (ImGui::MenuItem("Pyramid"))
 				{
-					app->importer->LoadMesh("Assets/Primitives/Pyramid.fbx");
+					App->importer->LoadMesh("Assets/Primitives/Pyramid.fbx");
 				}
 				if (ImGui::MenuItem("Cylinder"))
 				{
-					app->importer->LoadMesh("Assets/Primitives/Cylinder.fbx");
+					App->importer->LoadMesh("Assets/Primitives/Cylinder.fbx");
 				}
 
 				ImGui::EndMenu();
@@ -87,9 +87,9 @@ void ModuleHierarchy::PrimitivesMenu()
 			{
 				if (ImGui::MenuItem("Delete"))
 				{
-					if (app->scene->selectedGO != nullptr)
+					if (App->scene->selectedGO != nullptr)
 					{
-						app->scene->selectedGO->readytobedeleted = true;
+						App->scene->selectedGO->readytobedeleted = true;
 						//app->AddLog(Logs::WARNING, "Still On Development");
 					}
 					else
@@ -119,7 +119,7 @@ void ModuleHierarchy::ShowGameObjects(GameObject* go)
 		nodeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
 	}
 
-	if (go == app->scene->selectedGO)
+	if (go == App->scene->selectedGO)
 	{
 		nodeFlags |= ImGuiTreeNodeFlags_Selected;
 	};
@@ -131,7 +131,7 @@ void ModuleHierarchy::ShowGameObjects(GameObject* go)
 	{
 		if (go->parent != nullptr)
 		{
-			app->scene->selectedGO = go;
+			App->scene->selectedGO = go;
 		}
 	}
 

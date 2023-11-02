@@ -137,7 +137,7 @@ bool ModuleRenderer3D::Init()
 	glDisable(GL_TEXTURE_2D);
 
 	Grid.axis = true;
-	
+	App->importer->LoadMesh("../Assets/Models/BakerHouse.fbx");
 	ilInit();
 	//texture = App->textures->LoadTexture("../Assets/Textures/Baker_house.png");
 	return ret;
@@ -177,7 +177,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	}
 	Grid.Render();
-
 
 	App->editor->DrawEditor();
 

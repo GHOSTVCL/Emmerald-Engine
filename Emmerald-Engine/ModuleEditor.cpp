@@ -48,6 +48,7 @@ void ModuleEditor::DrawEditor()
 
 
     DisplayMainMenuBar();
+    App->hierarchy->Draw();
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

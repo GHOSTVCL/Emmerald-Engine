@@ -25,12 +25,16 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
+		GameObject* _go;
+		_go = new GameObject("GameObject");
 		if (App->scene->selectedGO->parent == nullptr) {
-			GameObject* go;
-			go = new GameObject("GameObject");
-			App->scene->root->AddChild(go);
-			App->scene->selectedGO = go;
+			App->scene->root->AddChild(_go);
 		}
+		else {
+			App->scene->selectedGO->AddChild(_go);
+		}
+		App->scene->selectedGO = _go;
+
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 
@@ -88,16 +92,17 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 					}
 				}
 			}
+			temp.textid = nullptr;
 			ourMeshes.push_back(temp);
-			ourMeshes.at(i).InitBuffers();
-			if (App->scene->selectedGO->parent != nullptr) {
-				GameObject* go;
-				go = new GameObject("Mesh" + i);
-				go->GetComponent<CompMesh>()->SetMesh(&ourMeshes.at(i));
-				go->GetComponent<CompMesh>()->name = ("Mesh" + i);
-				App->scene->selectedGO->AddChild(go);
-				App->scene->selectedGO = go;
-			}
+			ourMeshes.back().InitBuffers();
+			
+			GameObject* go;
+			std::string name = "Mesh";
+			name += std::to_string(i);
+			go = new GameObject(name);
+			go->GetComponent<CompMesh>()->SetMesh(&ourMeshes.at(i));
+			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
+			App->scene->selectedGO->AddChild(go);			
 
 		}
 
