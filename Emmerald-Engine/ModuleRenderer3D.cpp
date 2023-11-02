@@ -137,7 +137,7 @@ bool ModuleRenderer3D::Init()
 	glDisable(GL_TEXTURE_2D);
 
 	Grid.axis = true;
-	App->importer->LoadMesh("../Assets/Models/BakerHouse.fbx");
+	App->importer->LoadMesh("Assets/Models/BakerHouse.fbx");
 	
 	ilInit();
 	return ret;
