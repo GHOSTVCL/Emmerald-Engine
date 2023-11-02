@@ -1,19 +1,20 @@
 #ifndef __INSPECTOR_H__
 #define __INSPECTOR_H__
 
+#include "Module.h"
 #include <string>
 
 class GameObject;
 
-class Inspector
+class ModuleInspector : public Module
 {
 public:
 
-    Inspector();
+    ModuleInspector(Application* app, bool start_enabled = true);
 
-    ~Inspector();
+    ~ModuleInspector();
 
-    void Start();
+    bool Start();
 
     void Draw();
 
@@ -28,3 +29,4 @@ private:
 };
 
 #endif // !__INSPECTOR_H__
+

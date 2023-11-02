@@ -58,9 +58,6 @@
     <Filter Include="Sources\Component\CompTypes">
       <UniqueIdentifier>{b74a57ec-c243-4084-b273-22b43b631cab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Editor">
-      <UniqueIdentifier>{442c8122-5473-4518-94fb-0d77fa056bbf}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -438,9 +435,6 @@
     <ClInclude Include="ModuleTexture.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Sources\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Sources\Component</Filter>
     </ClInclude>
@@ -456,10 +450,10 @@
     <ClInclude Include="ModuleScene.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Inspector.h">
-      <Filter>Sources\Editor</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleHierarchy.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInspector.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -644,10 +638,10 @@
     <ClCompile Include="ModuleScene.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Inspector.cpp">
-      <Filter>Sources\Editor</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleHierarchy.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInspector.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,7 +12,7 @@
 #include "ModuleTexture.h"
 #include "ModuleScene.h"
 #include "ModuleHierarchy.h"
-
+#include "ModuleInspector.h"
 #include<vector>
 
 enum class Logs
@@ -45,6 +45,7 @@ public:
 	ModuleTexture* textures;
 	ModuleScene* scene;
 	ModuleHierarchy* hierarchy;
+	ModuleInspector* inspector;
 
 
 	std::vector <logReport> logreports;

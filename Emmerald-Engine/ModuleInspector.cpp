@@ -1,31 +1,33 @@
-#include "Inspector.h"
+#include "ModuleInspector.h"
 #include "ImGui/imgui.h"
 #include "GameObject.h"
+#include "Application.h"
 
-Inspector::Inspector() : inspectedObject(nullptr)
+ModuleInspector::ModuleInspector(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Inspector";
 }
 
-Inspector::~Inspector()
+ModuleInspector::~ModuleInspector()
 {
 }
 
-void Inspector::Start()
+bool ModuleInspector::Start()
 {
+	return true;
 }
 
-void Inspector::Draw()
+void ModuleInspector::Draw()
 {
 	if (isEnabled)
 	{
-		ImGui::Begin(name.c_str(), &isEnabled);
+		ImGui::BeginMenu(name.c_str(), &isEnabled);
 		if (inspectedObject != nullptr)
 		{
 
 			ImGui::Checkbox("Set as Transparent", &inspectedObject->transparent);
 
-			for (auto comp : inspectedObject->components)
+			for each (Component * comp in inspectedObject->components)
 			{
 				comp->OnUIController();
 			}
@@ -58,6 +60,6 @@ void Inspector::Draw()
 				ImGui::EndCombo();
 			}
 		}
-		ImGui::End();
+		ImGui::EndMenu();
 	}
 }
