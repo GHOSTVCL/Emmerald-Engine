@@ -6,6 +6,7 @@
 #include "ModuleMesh.h"
 #include "ModuleTexture.h"
 #include "CompMesh.h"
+#include "ModuleHierarchy.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -176,6 +177,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	}
 	Grid.Render();
+
 
 	App->editor->DrawEditor();
 

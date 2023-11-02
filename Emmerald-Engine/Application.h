@@ -11,8 +11,27 @@
 #include "ModuleMesh.h"
 #include "ModuleTexture.h"
 #include "ModuleScene.h"
+#include "ModuleHierarchy.h"
 
 #include<vector>
+
+enum class Logs
+{
+	ERROR_LOG,
+	WARNING,
+	NORMAL,
+	MAX,
+
+};
+
+struct logReport
+{
+	logReport(Logs type, std::string msg);
+
+	std::string message;
+	Logs type;
+
+};
 
 class Application
 {
@@ -25,6 +44,11 @@ public:
 	ModuleMesh* importer;
 	ModuleTexture* textures;
 	ModuleScene* scene;
+	ModuleHierarchy* hierarchy;
+
+
+	std::vector <logReport> logreports;
+
 private:
 
 	Timer	ms_timer;
@@ -44,6 +68,7 @@ public:
 private:
 
 	void AddModule(Module* mod);
+	void AddLog(Logs type, std::string msg);
 	void PrepareUpdate();
 	void FinishUpdate();
 };
