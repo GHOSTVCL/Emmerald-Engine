@@ -62,20 +62,9 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 	{
-		float3 dir_cam_to_go;
-
-		dir_cam_to_go = float3(0, 0, 0) - Position;
-		while(dir_cam_to_go.Length() > 15)
-		{
-			dir_cam_to_go = float3(0, 0, 0) - Position;
-			Position = (float3(0, 0, 0) - Position) / 2;
-		}
-
+		Position = float3(10, 5, 10);
 		LookAt(float3(0, 0, 0));
 	}
-
-	
-
 
 	if(App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT) newPos.y += speed;
 	if(App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) newPos.y -= speed;
@@ -126,7 +115,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z;
 	}
 
-	LookAt(Reference);
+	LookAt(Position);
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
