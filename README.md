@@ -35,6 +35,8 @@ The engine is being developed by:
 
 * Delete not working as expected, sorry about that
 
+* When creating a primitive since you can't delete the house, you will not be able to see it until you go inside the house
+
 
 # Controls:
 
