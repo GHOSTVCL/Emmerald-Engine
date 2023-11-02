@@ -27,42 +27,6 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::PreUpdate()
-{
-	if (this->readytobedeleted == true)
-	{
-
-		GameObject* parenttemp = this->parent;
-
-		parenttemp->RemoveChild(this);
-
-
-
-	}
-}
-
-void GameObject::Update()
-{
-
-	for (int i = 0; i < components.size(); i++)
-	{
-		if (this->active)
-		{
-			if (components[i]->active)
-			{
-				if (this != nullptr)
-				{
-					components[i]->Update();
-				}
-			}
-		}
-	}
-
-}
-
-void GameObject::PostUpdate()
-{
-}
 
 Component* GameObject::AddComponent(COMP_TYPE type)
 {
@@ -71,7 +35,6 @@ Component* GameObject::AddComponent(COMP_TYPE type)
 	switch (type)
 	{
 	case NONE:
-
 		break;
 	case MESH:
 		comp = new CompMesh(this);
@@ -114,10 +77,10 @@ void GameObject::AddChild(GameObject* _go)
 	if (_go == nullptr) return;
 	if (this->parent == _go) return;
 
-
-	this->children.push_back(_go);
-
 	_go->parent = this;
+
+	children.push_back(_go);
+
 
 }
 

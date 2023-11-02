@@ -4,7 +4,7 @@ CompMesh::CompMesh(GameObject* _go) : Component(_go), mesh() {
 
 	this->name = "Mesh_Component";
 	this->type = COMP_TYPE::MESH;
-
+	mesh = nullptr;
 }
 
 CompMesh::~CompMesh()

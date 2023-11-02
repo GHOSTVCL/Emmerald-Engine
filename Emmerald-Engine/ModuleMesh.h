@@ -15,6 +15,7 @@ struct Vertex {
 	float2 TexCoords;
 };
 class Texture;
+
 struct MeshData {
 
 	std::vector<unsigned int> indices;
@@ -32,13 +33,13 @@ class ModuleMesh : public Module
 public:
 	ModuleMesh(Application* app, bool start_enabled = true);
 
-	std::vector<MeshData> LoadMesh(const char* file_path);
+	std::vector<MeshData*> LoadMesh(const char* file_path);
 
 	~ModuleMesh();
 	update_status Update();
 	bool CleanUp();
 	void Draw();
-	std::vector<MeshData> ourMeshes;
+	std::vector<MeshData*> ourMeshes;
 
 };
 

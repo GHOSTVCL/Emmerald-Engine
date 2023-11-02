@@ -18,28 +18,21 @@ ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start
 
 }
 
-std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
+std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
+	
 		GameObject* _go;
 		_go = new GameObject("GameObject");
-		if (App->scene->selectedGO->parent == nullptr) {
-			App->scene->root->AddChild(_go);
-		}
-		else {
-			App->scene->selectedGO->AddChild(_go);
-		}
-		App->scene->selectedGO = _go;
 
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 
-			MeshData temp;
-
+			MeshData* temp = new MeshData();
 			
 			for (unsigned int o = 0; o < scene->mMeshes[i]->mNumVertices; o++)
 			{
@@ -70,14 +63,14 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 					tempvertex.TexCoords.y = 0.0f;
 				}
 				
-				temp.ourVertex.push_back(tempvertex);
+				temp->ourVertex.push_back(tempvertex);
 			}
 
 
 			if (scene->mMeshes[i]->HasFaces())
 			{
 			
-				temp.indices.resize(scene->mMeshes[i]->mNumFaces * 3);// assume each face is a triangle
+				temp->indices.resize(scene->mMeshes[i]->mNumFaces * 3);// assume each face is a triangle
 
 				for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; y++)
 				{
@@ -87,25 +80,32 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 					}
 					else {
 
-						memcpy(&temp.indices[y * 3], scene->mMeshes[i]->mFaces[y].mIndices, 3 * sizeof(unsigned int));
+						memcpy(&temp->indices[y * 3], scene->mMeshes[i]->mFaces[y].mIndices, 3 * sizeof(unsigned int));
 
 					}
 				}
 			}
-			temp.textid = nullptr;
+			temp->textid = nullptr;
 			ourMeshes.push_back(temp);
-			ourMeshes.back().InitBuffers();
+			ourMeshes.back()->InitBuffers();
 			
 			GameObject* go;
 			std::string name = "Mesh";
 			name += std::to_string(i);
 			go = new GameObject(name);
-			go->GetComponent<CompMesh>()->SetMesh(&ourMeshes.at(i));
+			go->GetComponent<CompMesh>()->SetMesh(temp);
 			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
-			App->scene->selectedGO->AddChild(go);			
+			_go->AddChild(go);
 
 		}
+		
 
+		if (App->scene->selectedGO->parent == nullptr) {
+			App->scene->root->AddChild(_go);
+		}
+		else {
+			App->scene->selectedGO->AddChild(_go);
+		}
 
 		aiReleaseImport(scene);
 

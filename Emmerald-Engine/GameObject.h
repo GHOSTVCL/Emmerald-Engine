@@ -17,12 +17,6 @@ public:
 
 	virtual ~GameObject();
 
-	void PreUpdate();
-
-	void Update();
-
-	void PostUpdate();
-
 	Component* AddComponent(COMP_TYPE type);
 
 	Component* GetComponent(COMP_TYPE type);
