@@ -26,7 +26,7 @@ public:
 	virtual void Update();
 	virtual void OnDisable();
 
-	virtual void OnUIController();
+	virtual void ShowCompUI();
 
 public:
 

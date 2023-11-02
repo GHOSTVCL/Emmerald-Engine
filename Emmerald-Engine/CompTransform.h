@@ -15,7 +15,7 @@ public:
 
     void Update() override;
 
-    void OnUIController() override;
+    void ShowCompUI() override;
 
     float4x4 GetLocalMatrix();
 

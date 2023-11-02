@@ -23,12 +23,15 @@ bool ModuleHierarchy::Start()
 
 void ModuleHierarchy::Draw()
 {
+	ImVec2 windowSize = ImGui::GetWindowSize();
 	//Window
 	if (isEnabled)
 	{
-		if (ImGui::Begin(name.c_str(), &isEnabled))
+
+		if (ImGui::Begin("Hierarchy", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 		{
-			
+			ImGui::SetWindowPos(ImVec2(0, 18));
+			ImGui::SetWindowSize(ImVec2(windowSize.x * 0.7f, windowSize.y * 2.5f));
 			ShowGameObjects(App->scene->root);
 
 			PrimitivesMenu();
@@ -40,64 +43,63 @@ void ModuleHierarchy::Draw()
 void ModuleHierarchy::PrimitivesMenu()
 {
 
-	
-		if (ImGui::BeginMenu("Empty GameObjects"))
+	if (ImGui::BeginMenu("Empty GameObjects"))
+	{
+		if (ImGui::MenuItem("Empty"))
 		{
-			if (ImGui::MenuItem("Empty"))
-			{
-				GameObject* empty = new GameObject("Empty" + std::to_string(emptycounter));
-				empty->SetParent(App->scene->root);
-				emptycounter++;
+			GameObject* empty = new GameObject("Empty" + std::to_string(emptycounter));
+			empty->SetParent(App->scene->root);
+			emptycounter++;
 
-			}
-			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Primitives"))
+		ImGui::EndMenu();
+	}
+	if (ImGui::BeginMenu("Primitives"))
+	{
+		if (ImGui::MenuItem("Cube"))
 		{
-			if (ImGui::MenuItem("Cube"))
-			{
-				App->importer->LoadMesh("Assets/Primitives/Cube.fbx");
-			}
-			if (ImGui::MenuItem("Sphere"))
-			{
-				App->importer->LoadMesh("Assets/Primitives/Sphere.fbx");
-			}
-			if (ImGui::MenuItem("Monkey"))
-			{
-				App->importer->LoadMesh("Assets/Primitives/Monkey.fbx");
-			}
-			if (ImGui::MenuItem("Plane"))
-			{
-				App->importer->LoadMesh("Assets/Primitives/Plane.fbx");
-			}
-			if (ImGui::MenuItem("Pyramid"))
-			{
-				App->importer->LoadMesh("Assets/Primitives/Pyramid.fbx");
-			}
-			if (ImGui::MenuItem("Cylinder"))
-			{
-				App->importer->LoadMesh("Assets/Primitives/Cylinder.fbx");
-			}
-
-			ImGui::EndMenu();
+			App->importer->LoadMesh("../Assets/Models/Primitives/Cube.fbx");
 		}
-		if (ImGui::BeginMenu("Delete GameObjects"))
+		if (ImGui::MenuItem("Sphere"))
 		{
-			if (ImGui::MenuItem("Delete"))
-			{
-				if (App->scene->selectedGO != nullptr)
-				{
-					App->scene->selectedGO->readytobedeleted = true;
-					//app->AddLog(Logs::WARNING, "Still On Development");
-				}
-				else
-				{
-					/*(Logs::WARNING, "Select the gameobject that you would like to delete.");*/
-				}
-
-			}
-			ImGui::EndMenu();
+			App->importer->LoadMesh("../Assets/Models/Primitives/Sphere.fbx");
 		}
+		if (ImGui::MenuItem("Monkey"))
+		{
+			App->importer->LoadMesh("../Assets/Models/Primitives/Monkey.fbx");
+		}
+		if (ImGui::MenuItem("Plane"))
+		{
+			App->importer->LoadMesh("../Assets/Models/Primitives/Plane.fbx");
+		}
+		if (ImGui::MenuItem("Pyramid"))
+		{
+			App->importer->LoadMesh("../Assets/Models/Primitives/Pyramid.fbx");
+		}
+		if (ImGui::MenuItem("Cylinder"))
+		{
+			App->importer->LoadMesh("../Assets/Models/Primitives/Cylinder.fbx");
+		}
+
+		ImGui::EndMenu();
+	}
+	if (ImGui::BeginMenu("Delete GameObjects"))
+	{
+		if (ImGui::MenuItem("Delete"))
+		{
+			if (App->scene->selectedGO != nullptr)
+			{
+				App->scene->selectedGO->readytobedeleted = true;
+				//app->AddLog(Logs::WARNING, "Still On Development");
+			}
+			else
+			{
+				/*(Logs::WARNING, "Select the gameobject that you would like to delete.");*/
+			}
+
+		}
+		ImGui::EndMenu();
+	}
 
 }
 

@@ -20,6 +20,6 @@ void Component::OnDisable()
 {
 }
 
-void Component::OnUIController()
+void Component::ShowCompUI()
 {
 }

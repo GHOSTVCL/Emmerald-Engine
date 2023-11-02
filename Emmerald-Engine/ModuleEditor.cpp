@@ -49,7 +49,7 @@ void ModuleEditor::DrawEditor()
 
     DisplayMainMenuBar();
     App->hierarchy->Draw();
-
+    App->inspector->Draw();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

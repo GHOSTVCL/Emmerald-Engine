@@ -26,7 +26,7 @@ void CompTransform::Update()
 	//GetGlobalMatrix();
 }
 
-void CompTransform::OnUIController()
+void CompTransform::ShowCompUI()
 {
 
 	if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
