@@ -24,7 +24,7 @@ struct MeshData {
 	void Draw(GLuint checkers);
 	void InitBuffers();
 	Texture* textid = nullptr;
-
+	bool printcheckers = false;
 };
 
 
@@ -40,7 +40,7 @@ public:
 	bool CleanUp();
 	void Draw();
 	std::vector<MeshData*> ourMeshes;
-
+	int gototal = 0;
 };
 
 

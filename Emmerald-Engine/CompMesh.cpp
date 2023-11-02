@@ -22,11 +22,11 @@ void CompMesh::SetMesh(MeshData* _mesh)
 
 void CompMesh::ShowCompUI()
 {
-	if (ImGui::CollapsingHeader("MeshRenderer: ", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader("Mesh Data: ", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		if (mesh != nullptr)
 		{
-			ImGui::Checkbox("Active ", &active);
+			ImGui::Checkbox("PrintCheckers ", &mesh->printcheckers);
 			//ImGui::Image((ImTextureID)_mesh->textureID, ImVec2(128, 128));
 			std::string tempvertices = std::to_string(mesh->ourVertex.size());
 			std::string tempindices = std::to_string(mesh->indices.size());

@@ -27,7 +27,15 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 	{
 	
 		GameObject* _go;
-		_go = new GameObject("GameObject");
+		if (gototal == 0) {
+			_go = new GameObject("GameObject");
+		}
+		else {
+			std::string goname = "GameObject ";
+			goname += std::to_string(gototal);
+			_go = new GameObject(goname);
+		}
+		gototal++;
 
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
@@ -93,7 +101,7 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 			std::string name = "Mesh";
 			name += std::to_string(i);
 			go = new GameObject(name);
-			go->GetComponent<CompMesh>()->SetMesh(temp);
+			go->GetComponent<CompMesh>()->SetMesh(ourMeshes.back());
 			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
 			go->GetComponent<CompMesh>()->path = file_path;
 			_go->AddChild(go);
@@ -146,7 +154,7 @@ void MeshData::Draw(GLuint checkers) {
 	if (textid != nullptr) {
 		glBindTexture(GL_TEXTURE_2D, textid->textID);
 	}
-	else {
+	else if(printcheckers){
 		glBindTexture(GL_TEXTURE_2D, checkers);
 
 	}

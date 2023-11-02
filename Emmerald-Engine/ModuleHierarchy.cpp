@@ -88,7 +88,7 @@ void ModuleHierarchy::PrimitivesMenu()
 		{
 			if (App->scene->selectedGO != nullptr)
 			{
-				App->scene->selectedGO->readytobedeleted = true;
+				App->scene->selectedGO->Delete();
 				//app->AddLog(Logs::WARNING, "Still On Development");
 			}
 			else

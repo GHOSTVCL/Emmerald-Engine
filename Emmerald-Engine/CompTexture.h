@@ -23,7 +23,6 @@ public:
     Texture* texture;
     Application* app;
     std::string path;
-
 private:
 
 

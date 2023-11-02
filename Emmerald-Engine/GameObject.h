@@ -27,6 +27,8 @@ public:
 
 	void RemoveChild(GameObject* _go);
 
+	void Delete();
+
 	template <class T>
 	T* GetComponent()
 	{
@@ -59,7 +61,6 @@ public:
 	bool active;
 	std::string name;
 
-	bool readytobedeleted;
 
 	bool transparent;
 
