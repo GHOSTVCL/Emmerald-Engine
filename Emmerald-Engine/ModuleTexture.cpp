@@ -67,6 +67,7 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         {
             App->scene->selectedGO->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
             App->scene->selectedGO->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
+            App->scene->selectedGO->GetComponent<CompTexture>()->path = textfile;
         }
         
         return new Texture(_texture, width, height);

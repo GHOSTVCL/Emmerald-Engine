@@ -7,7 +7,7 @@
 #include "ImGui/backends/imgui_impl_sdl2.h"
 #include "SDL/include/SDL.h"
 #include "MathGeoLib/include/MathGeoLib.h"
-
+#include "ModuleHierarchy.h"
 
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -243,7 +243,8 @@ void ModuleEditor::DisplayMainMenuBar()
         }
         if (ImGui::BeginMenu("Objects"))
         {
-            ImGui::Text("Hello world!");
+            App->hierarchy->PrimitivesMenu();
+
             ImGui::EndMenu();
         }
         DisplayConfigMenu();

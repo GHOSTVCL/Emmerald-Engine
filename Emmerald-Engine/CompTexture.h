@@ -16,6 +16,8 @@ public:
 
     Texture* GetTexture() { return texture; }
 
+    void ShowCompUI() override;
+
 
 public:
     Texture* texture;

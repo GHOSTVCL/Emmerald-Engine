@@ -34,7 +34,6 @@ void ModuleHierarchy::Draw()
 			ImGui::SetWindowSize(ImVec2(windowSize.x * 0.7f, windowSize.y * 2.5f));
 			ShowGameObjects(App->scene->root);
 
-			PrimitivesMenu();
 		}
 		ImGui::End();
 	}

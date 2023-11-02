@@ -16,11 +16,12 @@ public:
 
     MeshData* GetMesh() { return mesh; }
 
+    void ShowCompUI() override;
 
 public:
     MeshData* mesh;
     Application* app;
-
+    std::string path;
 private:
 
 

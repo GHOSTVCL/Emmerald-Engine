@@ -95,6 +95,7 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 			go = new GameObject(name);
 			go->GetComponent<CompMesh>()->SetMesh(temp);
 			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
+			go->GetComponent<CompMesh>()->path = file_path;
 			_go->AddChild(go);
 
 		}

@@ -18,3 +18,10 @@ void CompTexture::SetTexture(Texture* _texture)
 	this->texture = _texture;
 
 }
+
+void CompTexture::ShowCompUI()
+{
+
+
+
+}
