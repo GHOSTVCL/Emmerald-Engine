@@ -21,7 +21,7 @@ The engine is being developed by:
 
 # Features
 
-**Emmeral-Engine v.0.1:**
+**Emmeral-Engine v.0.33:**
 
 * GameObject Hierarchy & Inspector
 
