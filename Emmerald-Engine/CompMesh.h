@@ -2,7 +2,6 @@
 #define __COMPONENT_MESH_H__
 #include "Component.h"
 #include "ModuleMesh.h"
-#include <vector>
 
 class CompMesh :
     public Component
@@ -13,13 +12,13 @@ public:
 
     ~CompMesh();
 
-    void SetMesh(std::vector <MeshData> _meshes);
+    void SetMesh(MeshData* _mesh);
 
-    std::vector <MeshData> GetMesh() { return meshes; }
+    MeshData* GetMesh() { return mesh; }
 
 
 public:
-    std::vector <MeshData> meshes;
+    MeshData* mesh;
     Application* app;
 
 private:

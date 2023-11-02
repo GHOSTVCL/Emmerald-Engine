@@ -1,6 +1,6 @@
 #include "CompMesh.h"
 
-CompMesh::CompMesh(GameObject* _go) : Component(_go), meshes(NULL) {
+CompMesh::CompMesh(GameObject* _go) : Component(_go), mesh() {
 
 	this->name = "Mesh_Component";
 	this->type = COMP_TYPE::MESH;
@@ -9,13 +9,13 @@ CompMesh::CompMesh(GameObject* _go) : Component(_go), meshes(NULL) {
 
 CompMesh::~CompMesh()
 {
-	delete(&meshes);
+	delete(&mesh);
 }
 
-void CompMesh::SetMesh(std::vector <MeshData> _meshes)
+void CompMesh::SetMesh(MeshData* _mesh)
 {
 
-	this->meshes = _meshes;
+	this->mesh = _mesh;
 
 }
 

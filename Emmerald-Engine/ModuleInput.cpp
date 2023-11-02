@@ -118,10 +118,8 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 				dropfile = e.drop.file;
-				App->scene->selectedGO->AddComponent(MESH);
-				App->scene->selectedGO->GetComponent<CompMesh>()->SetMesh(App->importer->LoadMesh(dropfile));
+				App->importer->LoadMesh(dropfile);
 				App->renderer3D->texture = App->textures->LoadTexture(dropfile);
-				App->renderer3D->BindVBO();
 				SDL_free(dropfile);
 				break;
 

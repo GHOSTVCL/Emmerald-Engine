@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "ModuleTexture.h"
-
+#include "CompTexture.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
@@ -63,7 +63,8 @@ Texture* ModuleTexture::LoadTexture(std::string textfile)
         glDisable(GL_TEXTURE_2D);
      
         ilDeleteImages(1, &imageToTextID);
-
+        App->scene->selectedGO->GetComponent<CompMesh>()->mesh->textid = _texture;
+        App->scene->selectedGO->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
         return new Texture(_texture, width, height);
     }
     return new Texture(NULL, 0, 0);

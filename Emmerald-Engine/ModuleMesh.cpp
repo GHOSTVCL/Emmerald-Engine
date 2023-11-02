@@ -5,6 +5,7 @@
 #include <vector>
 #include "CompMesh.h"
 #include "Application.h"
+#include "ModuleTexture.h"
 
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
@@ -24,6 +25,12 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
+		if (App->scene->selectedGO->parent == nullptr) {
+			GameObject* go;
+			go = new GameObject("GameObject");
+			App->scene->root->AddChild(go);
+			App->scene->selectedGO = go;
+		}
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 
@@ -83,6 +90,15 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 			}
 			ourMeshes.push_back(temp);
 			ourMeshes.at(i).InitBuffers();
+			if (App->scene->selectedGO->parent != nullptr) {
+				GameObject* go;
+				go = new GameObject("Mesh" + i);
+				go->GetComponent<CompMesh>()->SetMesh(&temp);
+				go->GetComponent<CompMesh>()->name = ("Mesh" + i);
+				App->scene->selectedGO->AddChild(go);
+				App->scene->selectedGO = go;
+			}
+
 		}
 
 
