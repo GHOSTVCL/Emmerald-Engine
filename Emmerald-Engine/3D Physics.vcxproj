@@ -113,6 +113,10 @@
     <ClInclude Include="Assimp\Assimp\include\vector3.h" />
     <ClInclude Include="Assimp\Assimp\include\version.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="CompMesh.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="CompTexture.h" />
+    <ClInclude Include="CompTransform.h" />
     <ClInclude Include="DevIL\include\devil_cpp_wrapper.hpp" />
     <ClInclude Include="DevIL\include\devil_internal_exports.h" />
     <ClInclude Include="DevIL\include\il.h" />
@@ -132,6 +136,7 @@
     <ClInclude Include="ImGUI\imstb_rectpack.h" />
     <ClInclude Include="ImGUI\imstb_textedit.h" />
     <ClInclude Include="ImGUI\imstb_truetype.h" />
+    <ClInclude Include="Inspector.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MathGeoLib\include\Algorithm\Random\LCG.h" />
     <ClInclude Include="MathGeoLib\include\Geometry\AABB.h" />
@@ -193,12 +198,14 @@
     <ClInclude Include="MathGeoLib\include\Math\sse_mathfun.h" />
     <ClInclude Include="MathGeoLib\include\Math\TransformOps.h" />
     <ClInclude Include="MathGeoLib\include\Time\Clock.h" />
+    <ClInclude Include="ModuleHierarchy.h" />
     <ClInclude Include="ModuleMesh.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleEditor.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleScene.h" />
     <ClInclude Include="ModuleTexture.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Primitive.h" />
@@ -207,6 +214,11 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="CompMesh.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CompTexture.cpp" />
+    <ClCompile Include="CompTransform.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glmath.cpp" />
     <ClCompile Include="ImGUI\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="ImGUI\backends\imgui_impl_sdl2.cpp" />
@@ -215,6 +227,7 @@
     <ClCompile Include="ImGUI\imgui_draw.cpp" />
     <ClCompile Include="ImGUI\imgui_tables.cpp" />
     <ClCompile Include="ImGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Inspector.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -250,11 +263,13 @@
     <ClCompile Include="MathGeoLib\include\Math\SSEMath.cpp" />
     <ClCompile Include="MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
+    <ClCompile Include="ModuleHierarchy.cpp" />
     <ClCompile Include="ModuleMesh.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
+    <ClCompile Include="ModuleScene.cpp" />
     <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Primitive.cpp" />

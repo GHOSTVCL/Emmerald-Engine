@@ -10,7 +10,8 @@ Application::Application()
 	editor = new ModuleEditor(this);
 	importer = new ModuleMesh(this);
 	textures = new ModuleTexture(this);
-
+	scene = new ModuleScene(this);
+	hierarchy = new ModuleHierarchy(this);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -22,6 +23,8 @@ Application::Application()
 	AddModule(importer);
 	AddModule(textures);
 	// Renderer last!
+	AddModule(scene);
+	AddModule(hierarchy);
 	AddModule(renderer3D);
 	AddModule(editor);
 
@@ -115,3 +118,11 @@ void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
 }
+
+//void Application::AddLog(Logs type, std::string msg)
+//{
+//
+//	logReport temp(type, msg);
+//
+//	logreports.push_back(temp);
+//}

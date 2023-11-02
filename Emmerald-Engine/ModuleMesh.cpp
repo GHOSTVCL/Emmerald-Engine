@@ -3,20 +3,34 @@
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 #include <vector>
+#include "CompMesh.h"
+#include "Application.h"
+#include "ModuleTexture.h"
+
+#pragma comment (lib, "opengl32.lib")
+#pragma comment (lib, "glu32.lib")
+#pragma comment (lib, "Glew/libx86/glew32.lib")
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
 ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
+
 }
 
-void ModuleMesh::LoadMesh(const char* file_path)
+std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
+		if (App->scene->selectedGO->parent == nullptr) {
+			GameObject* go;
+			go = new GameObject("GameObject");
+			App->scene->root->AddChild(go);
+			App->scene->selectedGO = go;
+		}
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 
@@ -75,6 +89,16 @@ void ModuleMesh::LoadMesh(const char* file_path)
 				}
 			}
 			ourMeshes.push_back(temp);
+			ourMeshes.at(i).InitBuffers();
+			if (App->scene->selectedGO->parent != nullptr) {
+				GameObject* go;
+				go = new GameObject("Mesh" + i);
+				go->GetComponent<CompMesh>()->SetMesh(&ourMeshes.at(i));
+				go->GetComponent<CompMesh>()->name = ("Mesh" + i);
+				App->scene->selectedGO->AddChild(go);
+				App->scene->selectedGO = go;
+			}
+
 		}
 
 
@@ -82,8 +106,10 @@ void ModuleMesh::LoadMesh(const char* file_path)
 
 
 	}
-	else
+	else {
 		LOG("Error loading scene % s", file_path);
+	}
+	return ourMeshes;
 }
 
 ModuleMesh::~ModuleMesh()
@@ -98,4 +124,49 @@ update_status Update()
 bool ModuleMesh::CleanUp()
 {
 	return true;
+}
+
+void MeshData::Draw(GLuint checkers) {
+
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_COORD_ARRAY);
+	//Bind Mesh
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), (void*)0);
+
+	//Bind Textures
+	if (textid != nullptr) {
+		glBindTexture(GL_TEXTURE_2D, textid->textID);
+	}
+	else {
+		glBindTexture(GL_TEXTURE_2D, checkers);
+
+	}
+	glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
+	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_COORD_ARRAY);
+
+}
+
+void MeshData::InitBuffers() {
+	glGenBuffers(1, &this->VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->ourVertex.size(), &this->ourVertex[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &this->EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * this->indices.size(), &this->indices[0], GL_STATIC_DRAW);
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
