@@ -58,6 +58,9 @@
     <Filter Include="Sources\Component\CompTypes">
       <UniqueIdentifier>{b74a57ec-c243-4084-b273-22b43b631cab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Editor">
+      <UniqueIdentifier>{442c8122-5473-4518-94fb-0d77fa056bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -453,6 +456,9 @@
     <ClInclude Include="ModuleScene.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>Sources\Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -634,6 +640,9 @@
     </ClCompile>
     <ClCompile Include="ModuleScene.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>Sources\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
