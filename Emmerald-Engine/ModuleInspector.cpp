@@ -21,22 +21,21 @@ bool ModuleInspector::Start()
 
 void ModuleInspector::Draw()
 {
-	if (isEnabled)
+
+	inspectedObject = App->scene->selectedGO;
+	ImGui::Begin(name.c_str(), &isEnabled);
+	if (inspectedObject != nullptr)
 	{
-		inspectedObject = App->scene->selectedGO;
-		ImGui::Begin(name.c_str(), &isEnabled);
-		if (inspectedObject != nullptr)
+
+		for each (Component * comp in inspectedObject->components)
 		{
-
-			for each (Component * comp in inspectedObject->components)
-			{
-				comp->ShowCompUI();
-			}
-
-			ImGui::Separator();
-			ImGui::Spacing();
-
+			comp->ShowCompUI();
 		}
-		ImGui::End();
+
+		ImGui::Separator();
+		ImGui::Spacing();
+
 	}
+	ImGui::End();
+	
 }
