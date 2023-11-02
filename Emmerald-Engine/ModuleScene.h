@@ -12,6 +12,6 @@ public:
 	update_status Update();
 	bool CleanUp();
 	GameObject* selectedGO;
-	
+	GameObject* root;
 
 };

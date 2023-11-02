@@ -1,7 +1,11 @@
 #include "ModuleScene.h"
-
+#include "ModuleMesh.h"
+#include "Application.h"
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	root = new GameObject("Scene");
+	root->parent = nullptr;
+	selectedGO = root;
 
 }
 
@@ -12,7 +16,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	int i = 3;
+
 	return update_status();
 }
 

@@ -4,6 +4,7 @@
 #include "Assimp/include/postprocess.h"
 #include <vector>
 #include "CompMesh.h"
+#include "Application.h"
 
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
@@ -12,27 +13,7 @@
 
 ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	for (int i = 0; i < CHECKERS_WIDTH; i++) {
-		for (int j = 0; j < CHECKERS_HEIGHT; j++) {
-			int c = ((((i & 0x8) == 0) ^ (((j & 0x8)) == 0))) * 255;
-			checkerImage[i][j][0] = (GLubyte)c;
-			checkerImage[i][j][1] = (GLubyte)c;
-			checkerImage[i][j][2] = (GLubyte)c;
-			checkerImage[i][j][3] = (GLubyte)255;
-		}
-	}
 
-	glEnable(GL_TEXTURE_2D);
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glGenTextures(1, &checkersTexture);
-	glBindTexture(GL_TEXTURE_2D, checkersTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CHECKERS_WIDTH, CHECKERS_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkerImage);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_TEXTURE_2D);
 
 }
 
@@ -101,6 +82,7 @@ std::vector<MeshData> ModuleMesh::LoadMesh(const char* file_path)
 				}
 			}
 			ourMeshes.push_back(temp);
+			ourMeshes.at(i).InitBuffers();
 		}
 
 
@@ -128,7 +110,7 @@ bool ModuleMesh::CleanUp()
 	return true;
 }
 
-void MeshData::Draw() {
+void MeshData::Draw(GLuint checkers) {
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_TEXTURE_COORD_ARRAY);
@@ -143,12 +125,11 @@ void MeshData::Draw() {
 		glBindTexture(GL_TEXTURE_2D, textid);
 	}
 	else {
-		glBindTexture(GL_TEXTURE_2D, checkerImage);
+		glBindTexture(GL_TEXTURE_2D, checkers);
 
 	}
 	glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
 	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
-
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, NULL);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

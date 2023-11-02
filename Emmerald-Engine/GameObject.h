@@ -14,6 +14,7 @@ public:
 
 	GameObject(std::string name);
 
+
 	virtual ~GameObject();
 
 	void PreUpdate();

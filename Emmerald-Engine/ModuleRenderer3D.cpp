@@ -189,6 +189,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
+
 	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_TEXTURE_COORD_ARRAY);
