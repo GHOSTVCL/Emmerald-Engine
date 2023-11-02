@@ -12,7 +12,10 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Position = float3(0.0f, 10.0f, 5.0f);
 	Reference = float3(0.0f, 0.0f, 0.0f);
 	ViewMatrix = IdentityMatrix;
+	Position = float3(10, 5, 10);
+	float mousez = 60.0f;
 
+	LookAt(float3(0, 0, 0));
 	CalculateViewMatrix();
 }
 
@@ -112,7 +115,7 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 		}
 
-		Position = Reference + Z;
+		Position = Reference + Z ;
 		
 	}
 

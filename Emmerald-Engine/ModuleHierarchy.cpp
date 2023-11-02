@@ -86,11 +86,9 @@ void ModuleHierarchy::PrimitivesMenu()
 			if (App->scene->selectedGO != nullptr)
 			{
 				App->scene->selectedGO->Delete();
-				//app->AddLog(Logs::WARNING, "Still On Development");
 			}
 			else
 			{
-				/*(Logs::WARNING, "Select the gameobject that you would like to delete.");*/
 			}
 
 		}
