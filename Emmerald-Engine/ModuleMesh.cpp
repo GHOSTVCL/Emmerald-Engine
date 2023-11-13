@@ -243,4 +243,12 @@ void MeshData::InitBuffers() {
 
 void ModuleMesh::DeleteMesh(MeshData* mesh2delete) {
 
+	for (int i = 0; i < ourMeshes.size(); i++) {
+
+		if (mesh2delete == ourMeshes[i]) {
+			ourMeshes.erase(ourMeshes.begin() + i);
+		}
+
+	}
+
 }

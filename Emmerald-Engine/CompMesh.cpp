@@ -1,6 +1,6 @@
 #include "CompMesh.h"
 #include "ImGui/imgui.h"
-
+#include "Application.h"
 CompMesh::CompMesh(GameObject* _go) : Component(_go), mesh() {
 
 	this->name = "Mesh_Component";

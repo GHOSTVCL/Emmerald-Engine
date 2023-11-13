@@ -136,10 +136,10 @@ void GameObject::Delete()
 	}
 
 	
-	for (int i = 0; i < children.size(); i++) {
-
-		children[i]->Delete();
-		children[i] = nullptr;
+	std::vector<GameObject*> childrenCopy = children;
+	for (int i = 0; i < childrenCopy.size(); i++) {
+		childrenCopy[i]->Delete();
+		childrenCopy[i] = nullptr;
 	}
 
 	parent = nullptr;
