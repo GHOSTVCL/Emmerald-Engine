@@ -130,7 +130,12 @@ update_status ModuleInput::PreUpdate(float dt)
 		App->quitapp = true;
 		return UPDATE_STOP;
 	}
-		
+	
+	if (App->scene->selectedGO != nullptr) {
+		if (keyboard[SDL_SCANCODE_DELETE] == KEY_UP) {
+			App->scene->selectedGO->Delete();
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
