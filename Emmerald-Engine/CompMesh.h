@@ -2,9 +2,10 @@
 #define __COMPONENT_MESH_H__
 #include "Component.h"
 #include "ModuleMesh.h"
-
-class CompMesh :
-    public Component
+#include "Application.h"
+#include "Module.h"
+#include <vector>
+class CompMesh : public Component
 {
 public:
 
@@ -20,6 +21,7 @@ public:
 
 public:
     MeshData* mesh;
+    std::vector<MeshData*> _ourMeshes;
     Application* app;
     std::string path;
 private:

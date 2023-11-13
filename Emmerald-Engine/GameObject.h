@@ -44,12 +44,6 @@ public:
 
 	bool CheckifGameObjIsParent(GameObject* _go);
 
-private:
-
-
-protected:
-
-	Application* app = nullptr;
 
 public:
 

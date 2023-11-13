@@ -6,6 +6,7 @@ Component::Component(GameObject* _go) :comp_owner(_go), type(COMP_TYPE::NONE), a
 
 Component::~Component()
 {
+
 }
 
 void Component::OnEnable()

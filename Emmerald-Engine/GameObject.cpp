@@ -114,23 +114,40 @@ void GameObject::RemoveChild(GameObject* _go)
 
 void GameObject::Delete()
 {
-
 	
 	if (parent != nullptr) {
 
 		for (int i = 0; i < parent->children.size(); i++)
 		{
 			if (parent->children[i] == this) {
+				
 				parent->children.erase(parent->children.begin() + i);
+				break;
+
 			}
-			break;
 		}
 	}
+
+	
+	for (int i = 0; i < components.size(); i++) {
+
+		delete components[i];
+		components[i] = nullptr;
+	}
+
+	
+	for (int i = 0; i < children.size(); i++) {
+
+		children[i]->Delete();
+		children[i] = nullptr;
+	}
+
 	parent = nullptr;
 
 	
 	children.clear();
-	
+	components.clear();
+
 
 }
 

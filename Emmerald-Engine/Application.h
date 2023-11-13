@@ -41,7 +41,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
-	ModuleMesh* importer;
+	ModuleMesh* mesh;
 	ModuleTexture* textures;
 	ModuleScene* scene;
 	ModuleHierarchy* hierarchy;
@@ -73,3 +73,6 @@ private:
 	void PrepareUpdate();
 	void FinishUpdate();
 };
+
+
+extern Application* App;

@@ -26,7 +26,7 @@ void ModuleInspector::Draw()
 	ImGui::Begin(name.c_str(), &isEnabled);
 	if (inspectedObject != nullptr)
 	{
-
+		if(inspectedObject->components.size()!=0)
 		for each (Component * comp in inspectedObject->components)
 		{
 			comp->ShowCompUI();

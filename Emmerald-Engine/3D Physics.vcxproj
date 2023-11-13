@@ -125,6 +125,7 @@
     <ClInclude Include="DevIL\include\ilut_config.h" />
     <ClInclude Include="DevIL\include\ilu_region.h" />
     <ClInclude Include="DevIL\include\il_wrap.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ImGUI\backends\imgui_impl_opengl3.h" />

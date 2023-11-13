@@ -137,7 +137,7 @@ bool ModuleRenderer3D::Init()
 	glDisable(GL_TEXTURE_2D);
 
 	Grid.axis = true;
-	App->importer->LoadMesh("Assets/Models/BakerHouse.fbx");
+	App->mesh->LoadMesh("Assets/Models/BakerHouse.fbx");
 	
 	ilInit();
 	return ret;
@@ -171,9 +171,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
 
-	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
+	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
 
-		App->importer->ourMeshes.at(i)->Draw(checkersTexture);
+		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
 
 	}
 	Grid.Render();
@@ -189,10 +189,10 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 
-	for (int i = 0; i < App->importer->ourMeshes.size(); i++) {
+	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
 
-		glDeleteBuffers(1, &App->importer->ourMeshes[i]->VBO);
-		glDeleteBuffers(1, &App->importer->ourMeshes[i]->EBO);
+		glDeleteBuffers(1, &App->mesh->ourMeshes[i]->VBO);
+		glDeleteBuffers(1, &App->mesh->ourMeshes[i]->EBO);
 	}
 	
 	SDL_GL_DeleteContext(context);

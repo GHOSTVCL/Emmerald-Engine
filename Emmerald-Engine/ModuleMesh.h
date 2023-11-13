@@ -42,6 +42,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void Draw();
+	void DeleteMesh(MeshData* mesh2delete);
 	std::vector<MeshData*> ourMeshes;
 	int gototal = 0;
 };

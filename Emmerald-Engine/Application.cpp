@@ -8,7 +8,7 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	editor = new ModuleEditor(this);
-	importer = new ModuleMesh(this);
+	mesh = new ModuleMesh(this);
 	textures = new ModuleTexture(this);
 	scene = new ModuleScene(this);
 	hierarchy = new ModuleHierarchy(this);
@@ -21,7 +21,7 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(importer);
+	AddModule(mesh);
 	AddModule(textures);
 	// Renderer last!
 	AddModule(scene);

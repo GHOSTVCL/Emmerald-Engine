@@ -105,6 +105,7 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 			go->GetComponent<CompMesh>()->SetMesh(ourMeshes.back());
 			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
 			go->GetComponent<CompMesh>()->path = file_path;
+			go->GetComponent<CompMesh>()->_ourMeshes = ourMeshes;
 			_go->AddChild(go);
 
 		}
@@ -238,4 +239,8 @@ void MeshData::InitBuffers() {
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void ModuleMesh::DeleteMesh(MeshData* mesh2delete) {
+
 }
