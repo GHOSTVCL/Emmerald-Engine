@@ -10,7 +10,8 @@ CompMesh::CompMesh(GameObject* _go) : Component(_go), mesh() {
 
 CompMesh::~CompMesh()
 {
-	App->mesh->DeleteMesh(mesh);
+	Importer::DeleteMesh(mesh);
+
 	mesh = nullptr;
 }
 

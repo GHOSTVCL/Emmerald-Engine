@@ -7,19 +7,14 @@
 #include "Application.h"
 #include "ModuleTexture.h"
 #include "MathGeoLib/include/MathGeoLib.h"
-
+#include "Globals.h"
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 #pragma comment (lib, "Glew/libx86/glew32.lib")
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
-ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start_enabled)
-{
 
-
-}
-
-std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
+void Importer::LoadMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -125,22 +120,19 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 	else {
 		LOG("Error loading scene % s", file_path);
 	}
-	return ourMeshes;
 }
 
-ModuleMesh::~ModuleMesh()
+void Importer::DeleteMesh(MeshData* mesh2delete)
 {
+	for (int i = 0; i < ourMeshes.size(); i++) {
+
+		if (mesh2delete == ourMeshes[i]) {
+			ourMeshes.erase(ourMeshes.begin() + i);
+		}
+
+	}
 }
 
-update_status Update()
-{
-	return UPDATE_CONTINUE;
-}
-
-bool ModuleMesh::CleanUp()
-{
-	return true;
-}
 
 void MeshData::Draw(GLuint checkers) {
 
@@ -241,14 +233,7 @@ void MeshData::InitBuffers() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void ModuleMesh::DeleteMesh(MeshData* mesh2delete) {
 
-	for (int i = 0; i < ourMeshes.size(); i++) {
 
-		if (mesh2delete == ourMeshes[i]) {
-			ourMeshes.erase(ourMeshes.begin() + i);
-		}
 
-	}
 
-}

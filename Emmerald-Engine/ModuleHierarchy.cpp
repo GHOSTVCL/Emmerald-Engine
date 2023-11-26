@@ -54,27 +54,27 @@ void ModuleHierarchy::PrimitivesMenu()
 	{
 		if (ImGui::MenuItem("Cube"))
 		{
-			App->mesh->LoadMesh("Assets/Models/Primitives/Cube.fbx");
+			Importer::LoadMesh("Assets/Models/Primitives/Cube.fbx");
 		}
 		if (ImGui::MenuItem("Sphere"))
 		{
-			App->mesh->LoadMesh("Assets/Models/Primitives/Sphere.fbx");
+			Importer::LoadMesh("Assets/Models/Primitives/Sphere.fbx");
 		}
 		if (ImGui::MenuItem("Monkey"))
 		{
-			App->mesh->LoadMesh("Assets/Models/Primitives/Monkey.fbx");
+			Importer::LoadMesh("Assets/Models/Primitives/Monkey.fbx");
 		}
 		if (ImGui::MenuItem("Plane"))
 		{
-			App->mesh->LoadMesh("Assets/Models/Primitives/Plane.fbx");
+			Importer::LoadMesh("Assets/Models/Primitives/Plane.fbx");
 		}
 		if (ImGui::MenuItem("Pyramid"))
 		{
-			App->mesh->LoadMesh("Assets/Models/Primitives/Pyramid.fbx");
+			Importer::LoadMesh("Assets/Models/Primitives/Pyramid.fbx");
 		}
 		if (ImGui::MenuItem("Cylinder"))
 		{
-			App->mesh->LoadMesh("Assets/Models/Primitives/Cylinder.fbx");
+			Importer::LoadMesh("Assets/Models/Primitives/Cylinder.fbx");
 		}
 
 		ImGui::EndMenu();

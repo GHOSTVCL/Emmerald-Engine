@@ -8,7 +8,6 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
-#include "ModuleMesh.h"
 #include "ModuleTexture.h"
 #include "ModuleScene.h"
 #include "ModuleHierarchy.h"
@@ -41,7 +40,6 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
-	ModuleMesh* mesh;
 	ModuleTexture* textures;
 	ModuleScene* scene;
 	ModuleHierarchy* hierarchy;

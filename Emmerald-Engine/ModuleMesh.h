@@ -1,8 +1,4 @@
-#ifndef MODULE_IMPORTER
-#define MODULE_IMPORTER
-
 #include "Module.h"
-#include "Globals.h"
 #include "glmath.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "Glew/include/glew.h"
@@ -29,27 +25,12 @@ struct MeshData {
 	bool printVertexNormals = false;
 
 };
+namespace Importer {
 
-
-class ModuleMesh : public Module
-{
-public:
-	ModuleMesh(Application* app, bool start_enabled = true);
-
-	std::vector<MeshData*> LoadMesh(const char* file_path);
-
-	~ModuleMesh();
-	update_status Update();
-	bool CleanUp();
-	void Draw();
+	void LoadMesh(const char* file_path);
 	void DeleteMesh(MeshData* mesh2delete);
 	std::vector<MeshData*> ourMeshes;
 	int gototal = 0;
+
 };
 
-
-
-
-
-
-#endif //MODULE_IMPORTER

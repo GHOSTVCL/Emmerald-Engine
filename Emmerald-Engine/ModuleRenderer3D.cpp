@@ -7,7 +7,7 @@
 #include "ModuleTexture.h"
 #include "CompMesh.h"
 #include "ModuleHierarchy.h"
-
+#include "Globals.h"
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "Glew/libx86/glew32.lib")
@@ -137,7 +137,7 @@ bool ModuleRenderer3D::Init()
 	glDisable(GL_TEXTURE_2D);
 
 	Grid.axis = true;
-	App->mesh->LoadMesh("Assets/Models/BakerHouse.fbx");
+	Importer::LoadMesh("Assets/Models/BakerHouse.fbx");
 	
 	ilInit();
 	return ret;
@@ -171,9 +171,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
 
-	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
+	for (int i = 0; i < Importer::ourMeshes.size(); i++) {
 
-		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
+		Importer::ourMeshes.at(i)->Draw(checkersTexture);
 
 	}
 	Grid.Render();
@@ -189,10 +189,10 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 
-	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
+	for (int i = 0; i < Importer::ourMeshes.size(); i++) {
 
-		glDeleteBuffers(1, &App->mesh->ourMeshes[i]->VBO);
-		glDeleteBuffers(1, &App->mesh->ourMeshes[i]->EBO);
+		glDeleteBuffers(1, &Importer::ourMeshes[i]->VBO);
+		glDeleteBuffers(1, &Importer::ourMeshes[i]->EBO);
 	}
 	
 	SDL_GL_DeleteContext(context);
