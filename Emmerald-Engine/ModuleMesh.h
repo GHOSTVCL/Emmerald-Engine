@@ -28,6 +28,10 @@ struct MeshData {
 	bool printFaceNormals = false;
 	bool printVertexNormals = false;
 
+	AABB localAABB;
+	AABB aabb;
+	OBB obb;
+
 };
 
 

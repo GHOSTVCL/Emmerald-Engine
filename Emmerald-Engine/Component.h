@@ -11,7 +11,8 @@ enum COMP_TYPE
 	NONE,
 	TRANSFORM,
 	MESH,
-	TEXTURE
+	TEXTURE,
+	CAMERA
 };
 
 class Component

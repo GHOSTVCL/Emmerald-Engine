@@ -7,6 +7,8 @@
 #include "ModuleTexture.h"
 #include "CompMesh.h"
 #include "ModuleHierarchy.h"
+#include "Camera.h"
+#include "Transform.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -34,7 +36,7 @@ bool ModuleRenderer3D::Init()
 {
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
-	
+
 	
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);

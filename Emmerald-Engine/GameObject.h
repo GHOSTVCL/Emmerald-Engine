@@ -7,13 +7,13 @@
 
 class Component;
 class Application;
-
+class Transform;
 class GameObject
 {
 public:
 
 	GameObject(std::string name);
-
+	GameObject(GameObject* parent);
 
 	virtual ~GameObject();
 
@@ -52,8 +52,11 @@ public:
 
 	GameObject* parent = nullptr;
 
+	bool fixed;
 	bool active;
 	std::string name;
+
+	Transform* transform = nullptr;
 
 
 	bool transparent;
