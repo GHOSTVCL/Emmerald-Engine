@@ -1,7 +1,7 @@
 #ifndef __COMPONENT_MESH_H__
 #define __COMPONENT_MESH_H__
 #include "Component.h"
-#include "ModuleMesh.h"
+#include "MeshImporter.h"
 #include "Module.h"
 #include <vector>
 class CompMesh : public Component

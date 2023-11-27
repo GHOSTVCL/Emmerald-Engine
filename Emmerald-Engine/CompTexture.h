@@ -1,7 +1,6 @@
-#ifndef __COMPONENT_TEXTURE_
-#define __COMPONENT_TEXTURE_
+
 #include "Component.h"
-#include "ModuleTexture.h"
+#include "TextureImporter.h"
 
 class CompTexture :
     public Component
@@ -21,11 +20,9 @@ public:
 
 public:
     Texture* texture;
-    Application* app;
     std::string path;
 private:
 
 
 };
 
-#endif // !__COMPONENT_TEXTURE__

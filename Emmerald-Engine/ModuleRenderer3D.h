@@ -2,7 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Light.h"
-#include "ModuleTexture.h"
+#include "MeshImporter.h"
 #include "MathGeoLib/include/Math/float3x3.h"
 #include "MathGeoLib/include/Math/float4x4.h"
 #include "Primitive.h"
@@ -10,7 +10,7 @@
 //todo: REMOVE this before 1st delivery!!
 #include "glmath.h"
 #include "GameObject.h"
-#include "ModuleMesh.h"
+#include "TextureImporter.h"
 #include <vector>
 #define MAX_LIGHTS 8
 #define CHECKERS_WIDTH 64

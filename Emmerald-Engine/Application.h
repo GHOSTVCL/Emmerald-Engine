@@ -8,7 +8,6 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
-#include "ModuleTexture.h"
 #include "ModuleScene.h"
 #include "ModuleHierarchy.h"
 #include "ModuleInspector.h"
@@ -40,7 +39,6 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleEditor* editor;
-	ModuleTexture* textures;
 	ModuleScene* scene;
 	ModuleHierarchy* hierarchy;
 	ModuleInspector* inspector;

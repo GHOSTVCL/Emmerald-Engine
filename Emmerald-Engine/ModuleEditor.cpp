@@ -54,9 +54,6 @@ void ModuleEditor::DrawEditor()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-
-
-
 bool ModuleEditor::CleanUp()
 {
     ImGui_ImplOpenGL3_Shutdown();
@@ -163,6 +160,7 @@ void ModuleEditor::DisplayHelp()
         ImGui::EndMenu();
     }
 }
+
 void ModuleEditor::DisplayConfigMenu()
 {
     if (ImGui::BeginMenu("Configuration"))
@@ -227,6 +225,7 @@ void ModuleEditor::DisplayConfigMenu()
         ImGui::EndMenu();
     }
 }
+
 void ModuleEditor::DisplayMainMenuBar()
 {
     if (ImGui::BeginMainMenuBar())

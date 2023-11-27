@@ -1,11 +1,10 @@
-#include "ModuleMesh.h"
+#include "MeshImporter.h"
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 #include <vector>
 #include "CompMesh.h"
 #include "Application.h"
-#include "ModuleTexture.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "ModuleRenderer3D.h"
 #include "Globals.h"
@@ -13,8 +12,6 @@
 #pragma comment (lib, "glu32.lib")
 #pragma comment (lib, "Glew/libx86/glew32.lib")
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
-
-struct Vertex;
 
 void Importer::LoadMesh(const char* file_path)
 {

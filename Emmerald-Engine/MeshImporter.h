@@ -2,7 +2,7 @@
 #include "glmath.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "Glew/include/glew.h"
-#include "ModuleTexture.h"
+#include "TextureImporter.h"
 #include <vector>
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64

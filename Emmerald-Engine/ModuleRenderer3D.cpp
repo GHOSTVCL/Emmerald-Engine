@@ -3,7 +3,7 @@
 #include "ModuleRenderer3D.h"
 #include "SDL\include\SDL_opengl.h"
 #include "ImGui/imgui.h"
-#include "ModuleTexture.h"
+#include "MeshImporter.h"
 #include "CompMesh.h"
 #include "ModuleHierarchy.h"
 #include "Globals.h"
