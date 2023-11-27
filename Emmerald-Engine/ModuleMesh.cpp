@@ -7,12 +7,14 @@
 #include "Application.h"
 #include "ModuleTexture.h"
 #include "MathGeoLib/include/MathGeoLib.h"
+#include "ModuleRenderer3D.h"
 #include "Globals.h"
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 #pragma comment (lib, "Glew/libx86/glew32.lib")
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
+struct Vertex;
 
 void Importer::LoadMesh(const char* file_path)
 {
@@ -23,15 +25,15 @@ void Importer::LoadMesh(const char* file_path)
 	{
 	
 		GameObject* _go;
-		if (gototal == 0) {
+		if (App->renderer3D->GOtotal == 0) {
 			_go = new GameObject("GameObject");
 		}
 		else {
 			std::string goname = "GameObject ";
-			goname += std::to_string(gototal);
+			goname += std::to_string(App->renderer3D->GOtotal);
 			_go = new GameObject(goname);
 		}
-		gototal++;
+		App->renderer3D->GOtotal++;
 
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
@@ -90,17 +92,18 @@ void Importer::LoadMesh(const char* file_path)
 				}
 			}
 			temp->textid = nullptr;
-			ourMeshes.push_back(temp);
-			ourMeshes.back()->InitBuffers();
+			
+			App->renderer3D->ourMeshes.push_back(temp);
+			App->renderer3D->ourMeshes.back()->InitBuffers();
 			
 			GameObject* go;
 			std::string name = "Mesh";
 			name += std::to_string(i);
 			go = new GameObject(name);
-			go->GetComponent<CompMesh>()->SetMesh(ourMeshes.back());
+			go->GetComponent<CompMesh>()->SetMesh(App->renderer3D->ourMeshes.back());
 			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
 			go->GetComponent<CompMesh>()->path = file_path;
-			go->GetComponent<CompMesh>()->_ourMeshes = ourMeshes;
+			go->GetComponent<CompMesh>()->_ourMeshes = App->renderer3D->ourMeshes;
 			_go->AddChild(go);
 
 		}
@@ -124,10 +127,10 @@ void Importer::LoadMesh(const char* file_path)
 
 void Importer::DeleteMesh(MeshData* mesh2delete)
 {
-	for (int i = 0; i < ourMeshes.size(); i++) {
+	for (int i = 0; i < App->renderer3D->ourMeshes.size(); i++) {
 
-		if (mesh2delete == ourMeshes[i]) {
-			ourMeshes.erase(ourMeshes.begin() + i);
+		if (mesh2delete == App->renderer3D->ourMeshes[i]) {
+			App->renderer3D->ourMeshes.erase(App->renderer3D->ourMeshes.begin() + i);
 		}
 
 	}
@@ -220,13 +223,13 @@ void MeshData::Draw(GLuint checkers) {
 }
 
 void MeshData::InitBuffers() {
-	glGenBuffers(1, &this->VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->ourVertex.size(), &this->ourVertex[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * ourVertex.size(), &ourVertex[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &this->EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * this->indices.size(), &this->indices[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

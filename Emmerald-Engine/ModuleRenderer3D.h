@@ -10,7 +10,8 @@
 //todo: REMOVE this before 1st delivery!!
 #include "glmath.h"
 #include "GameObject.h"
-
+#include "ModuleMesh.h"
+#include <vector>
 #define MAX_LIGHTS 8
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
@@ -27,11 +28,7 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-
-
-
 	void OnResize(int width, int height);
-
 
 	void SetDepthTest(bool depth);
 	void SetCullFace(bool cull);
@@ -52,7 +49,8 @@ public:
 
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
-
+	std::vector<MeshData*> ourMeshes;
+	int GOtotal;
 	
 	bool txt2d = false;
 	

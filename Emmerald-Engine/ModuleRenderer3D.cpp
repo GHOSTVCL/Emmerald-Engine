@@ -3,7 +3,6 @@
 #include "ModuleRenderer3D.h"
 #include "SDL\include\SDL_opengl.h"
 #include "ImGui/imgui.h"
-#include "ModuleMesh.h"
 #include "ModuleTexture.h"
 #include "CompMesh.h"
 #include "ModuleHierarchy.h"
@@ -21,7 +20,6 @@
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	
 }
 
 // Destructor
@@ -34,8 +32,8 @@ bool ModuleRenderer3D::Init()
 {
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
-	
-	
+	GOtotal = 0;
+
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if (context == NULL)
@@ -171,9 +169,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
 
-	for (int i = 0; i < Importer::ourMeshes.size(); i++) {
+	for (int i = 0; i < ourMeshes.size(); i++) {
 
-		Importer::ourMeshes.at(i)->Draw(checkersTexture);
+		ourMeshes.at(i)->Draw(checkersTexture);
 
 	}
 	Grid.Render();
@@ -189,10 +187,10 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 
-	for (int i = 0; i < Importer::ourMeshes.size(); i++) {
+	for (int i = 0; i < ourMeshes.size(); i++) {
 
-		glDeleteBuffers(1, &Importer::ourMeshes[i]->VBO);
-		glDeleteBuffers(1, &Importer::ourMeshes[i]->EBO);
+		glDeleteBuffers(1, &ourMeshes[i]->VBO);
+		glDeleteBuffers(1, &ourMeshes[i]->EBO);
 	}
 	
 	SDL_GL_DeleteContext(context);
