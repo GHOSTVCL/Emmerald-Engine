@@ -24,7 +24,6 @@ public:
 	float* GetViewMatrix();
 	float Scrollzoom();
 
-	CCamera* sceneCam;
 
 private:
 
@@ -39,7 +38,7 @@ public:
 private:
 
 
-	bool click = false;
+
 	mat4x4 ViewMatrix;
 	//Frustum mMainCamera; Some help here :)
 };

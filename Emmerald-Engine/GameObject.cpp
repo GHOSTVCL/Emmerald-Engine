@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Application.h"
 
-#include "Transform.h"
+
 #include "CompMesh.h"
 #include "CompTexture.h"
 #include "CompTransform.h"
@@ -19,22 +19,6 @@ GameObject::GameObject(std::string name)
 	this->AddComponent(COMP_TYPE::MESH);
 	this->AddComponent(COMP_TYPE::TEXTURE);
 
-	transform = new Transform(this);
-	components.push_back(transform);
-}
-
-GameObject::GameObject(GameObject* parent)
-{
-	name = "gameObject";
-	this->parent = parent;
-	fixed = false;
-
-	if (parent != nullptr) {
-		parent->children.push_back(this);
-	}
-
-	transform = new Transform(this);
-	components.push_back(transform);
 }
 
 GameObject::~GameObject()

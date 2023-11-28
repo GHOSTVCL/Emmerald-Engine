@@ -112,7 +112,6 @@
     <ClInclude Include="Assimp\Assimp\include\vector2.h" />
     <ClInclude Include="Assimp\Assimp\include\vector3.h" />
     <ClInclude Include="Assimp\Assimp\include\version.h" />
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="CompMesh.h" />
     <ClInclude Include="Component.h" />
@@ -212,11 +211,9 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="CompMesh.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -277,7 +274,6 @@
     <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Primitive.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>

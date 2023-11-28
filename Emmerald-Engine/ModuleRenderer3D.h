@@ -15,8 +15,6 @@
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
 
-class CCamera;
-
 class ModuleRenderer3D : public Module
 {
 public:
@@ -54,9 +52,6 @@ public:
 
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
-
-	GameObject* GameCamera;
-	CCamera* mainCam;
 
 	
 	bool txt2d = false;
