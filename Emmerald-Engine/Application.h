@@ -10,7 +10,6 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "ModuleHierarchy.h"
-#include "ModuleInspector.h"
 #include<vector>
 
 enum class Logs
@@ -41,7 +40,6 @@ public:
 	ModuleEditor* editor;
 	ModuleScene* scene;
 	ModuleHierarchy* hierarchy;
-	ModuleInspector* inspector;
 
 
 	std::vector <logReport> logreports;

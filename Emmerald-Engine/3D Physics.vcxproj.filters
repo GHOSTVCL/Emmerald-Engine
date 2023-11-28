@@ -67,6 +67,9 @@
     <Filter Include="Sources\Importers\Texture">
       <UniqueIdentifier>{f74bd0e2-3337-440e-bb7f-ef646082c52e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Windows">
+      <UniqueIdentifier>{c7c5f697-9ff3-4427-9273-6d3946eedfb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -456,9 +459,6 @@
     <ClInclude Include="ModuleHierarchy.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInspector.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Sources\GameObject</Filter>
     </ClInclude>
@@ -467,6 +467,9 @@
     </ClInclude>
     <ClInclude Include="TextureImporter.h">
       <Filter>Sources\Importers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="WinInspector.h">
+      <Filter>Sources\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -647,14 +650,14 @@
     <ClCompile Include="ModuleHierarchy.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleInspector.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="MeshImporter.cpp">
       <Filter>Sources\Importers\Model</Filter>
     </ClCompile>
     <ClCompile Include="TextureImporter.cpp">
       <Filter>Sources\Importers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="WinInspector.cpp">
+      <Filter>Sources\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
