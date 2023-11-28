@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "MathGeoLib/include/Math/float3.h"
 #include "MathGeoLib/include/Math/float4x4.h"
+#include "Camera.h"
 
 //todo: REMOVE this before 1st delivery!!
 #include "glmath.h"
@@ -14,15 +15,17 @@ public:
 	~ModuleCamera3D();
 
 	bool Start();
-	update_status Update(float dt);
-	void Rotation();
+	update_status Update();
+	void SceneCameraHandleInput();
+	void CamMovementInput();
+	void CamRotationInput();
 	bool CleanUp();
 
-	void Look(const float3 &Position, const float3&Reference, bool RotateAroundReference = false);
-	void LookAt(const float3&Spot);
-	void Move(const float3&Movement);
-	float* GetViewMatrix();
-	float Scrollzoom();
+	/*bool SaveSettings(pugi::xml_node& config);*/
+
+	Camera* AddCamera();
+
+	void DestroyCamera(Camera* camToDestroy);
 
 
 private:
@@ -35,9 +38,15 @@ public:
 	float3 X, Y, Z, Position, Reference;
 	float mousez = 60.0f;
 
+	std::vector<Camera*> gamecams;
+
+	Camera scenecam;
+
+	Camera* cameratobedrawn = nullptr;
+
+	Camera* gamecamactive = nullptr;
+
 private:
-
-
 
 	mat4x4 ViewMatrix;
 	//Frustum mMainCamera; Some help here :)

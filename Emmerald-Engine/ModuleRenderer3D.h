@@ -27,17 +27,15 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-
-
-
 	void OnResize(int width, int height);
-
 
 	void SetDepthTest(bool depth);
 	void SetCullFace(bool cull);
 	void SetLightning(bool setlights);
 	void SetWireframe(bool wireframe);
 	void OnZoom();
+
+	void AddDebug(/*float3* points*/);
 
 public:
 
@@ -58,3 +56,4 @@ public:
 	
 	
 };
+

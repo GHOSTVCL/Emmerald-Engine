@@ -47,6 +47,7 @@ public:
 	ModuleHierarchy* hierarchy;
 	ModuleInspector* inspector;
 
+	float fps = 1.0f / 60.0f;
 
 	std::vector <logReport> logreports;
 
@@ -66,6 +67,8 @@ public:
 	bool CleanUp();
 	bool quitapp = false;
 	float GetDT();
+
+	static Application* GetInstance();
 private:
 
 	void AddModule(Module* mod);

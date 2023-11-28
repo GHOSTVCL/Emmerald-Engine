@@ -128,3 +128,12 @@ void Application::AddModule(Module* mod)
 //
 //	logreports.push_back(temp);
 //}
+
+Application* Application::GetInstance()
+{
+
+	if (App == nullptr) {
+		App = new Application();
+	}
+	return App;
+}

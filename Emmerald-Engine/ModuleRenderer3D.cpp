@@ -7,6 +7,7 @@
 #include "ModuleTexture.h"
 #include "CompMesh.h"
 #include "ModuleHierarchy.h"
+#include "ModuleCamera3D.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -151,7 +152,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetViewMatrix());
+	/*glLoadMatrixf(App->camera->GetViewMatrix());*/
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
@@ -266,7 +267,35 @@ void ModuleRenderer3D::OnZoom()
 	glLoadIdentity();
 
 	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
-	ProjectionMatrix = perspective(App->camera->Scrollzoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);
+	/*ProjectionMatrix = perspective(App->camera->Scrollzoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);*/
 	glLoadMatrixf(ProjectionMatrix.M);
+
+}
+
+void ModuleRenderer3D::AddDebug(/*float3* points*/)
+{
+	glUseProgram(0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(App->camera->cameratobedrawn->GetViewMatrix());
+
+	glBegin(GL_POINTS);
+
+	glColor3f(1.f, 0.f, 0.f);
+
+	glPointSize(5.0f);
+
+	glVertex3f(5.0f, 0.0f, 0.0f);
+	glVertex3f(10.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//glVertex3f(points[6].x, points[6].y, points[6].z);
+	//glVertex3f(points[6].x, points[6].y, points[6].z); 
+	//glVertex3f(points[4].x, points[4].y, points[4].z);
+	//glVertex3f(points[4].x, points[4].y, points[4].z); 
+	//glVertex3f(points[0].x, points[0].y, points[0].z);
+
+	glEnd();
+
 
 }
