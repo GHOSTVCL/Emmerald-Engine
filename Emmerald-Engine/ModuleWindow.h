@@ -25,6 +25,7 @@ public:
 	void SetBorder(bool setborder);
 	void SetBrightness(float brightness);
 	void SetScreenSize(int w, int h);
+	void GetScreenSize(int* wi, int* he);
 
 public:
 	//The window we'll be rendering to

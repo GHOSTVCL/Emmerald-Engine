@@ -465,6 +465,9 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="CompCamera.h">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -658,6 +661,9 @@
     </ClCompile>
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="CompCamera.cpp">
+      <Filter>Sources\Component\CompTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

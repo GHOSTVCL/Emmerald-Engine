@@ -5,6 +5,7 @@
 #include "CompMesh.h"
 #include "CompTexture.h"
 #include "CompTransform.h"
+#include "CompCamera.h"
 #include <string>
 
 GameObject::GameObject(std::string name)
@@ -46,6 +47,10 @@ Component* GameObject::AddComponent(COMP_TYPE type)
 		break;
 	case TEXTURE:
 		comp = new CompTexture(this);
+		comp->type = type;
+		break;
+	case CAMERA:
+		comp = new CompCamera(this);
 		comp->type = type;
 		break;
 	}

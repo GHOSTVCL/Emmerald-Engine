@@ -21,6 +21,7 @@ void FrameBuffer::SettingUpFrameBuffer(int widthh, int heightt)
 	this->height = heightt;
 	ClearFrameBuffer();
 
+
 	glGenFramebuffers(1, &framebuffer);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);

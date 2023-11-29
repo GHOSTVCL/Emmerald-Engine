@@ -137,3 +137,8 @@ void ModuleWindow::SetScreenSize(int w, int h)
 	SDL_SetWindowSize(window, w, h);
 
 }
+
+void ModuleWindow::GetScreenSize(int* wi, int* he)
+{
+	SDL_GetWindowSize(window, wi, he);
+}
