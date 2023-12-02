@@ -137,11 +137,3 @@ Application* Application::GetInstance()
 	}
 	return App;
 }
-
-void Application::AddLog(Logs type, std::string msg)
-{
-
-	logReport temp(type, msg);
-
-	logreports.push_back(temp);
-}

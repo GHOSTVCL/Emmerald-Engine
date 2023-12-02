@@ -72,7 +72,6 @@ public:
 private:
 
 	void AddModule(Module* mod);
-	void AddLog(Logs type, std::string msg);
 	void PrepareUpdate();
 	void FinishUpdate();
 };
