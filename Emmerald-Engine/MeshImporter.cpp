@@ -134,8 +134,10 @@ void Importer::DeleteMesh(MeshData* mesh2delete)
 }
 
 
-void MeshData::Draw(GLuint checkers) {
-
+void MeshData::Draw(GLuint checkers, float4x4 matrix) {
+	
+	glPushMatrix();
+	glMultMatrixf(&matrix.v[0][0]);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_TEXTURE_COORD_ARRAY);
 	//Bind Mesh
@@ -216,7 +218,7 @@ void MeshData::Draw(GLuint checkers) {
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_COORD_ARRAY);
-
+	glPopMatrix();
 }
 
 void MeshData::InitBuffers() {

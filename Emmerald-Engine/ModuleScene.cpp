@@ -1,5 +1,6 @@
 #include "ModuleScene.h"
 #include "Application.h"
+#include "CompMesh.h"
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	root = new GameObject("Scene");
@@ -13,12 +14,42 @@ bool ModuleScene::Start()
 	return false;
 }
 
-update_status ModuleScene::Update()
+update_status ModuleScene::Update(float dt)
 {
-
-	return update_status();
+	UpdateGo(root);
+	return UPDATE_CONTINUE;
 }
 
+
+update_status ModuleScene::PostUpdate(float dt)
+{
+	DrawMesh(root);
+	return UPDATE_CONTINUE;
+}
+
+void ModuleScene::UpdateGo(GameObject* goToUpdate)
+{
+
+	goToUpdate->Update();
+
+    for (int i = 0; i < goToUpdate->children.size(); i++)
+	{
+		UpdateGo(goToUpdate->children[i]);
+    }
+
+}
+
+void ModuleScene::DrawMesh(GameObject* goToUpdate)
+{
+
+	goToUpdate->GetComponent<CompMesh>()->Draw();
+
+	for (int i = 0; i < goToUpdate->children.size(); i++)
+	{
+		DrawMesh(goToUpdate->children[i]);
+	}
+
+}
 bool ModuleScene::CleanUp()
 {
 	return false;

@@ -169,11 +169,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
 
-	for (int i = 0; i < ourMeshes.size(); i++) {
+	/*for (int i = 0; i < ourMeshes.size(); i++) {
 
 		ourMeshes.at(i)->Draw(checkersTexture);
 
-	}
+	}*/
 	Grid.Render();
 
 	App->editor->DrawEditor();

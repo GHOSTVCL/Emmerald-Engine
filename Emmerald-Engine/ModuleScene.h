@@ -9,7 +9,11 @@ public:
 	ModuleScene(Application* app, bool start_enabled = true);
 	~ModuleScene() {}
 	bool Start();
-	update_status Update();
+	update_status Update(float dt);
+	update_status PostUpdate(float dt);
+	void UpdateGo(GameObject* goToUpdate);
+	void DrawMesh(GameObject* goToUpdate);
+
 	bool CleanUp();
 	GameObject* selectedGO;
 	GameObject* root;

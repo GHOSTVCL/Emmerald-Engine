@@ -1,4 +1,5 @@
 #include "CompMesh.h"
+#include "CompTransform.h"
 #include "ImGui/imgui.h"
 #include "Application.h"
 CompMesh::CompMesh(GameObject* _go) : Component(_go), mesh() {
@@ -18,8 +19,14 @@ CompMesh::~CompMesh()
 void CompMesh::SetMesh(MeshData* _mesh)
 {
 
-	this->mesh = _mesh;
+	mesh = _mesh;
 
+}
+
+void CompMesh::Draw()
+{
+	if(mesh != nullptr)
+	mesh->Draw(App->renderer3D->checkersTexture, comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed());
 }
 
 void CompMesh::ShowCompUI()

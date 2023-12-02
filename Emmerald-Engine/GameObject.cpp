@@ -72,6 +72,24 @@ Component* GameObject::GetComponent(COMP_TYPE _type)
 	return comp;
 }
 
+void GameObject::Update()
+{
+	for (int i = 0; i < components.size(); i++)
+	{
+		if (this->active)
+		{
+			if (components[i]->active)
+			{
+				if (this != nullptr)
+				{
+					components[i]->Update();
+				}
+			}
+		}
+	}
+
+}
+
 void GameObject::AddChild(GameObject* _go)
 {
 	if (_go == nullptr) return;

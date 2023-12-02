@@ -19,7 +19,7 @@ struct MeshData {
 	std::vector<unsigned int> indices;
 	std::vector<Vertex> ourVertex;
 	unsigned int VBO = 0, EBO = 0;
-	void Draw(GLuint checkers);
+	void Draw(GLuint checkers, float4x4 matrix);
 	void InitBuffers();
 	Texture* textid = nullptr;
 	bool printcheckers = false;
