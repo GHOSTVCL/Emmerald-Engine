@@ -137,7 +137,7 @@ void Importer::DeleteMesh(MeshData* mesh2delete)
 void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 	
 	glPushMatrix();
-	glMultMatrixf(&matrix.v[0][0]);
+	glMultMatrixf(matrix.ptr());
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_TEXTURE_COORD_ARRAY);
 	//Bind Mesh
