@@ -10,13 +10,10 @@
 //todo: REMOVE this before 1st delivery!!
 #include "glmath.h"
 #include "GameObject.h"
-#include <map>
 
 #define MAX_LIGHTS 8
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
-
-class CompMesh;
 
 class ModuleRenderer3D : public Module
 {
@@ -40,8 +37,6 @@ public:
 
 	void AddDebug(/*float3* points*/);
 
-	void DrawTransparentObjects(std::map<float, CompMesh*>& transMeshes);
-
 public:
 
 	Light lights[MAX_LIGHTS];
@@ -56,12 +51,9 @@ public:
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
 
-	int winWidth_;
-	int winHeight_;
 	
 	bool txt2d = false;
-
-	std::vector<CompMesh*>transmeshes;
-	std::map<float, CompMesh*> transparentObjectsmap;
+	
+	
 };
 

@@ -12,7 +12,10 @@ public:
 
 	~CompCamera();
 
+	void OnEnable();
 	void Update();
+	void OnDisable();
+
 	void ShowCompUI();
 
 	Camera* camera_;

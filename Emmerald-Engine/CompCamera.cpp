@@ -11,10 +11,7 @@ CompCamera::CompCamera(GameObject* _go) : Component(_go)
 {
 	this->name = "Camera_Component";
 	this->type = COMP_TYPE::CAMERA;
-	camera_ = App->camera->AddCamera();
-	App->window->GetScreenSize(&width_, &height_);
-	camera_->SetUpFrameBuffer(width_, height_);
-	camera_->SetAsGameCamera();
+	
 }
 
 CompCamera::~CompCamera()
@@ -22,11 +19,25 @@ CompCamera::~CompCamera()
 	App->camera->DestroyCamera(camera_);
 }
 
+void CompCamera::OnEnable()
+{
+	camera_ = App->camera->AddCamera();
+	App->window->GetScreenSize(&width_, &height_);
+	camera_->SetUpFrameBuffer(width_,height_);
+	camera_->SetAsGameCamera();
+
+}
+
 void CompCamera::Update()
 {
 	camera_->CameraFrustrum.pos = comp_owner->GetComponent<CompTransform>()->position;
 	camera_->CameraFrustrum.front = comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix().RotatePart().Col(2);
 	camera_->CameraFrustrum.up = comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix().RotatePart().Col(1);
+}
+
+void CompCamera::OnDisable()
+{
+	App->camera->DestroyCamera(camera_);
 }
 
 void CompCamera::ShowCompUI()

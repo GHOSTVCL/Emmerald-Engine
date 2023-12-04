@@ -6,10 +6,8 @@
 #include "ModuleMesh.h"
 #include "ModuleTexture.h"
 #include "CompMesh.h"
-#include "CompTransform.h"
 #include "ModuleHierarchy.h"
 #include "ModuleCamera3D.h"
-#include "ModuleWindow.h"
 
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
@@ -172,14 +170,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	update_status ret = update_status::UPDATE_CONTINUE;
 	//Draw test here
-	glBindFramebuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	App->camera->cameratobedrawn = &App->camera->scenecam;
-
 
 	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
 
@@ -187,29 +178,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	}
 	Grid.Render();
-
-
-	if (App->camera->gamecams.size() != 0 && App->camera->gamecamactive != nullptr)
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, App->camera->gamecamactive->framebuffer.GetFrameBuffer());
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-
-		App->camera->cameratobedrawn = App->camera->gamecamactive;
-
-		for (int i = 0; i < App->mesh->ourMeshes.size(); i++)
-		{
-			App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
-		}
-		DrawTransparentObjects(transparentObjectsmap);
-
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-	App->camera->cameratobedrawn = &App->camera->scenecam;
-	/*if (!App->uiController->Draw())
-	{
-		ret = update_status::UPDATE_STOP;
-	};*/
 
 	App->editor->DrawEditor();
 
@@ -247,15 +215,6 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-	/*App->window->SetScreenSize(winWidth_, winHeight_);
-
-	App->camera->scenecam.SetUpFrameBuffer(width, height);
-	if (App->camera->gamecams.size() != 0)
-	{
-		App->camera->gamecamactive->SetUpFrameBuffer(width, height);
-	}
-	glViewport(0, 0, width, height);*/
 }
 
 void ModuleRenderer3D::SetDepthTest(bool depth)
@@ -330,30 +289,13 @@ void ModuleRenderer3D::AddDebug(/*float3* points*/)
 	glVertex3f(5.0f, 0.0f, 0.0f);
 	glVertex3f(10.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	//glVertex3f(points[6].x, points[6].y, points[6].z);
+	//glVertex3f(points[6].x, points[6].y, points[6].z); 
+	//glVertex3f(points[4].x, points[4].y, points[4].z);
+	//glVertex3f(points[4].x, points[4].y, points[4].z); 
+	//glVertex3f(points[0].x, points[0].y, points[0].z);
 
 	glEnd();
 
-}
-void ModuleRenderer3D::DrawTransparentObjects(std::map<float, CompMesh*>& transparentMeshes)
-{
-	if (transmeshes.size() == 0)return;
-
-	for (int i = 0; i < transmeshes.size(); i++)
-	{
-		//Add a variable to map and calculate the distance
-
-		float dist = Distance(transmeshes[i]->comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix().TranslatePart(), App->camera->cameratobedrawn->CameraFrustrum.pos);
-
-		//Preguntar problema de que quan poses un altre a la mateixa distancia desapareix
-
-		transparentMeshes.emplace(std::make_pair(dist, transmeshes[i]));
-	}
-
-	std::map<float, CompMesh*>::reverse_iterator it;
-
-	/*for (it = transparentMeshes.rbegin(); it != transparentMeshes.rend(); it++)
-	{
-		it->second->Draw(testshader);
-	}*/
 
 }
