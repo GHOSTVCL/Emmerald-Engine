@@ -65,7 +65,7 @@ float4x4 CompTransform::GetGlobalMatrix()
 		aux = comp_owner->parent->GetComponent<CompTransform>()->GetGlobalMatrix() * GetLocalMatrix();
 
 	}
-
+	//Getglobalmatrix.transposed
 	return aux;
 }
 

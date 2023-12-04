@@ -183,8 +183,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
 
+		//(gwtglobalmatrix.transposed) --> view*model
 		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
-
 	}
 	Grid.Render();
 
