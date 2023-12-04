@@ -6,6 +6,7 @@
 #include "ModuleMesh.h"
 #include "ModuleTexture.h"
 #include "CompMesh.h"
+#include "CompCamera.h"
 #include "ModuleHierarchy.h"
 #include "ModuleCamera3D.h"
 
@@ -111,7 +112,7 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_COLOR_MATERIAL);
 		glewInit();
 	}
-
+	App->camera->cameratobedrawn = &App->camera->scenecam;
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -151,8 +152,13 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	glMatrixMode(GL_MODELVIEW);
-	/*glLoadMatrixf(App->camera->GetViewMatrix());*/
+	glMatrixMode(GL_MODELVIEW);/*(!!!!!)*/
+	glLoadMatrixf(App->camera->scenecam.GetViewMatrix());
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(App->camera->scenecam.GetProjMatrix());
+
+	glMatrixMode(0);
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
@@ -162,7 +168,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	App->editor->AddFPS(App->GetDT());
 
-	OnZoom();
+	/*OnZoom();*/
 
 	return UPDATE_CONTINUE;
 }
@@ -171,6 +177,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
+	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
+
+	App->camera->cameratobedrawn = &App->camera->scenecam;
 
 	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
 
@@ -204,17 +213,20 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::OnResize(int width, int height)
 {
+	
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
-	ProjectionMatrix = perspective(60, (float)width / (float)height, 0.125f, 512.0f);
-	glLoadMatrixf(ProjectionMatrix.M);
+	ProjectionMatrix = perspective(App->camera->cameratobedrawn->CameraFrustrum.verticalFov, (float)width / (float)height, 0.125f, 512.0f);
+	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	App->camera->scenecam.framebuffer.SettingUpFrameBuffer(width, height);
 }
 
 void ModuleRenderer3D::SetDepthTest(bool depth)
@@ -267,7 +279,7 @@ void ModuleRenderer3D::OnZoom()
 	glLoadIdentity();
 
 	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
-	/*ProjectionMatrix = perspective(App->camera->Scrollzoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);*/
+	ProjectionMatrix = perspective(50.0f, (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);
 	glLoadMatrixf(ProjectionMatrix.M);
 
 }

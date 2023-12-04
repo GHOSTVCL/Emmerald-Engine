@@ -19,7 +19,7 @@ bool ModuleCamera3D::Start()
 	LOG("Setting up the camera");
 	bool ret = true;
 
-
+	cameratobedrawn = &scenecam;
 
 	return ret;
 }
