@@ -184,7 +184,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
 		//(gwtglobalmatrix.transposed) --> view*model
-		glmatrix = App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
+		App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
 		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
 	}
 	Grid.Render();
