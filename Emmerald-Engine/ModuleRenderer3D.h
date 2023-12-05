@@ -51,6 +51,7 @@ public:
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
 
+	float3 glmatrix;
 	
 	bool txt2d = false;
 	

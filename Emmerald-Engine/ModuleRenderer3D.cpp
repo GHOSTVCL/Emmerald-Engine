@@ -7,6 +7,7 @@
 #include "ModuleTexture.h"
 #include "CompMesh.h"
 #include "CompCamera.h"
+#include "CompTransform.h"
 #include "ModuleHierarchy.h"
 #include "ModuleCamera3D.h"
 
@@ -182,8 +183,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	App->camera->cameratobedrawn = &App->camera->scenecam;
 
 	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
-
 		//(gwtglobalmatrix.transposed) --> view*model
+		glmatrix = App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
 		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
 	}
 	Grid.Render();
