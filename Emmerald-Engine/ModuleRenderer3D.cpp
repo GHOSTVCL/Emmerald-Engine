@@ -180,7 +180,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
 	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
-	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 	App->camera->cameratobedrawn = &App->camera->scenecam;
 
@@ -223,9 +224,6 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
-	ProjectionMatrix = perspective(App->camera->cameratobedrawn->CameraFrustrum.verticalFov, (float)width / (float)height, 0.125f, 512.0f);
 	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
 
 	glMatrixMode(GL_MODELVIEW);
