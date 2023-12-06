@@ -21,6 +21,8 @@ public:
 
 	Component* GetComponent(COMP_TYPE type);
 
+	void Update();
+
 	void AddChild(GameObject* _go);
 
 	void SetParent(GameObject* _go);

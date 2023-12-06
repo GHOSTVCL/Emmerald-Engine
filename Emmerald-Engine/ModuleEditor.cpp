@@ -8,9 +8,18 @@
 #include "SDL/include/SDL.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "ModuleHierarchy.h"
-
+#include "WinInspector.h"
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+    fullscreen = false;
+    resizeable = true;
+    bordered = true;
+    depthEnabled = false;
+    cullEnabled = false;
+    lightsEnabled = false;
+    colorMaterialEnabled = false;
+    textureMappingEnabled = false;
+    wireframeEnabled = false;
 }
 
 ModuleEditor::~ModuleEditor()
@@ -49,13 +58,10 @@ void ModuleEditor::DrawEditor()
 
     DisplayMainMenuBar();
     App->hierarchy->Draw();
-    App->inspector->Draw();
+    Inspector::Draw();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-
-
 
 bool ModuleEditor::CleanUp()
 {
@@ -163,6 +169,7 @@ void ModuleEditor::DisplayHelp()
         ImGui::EndMenu();
     }
 }
+
 void ModuleEditor::DisplayConfigMenu()
 {
     if (ImGui::BeginMenu("Configuration"))
@@ -227,6 +234,7 @@ void ModuleEditor::DisplayConfigMenu()
         ImGui::EndMenu();
     }
 }
+
 void ModuleEditor::DisplayMainMenuBar()
 {
     if (ImGui::BeginMainMenuBar())

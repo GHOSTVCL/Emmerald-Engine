@@ -3,14 +3,14 @@
 #include "ModuleRenderer3D.h"
 #include "SDL\include\SDL_opengl.h"
 #include "ImGui/imgui.h"
-#include "ModuleMesh.h"
-#include "ModuleTexture.h"
+#include "MeshImporter.h"
 #include "CompMesh.h"
 #include "CompCamera.h"
 #include "CompTransform.h"
 #include "ModuleHierarchy.h"
 #include "ModuleCamera3D.h"
 
+#include "Globals.h"
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "Glew/libx86/glew32.lib")
@@ -24,7 +24,6 @@
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	
 }
 
 // Destructor
@@ -37,8 +36,8 @@ bool ModuleRenderer3D::Init()
 {
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
-	
-	
+	GOtotal = 0;
+
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if (context == NULL)
@@ -140,7 +139,7 @@ bool ModuleRenderer3D::Init()
 	glDisable(GL_TEXTURE_2D);
 
 	Grid.axis = true;
-	App->mesh->LoadMesh("Assets/Models/BakerHouse.fbx");
+	Importer::LoadMesh("Assets/Models/BakerHouse.fbx");
 	
 	ilInit();
 	return ret;
@@ -186,9 +185,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	App->camera->cameratobedrawn = &App->camera->scenecam;
 
-	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
-		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
-	}
+	/*for (int i = 0; i < ourMeshes.size(); i++) {
+
+		ourMeshes.at(i)->Draw(checkersTexture);
+
+	}*/
 	Grid.Render();
 
 	App->editor->DrawEditor();
@@ -202,10 +203,10 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 
-	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
+	for (int i = 0; i < ourMeshes.size(); i++) {
 
-		glDeleteBuffers(1, &App->mesh->ourMeshes[i]->VBO);
-		glDeleteBuffers(1, &App->mesh->ourMeshes[i]->EBO);
+		glDeleteBuffers(1, &ourMeshes[i]->VBO);
+		glDeleteBuffers(1, &ourMeshes[i]->EBO);
 	}
 	
 	SDL_GL_DeleteContext(context);

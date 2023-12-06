@@ -1,25 +1,19 @@
-#include "ModuleMesh.h"
+#include "MeshImporter.h"
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
 #include <vector>
 #include "CompMesh.h"
 #include "Application.h"
-#include "ModuleTexture.h"
 #include "MathGeoLib/include/MathGeoLib.h"
-
+#include "ModuleRenderer3D.h"
+#include "Globals.h"
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 #pragma comment (lib, "Glew/libx86/glew32.lib")
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
-ModuleMesh::ModuleMesh(Application* app, bool start_enabled) : Module(app, start_enabled)
-{
-
-
-}
-
-std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
+void Importer::LoadMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -28,15 +22,15 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 	{
 	
 		GameObject* _go;
-		if (gototal == 0) {
+		if (App->renderer3D->GOtotal == 0) {
 			_go = new GameObject("GameObject");
 		}
 		else {
 			std::string goname = "GameObject ";
-			goname += std::to_string(gototal);
+			goname += std::to_string(App->renderer3D->GOtotal);
 			_go = new GameObject(goname);
 		}
-		gototal++;
+		App->renderer3D->GOtotal++;
 
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (int i = 0; i < scene->mNumMeshes; i++) {
@@ -95,17 +89,18 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 				}
 			}
 			temp->textid = nullptr;
-			ourMeshes.push_back(temp);
-			ourMeshes.back()->InitBuffers();
+			
+			App->renderer3D->ourMeshes.push_back(temp);
+			App->renderer3D->ourMeshes.back()->InitBuffers();
 			
 			GameObject* go;
 			std::string name = "Mesh";
 			name += std::to_string(i);
 			go = new GameObject(name);
-			go->GetComponent<CompMesh>()->SetMesh(ourMeshes.back());
+			go->GetComponent<CompMesh>()->SetMesh(App->renderer3D->ourMeshes.back());
 			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
 			go->GetComponent<CompMesh>()->path = file_path;
-			go->GetComponent<CompMesh>()->_ourMeshes = ourMeshes;
+			go->GetComponent<CompMesh>()->_ourMeshes = App->renderer3D->ourMeshes;
 			_go->AddChild(go);
 
 		}
@@ -125,25 +120,24 @@ std::vector<MeshData*> ModuleMesh::LoadMesh(const char* file_path)
 	else {
 		LOG("Error loading scene % s", file_path);
 	}
-	return ourMeshes;
 }
 
-ModuleMesh::~ModuleMesh()
+void Importer::DeleteMesh(MeshData* mesh2delete)
 {
+	for (int i = 0; i < App->renderer3D->ourMeshes.size(); i++) {
+
+		if (mesh2delete == App->renderer3D->ourMeshes[i]) {
+			App->renderer3D->ourMeshes.erase(App->renderer3D->ourMeshes.begin() + i);
+		}
+
+	}
 }
 
-update_status Update()
-{
-	return UPDATE_CONTINUE;
-}
 
-bool ModuleMesh::CleanUp()
-{
-	return true;
-}
-
-void MeshData::Draw(GLuint checkers) {
-
+void MeshData::Draw(GLuint checkers, float4x4 matrix) {
+	
+	glPushMatrix();
+	glMultMatrixf(matrix.ptr());
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_TEXTURE_COORD_ARRAY);
 	//Bind Mesh
@@ -191,12 +185,12 @@ void MeshData::Draw(GLuint checkers) {
 		glBegin(GL_LINES);
 
 		for (unsigned int i = 0; i < indices.size(); i += 3) {
-			// Obtener los índices de los vértices de la cara
+			// Obtener los ï¿½ndices de los vï¿½rtices de la cara
 			unsigned int index1 = indices[i];
 			unsigned int index2 = indices[i + 1];
 			unsigned int index3 = indices[i + 2];
 
-			// Calcular el punto medio de la cara (usamos la posición promedio de los vértices)
+			// Calcular el punto medio de la cara (usamos la posiciï¿½n promedio de los vï¿½rtices)
 			float3 midPoint = (ourVertex[index1].Position + ourVertex[index2].Position + ourVertex[index3].Position) / 3.0f;
 
 			// Obtener la normal de la cara
@@ -205,11 +199,11 @@ void MeshData::Draw(GLuint checkers) {
 			// Normalizar la normal de la cara
 			faceNormal = faceNormal.Normalized();
 
-			// Punto inicial de la línea en el punto medio de la cara
+			// Punto inicial de la lï¿½nea en el punto medio de la cara
 			glVertex3f(midPoint.x, midPoint.y, midPoint.z);
 
-			// Punto final de la línea desplazado según la normal de la cara
-			float scale = 0.1f;  // Factor de escala para las líneas de las normales
+			// Punto final de la lï¿½nea desplazado segï¿½n la normal de la cara
+			float scale = 0.1f;  // Factor de escala para las lï¿½neas de las normales
 			glVertex3f(midPoint.x + scale * faceNormal.x, midPoint.y + scale * faceNormal.y, midPoint.z + scale * faceNormal.z);
 		}
 		glEnd();
@@ -225,32 +219,24 @@ void MeshData::Draw(GLuint checkers) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_COORD_ARRAY);
 
-	App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
-
+	glPopMatrix();
 }
 
 void MeshData::InitBuffers() {
-	glGenBuffers(1, &this->VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->ourVertex.size(), &this->ourVertex[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * ourVertex.size(), &ourVertex[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &this->EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * this->indices.size(), &this->indices[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void ModuleMesh::DeleteMesh(MeshData* mesh2delete) {
 
-	for (int i = 0; i < ourMeshes.size(); i++) {
 
-		if (mesh2delete == ourMeshes[i]) {
-			ourMeshes.erase(ourMeshes.begin() + i);
-		}
 
-	}
 
-}

@@ -1,12 +1,11 @@
 #pragma once
-#include "Module.h"
 #include "Glew/include/glew.h"
 #include "DevIL/include/il.h"
 #include "DevIL/include/ilu.h"
 #include "DevIL/include/ilut.h"
 #include "SDL/include/SDL_opengl.h"
 #include <string>
-
+#include "Globals.h"
 
 struct Texture
 {
@@ -21,20 +20,9 @@ struct Texture
 	uint width;
 	uint height;
 };
-class ModuleTexture : public Module
-{
-public:
+
+namespace TextureImporter {
 	
-	ModuleTexture(Application* app, bool start_enabled = true);
-	~ModuleTexture() {}
-	bool Start();
-	bool CleanUp();
-
-	bool GenTexture(GLuint* imgData, GLuint width, GLuint height);
-
 	Texture* LoadTexture(std::string textfile);
 
-	std::string texturePath;
-
-
-};
+}

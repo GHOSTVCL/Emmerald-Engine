@@ -1,9 +1,10 @@
 #ifndef __COMPONENT_MESH_H__
 #define __COMPONENT_MESH_H__
 #include "Component.h"
-#include "ModuleMesh.h"
+#include "MeshImporter.h"
 #include "Module.h"
 #include <vector>
+
 class CompMesh : public Component
 {
 public:
@@ -13,7 +14,7 @@ public:
     ~CompMesh();
 
     void SetMesh(MeshData* _mesh);
-
+    void Draw();
     MeshData* GetMesh() { return mesh; }
 
     void ShowCompUI() override;
@@ -23,6 +24,7 @@ public:
     std::vector<MeshData*> _ourMeshes;
     Application* app;
     std::string path;
+
 private:
 
 

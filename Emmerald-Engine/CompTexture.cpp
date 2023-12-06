@@ -1,4 +1,5 @@
 #include "CompTexture.h"
+#include "TextureImporter.h"
 #include "ImGui/imgui.h"
 
 CompTexture::CompTexture(GameObject* _go) : Component(_go), texture(nullptr) {

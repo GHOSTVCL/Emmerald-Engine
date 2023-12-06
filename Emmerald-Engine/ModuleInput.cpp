@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
-#include "ModuleMesh.h"
+#include "MeshImporter.h"
+#include "TextureImporter.h"
 #include "ImGUI/backends/imgui_impl_sdl2.h"
 
 #define MAX_KEYS 300
@@ -118,8 +119,8 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 				dropfile = e.drop.file;
-				App->mesh->LoadMesh(dropfile);
-				App->textures->LoadTexture(dropfile);
+				Importer::LoadMesh(dropfile);
+				TextureImporter::LoadTexture(dropfile);
 				SDL_free(dropfile);
 				break;
 

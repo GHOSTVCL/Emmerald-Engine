@@ -58,6 +58,18 @@
     <Filter Include="Sources\Component\CompTypes">
       <UniqueIdentifier>{b74a57ec-c243-4084-b273-22b43b631cab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Importers">
+      <UniqueIdentifier>{30e91fc4-c8c5-4ae0-89c6-a568a868f6f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Importers\Model">
+      <UniqueIdentifier>{7dd28ca8-8d6e-4ef1-bf0b-5150cd08aac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Importers\Texture">
+      <UniqueIdentifier>{f74bd0e2-3337-440e-bb7f-ef646082c52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Windows">
+      <UniqueIdentifier>{c7c5f697-9ff3-4427-9273-6d3946eedfb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -306,9 +318,6 @@
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleMesh.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Assimp\Assimp\include\texture.h">
       <Filter>Sources\Assimp</Filter>
     </ClInclude>
@@ -432,9 +441,6 @@
     <ClInclude Include="DevIL\include\ilut_config.h">
       <Filter>Sources\DevIL</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleTexture.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Sources\Component</Filter>
     </ClInclude>
@@ -453,9 +459,6 @@
     <ClInclude Include="ModuleHierarchy.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInspector.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Sources\GameObject</Filter>
     </ClInclude>
@@ -467,6 +470,15 @@
     </ClInclude>
     <ClInclude Include="CompCamera.h">
       <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshImporter.h">
+      <Filter>Sources\Importers\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureImporter.h">
+      <Filter>Sources\Importers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="WinInspector.h">
+      <Filter>Sources\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -626,12 +638,6 @@
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleMesh.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTexture.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Sources\GameObject</Filter>
     </ClCompile>
@@ -653,8 +659,14 @@
     <ClCompile Include="ModuleHierarchy.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleInspector.cpp">
-      <Filter>Sources\Modules</Filter>
+    <ClCompile Include="MeshImporter.cpp">
+      <Filter>Sources\Importers\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureImporter.cpp">
+      <Filter>Sources\Importers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="WinInspector.cpp">
+      <Filter>Sources\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Sources\GameObject</Filter>

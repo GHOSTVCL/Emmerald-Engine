@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "ModuleTexture.h"
+#include "TextureImporter.h"
 #include "CompTexture.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -8,30 +8,8 @@
 #pragma comment(lib, "DevIL/libx86/ILU.lib")
 #pragma comment(lib, "DevIL/libx86/ILUT.lib")
 
-//#include "SDL/include/SDL_opengl.h"
 
-ModuleTexture::ModuleTexture(Application* app, bool start_enabled) : Module(app, start_enabled)
-{
-	//textureID = 0;
-}
-
-bool ModuleTexture::Start()
-{
-
-    
-
-
-
-	return true;
-}
-
-bool ModuleTexture::CleanUp()
-{
-	//glDeleteBuffers(1, &textureID);
-	return true;
-}
-
-Texture* ModuleTexture::LoadTexture(std::string textfile)
+Texture* TextureImporter::LoadTexture(std::string textfile)
 {
     ILenum imageToTextID;
     ILboolean done;
