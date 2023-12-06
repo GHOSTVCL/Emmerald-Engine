@@ -153,8 +153,12 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	glMatrixMode(GL_MODELVIEW);/*(!!!!!)*/
-	glLoadMatrixf(App->camera->scenecam.GetViewMatrix());
+
+	math::float4x4 gvmatrix = App->camera->scenecam.GetViewMatrix() * App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
+
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(&gvmatrix.v[0][0]);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(App->camera->scenecam.GetProjMatrix());
@@ -183,8 +187,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	App->camera->cameratobedrawn = &App->camera->scenecam;
 
 	for (int i = 0; i < App->mesh->ourMeshes.size(); i++) {
-		//(gwtglobalmatrix.transposed) --> view*model
-		App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
 		App->mesh->ourMeshes.at(i)->Draw(checkersTexture);
 	}
 	Grid.Render();
@@ -291,7 +293,7 @@ void ModuleRenderer3D::AddDebug(/*float3* points*/)
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->cameratobedrawn->GetViewMatrix());
+	glLoadMatrixf(App->camera->cameratobedrawn->GetViewMatrix_());
 
 	glBegin(GL_POINTS);
 

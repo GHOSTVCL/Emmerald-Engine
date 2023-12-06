@@ -53,6 +53,5 @@ public:
 	
 	bool txt2d = false;
 	
-	
 };
 

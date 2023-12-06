@@ -15,6 +15,7 @@ CompCamera::CompCamera(GameObject* _go) : Component(_go)
 	App->window->GetScreenSize(&width_, &height_);
 	camera_->SetUpFrameBuffer(width_, height_);
 	camera_->SetAsGameCamera();
+
 }
 
 CompCamera::~CompCamera()

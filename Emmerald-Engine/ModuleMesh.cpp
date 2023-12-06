@@ -225,6 +225,8 @@ void MeshData::Draw(GLuint checkers) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_COORD_ARRAY);
 
+	App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
+
 }
 
 void MeshData::InitBuffers() {

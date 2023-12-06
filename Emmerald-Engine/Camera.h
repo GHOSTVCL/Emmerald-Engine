@@ -26,7 +26,8 @@ public:
 	bool FrustrumContainsBB(AABB& globalBB);
 
 	//Getters
-	float* GetViewMatrix();
+	float4x4 GetViewMatrix();
+	float* GetViewMatrix_();
 	float* GetProjMatrix();
 
 	void SetUpFrameBuffer(int width, int height);

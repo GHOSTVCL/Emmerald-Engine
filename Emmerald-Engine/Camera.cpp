@@ -71,7 +71,15 @@ void Camera::Move(const float3& Movement)
 	CameraFrustrum.pos += Movement;
 }
 
-float* Camera::GetViewMatrix()
+float4x4 Camera::GetViewMatrix()
+{
+	//ViewMatrix;
+	float4x4 tempview = CameraFrustrum.ViewMatrix();
+	//In order to pass it to opengl we have to transpose it
+	tempview.Transpose();
+	return tempview;
+}
+float* Camera::GetViewMatrix_()
 {
 	//ViewMatrix;
 	float4x4 tempview = CameraFrustrum.ViewMatrix();
@@ -79,7 +87,6 @@ float* Camera::GetViewMatrix()
 	tempview.Transpose();
 	return &tempview.v[0][0];
 }
-
 float* Camera::GetProjMatrix()
 {
 	//ProjMatrix = 
