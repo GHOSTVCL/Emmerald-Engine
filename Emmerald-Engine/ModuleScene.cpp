@@ -23,7 +23,16 @@ update_status ModuleScene::Update(float dt)
 
 update_status ModuleScene::PostUpdate(float dt)
 {
+	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+	App->camera->cameratobedrawn = &App->camera->scenecam;
+
 	DrawMesh(root);
+
+	glBindBuffer(GL_FRAMEBUFFER,0);
+
 	return UPDATE_CONTINUE;
 }
 

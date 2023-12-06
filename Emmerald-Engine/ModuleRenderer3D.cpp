@@ -152,15 +152,15 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-
-	math::float4x4 gvmatrix = App->camera->scenecam.GetViewMatrix() * App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed();
-
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(&gvmatrix.v[0][0]);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(App->camera->scenecam.GetProjMatrix());
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(App->camera->scenecam.GetViewMatrix_());
+
+	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 	glMatrixMode(0);
 
@@ -172,8 +172,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	App->editor->AddFPS(App->GetDT());
 
-	/*OnZoom();*/
-
 	return UPDATE_CONTINUE;
 }
 
@@ -182,6 +180,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
 	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
+	
 
 	App->camera->cameratobedrawn = &App->camera->scenecam;
 
@@ -193,6 +192,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	Grid.Render();
 
 	App->editor->DrawEditor();
+
+	glBindBuffer(GL_FRAMEBUFFER, 0);
 
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
@@ -312,6 +313,4 @@ void ModuleRenderer3D::AddDebug(/*float3* points*/)
 	//glVertex3f(points[0].x, points[0].y, points[0].z);
 
 	glEnd();
-
-
 }
