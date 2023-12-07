@@ -16,8 +16,6 @@
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
 
-class CCamera;
-
 class ModuleRenderer3D : public Module
 {
 public:
@@ -37,7 +35,7 @@ public:
 	void SetWireframe(bool wireframe);
 	void OnZoom();
 
-	//void AddDebug(/*float3* points*/);
+	void AddDebug(/*float3* points*/);
 
 public:
 
@@ -56,9 +54,6 @@ public:
 	int GOtotal;
 	
 	bool txt2d = false;
-
-	GameObject* GameCamera;
-	CCamera* mainCam;
 	
 };
 

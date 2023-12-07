@@ -1,11 +1,12 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
-#include "MathGeoLib/include/MathGeoLib.h"
+#include "MathGeoLib/include/Math/float3.h"
+#include "MathGeoLib/include/Math/float4x4.h"
+#include "Camera.h"
 
-//#include "Math/Quat.h"
-
-class CCamera;
+//todo: REMOVE this before 1st delivery!!
+#include "glmath.h"
 
 class ModuleCamera3D : public Module
 {
@@ -14,23 +15,39 @@ public:
 	~ModuleCamera3D();
 
 	bool Start();
-	update_status Update(float dt);
+	update_status Update();
+	void SceneCameraHandleInput();
+	void CamMovementInput();
+	void CamRotationInput();
 	bool CleanUp();
 
-	void Rotation();
+	/*bool SaveSettings(pugi::xml_node& config);*/
 
-	CCamera* sceneCam;
-	float mouseSens = 0.50f;
+	Camera* AddCamera();
 
-	//void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	//void LookAt(const vec3 &Spot);
-	//void Move(const vec3 &Movement);
-	/*float* GetViewMatrix();
-	float* GetProjectionMatrix();*/
-	//void PrintLicense();
+	void DestroyCamera(Camera* camToDestroy);
+
 
 private:
 
-	bool click = false;
+	void CalculateViewMatrix();
 
+public:
+	
+	//You won't need this after using Frustum
+	float3 X, Y, Z, Position, Reference;
+	float mousez = 60.0f;
+
+	std::vector<Camera*> gamecams;
+
+	Camera scenecam;
+
+	Camera* cameratobedrawn = nullptr;
+
+	Camera* gamecamactive = nullptr;
+
+private:
+
+	mat4x4 ViewMatrix;
+	//Frustum mMainCamera; Some help here :)
 };
