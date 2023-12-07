@@ -15,7 +15,7 @@ public:
 	~ModuleCamera3D();
 
 	bool Start();
-	update_status Update();
+	update_status Update(float dt) override;
 	void SceneCameraHandleInput();
 	void CamMovementInput();
 	void CamRotationInput();

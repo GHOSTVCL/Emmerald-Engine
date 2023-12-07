@@ -63,7 +63,7 @@ void ModuleCamera3D::DestroyCamera(Camera* camToDestroy)
 }
 
 // -----------------------------------------------------------------
-update_status ModuleCamera3D::Update()
+update_status ModuleCamera3D::Update(float dt)
 {
 
 	SceneCameraHandleInput();

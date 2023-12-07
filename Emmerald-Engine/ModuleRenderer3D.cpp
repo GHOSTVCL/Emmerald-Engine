@@ -181,6 +181,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	App->camera->cameratobedrawn = &App->camera->scenecam;
 
+	lights[0].SetPos(App->camera->scenecam.CameraFrustrum.pos.x, App->camera->scenecam.CameraFrustrum.pos.y, App->camera->scenecam.CameraFrustrum.pos.z);
+
 	/*for (int i = 0; i < ourMeshes.size(); i++) {
 
 		ourMeshes.at(i)->Draw(checkersTexture);
