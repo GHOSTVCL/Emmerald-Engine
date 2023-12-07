@@ -9,6 +9,7 @@
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "ModuleHierarchy.h"
 #include "WinInspector.h"
+#include "WinScene.h"
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
     fullscreen = false;
@@ -59,6 +60,7 @@ void ModuleEditor::DrawEditor()
     DisplayMainMenuBar();
     App->hierarchy->Draw();
     Inspector::Draw();
+    WindowScene::Draw();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

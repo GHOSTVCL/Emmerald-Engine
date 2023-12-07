@@ -56,10 +56,6 @@ public:
 
 private:
 
-	float4x4 ViewMatrix;
-	float4x4 ViewMatrixInverse;
-	float4x4 ProjMatrix;
-
 	Application* app = nullptr;
 
 };

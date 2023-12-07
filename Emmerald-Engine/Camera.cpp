@@ -85,7 +85,7 @@ float* Camera::GetViewMatrix_()
 	float4x4 tempview = CameraFrustrum.ViewMatrix();
 	//In order to pass it to opengl we have to transpose it
 	tempview.Transpose();
-	return &tempview.v[0][0];
+	return tempview.ptr();
 }
 float* Camera::GetProjMatrix()
 {
@@ -93,7 +93,7 @@ float* Camera::GetProjMatrix()
 	float4x4 tempproj = CameraFrustrum.ProjectionMatrix();
 	//In order to pass it to opengl we have to transpose it
 	tempproj.Transpose();
-	return &tempproj.v[0][0];
+	return tempproj.ptr();
 }
 
 void Camera::SetUpFrameBuffer(int width, int height)
