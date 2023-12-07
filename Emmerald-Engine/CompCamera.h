@@ -1,26 +1,45 @@
-#ifndef __COMPONENT_CAMERA_H__
-#define __COMPONENT_CAMERA_H__
+#pragma once
+#include "Globals.h"
 #include "Component.h"
-#include "Module.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
-class Camera;
+class GameObject;
+class Component;
 
-class CompCamera : public Component
+class CCamera : public Component
 {
 public:
-	CompCamera(GameObject* _go);
 
-	~CompCamera();
+	CCamera();
+	CCamera(GameObject* owner);
+	~CCamera();
 
-	void Update();
-	void ShowCompUI();
+	void SetCam();
+	void GenBuffer();
 
-	Camera* camera_;
+	float* GetViewMatrix();
+	float* GetProjectionMatrix();
 
-public:
+	void LookAt(const float3& target);
 
-	int width_, height_;
+	void TransformCam();
 
+	void Inspector();
+
+	bool ContainsAaBox(MeshData* refBox);
+
+	Frustum FrustumCam;
+	float4x4 viewMatrix;
+	float4x4 projectionMatrix;
+
+	int printCount;
+
+	int FOV = 60.0f;
+
+	unsigned int cameraBuffer;
+	unsigned int frameBuffer;
+
+private:
+
+	unsigned int renderObjBuffer;
 };
-
-#endif // !__COMPONENT_CAMERA

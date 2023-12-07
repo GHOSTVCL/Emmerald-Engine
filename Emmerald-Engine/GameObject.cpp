@@ -50,7 +50,7 @@ Component* GameObject::AddComponent(COMP_TYPE type)
 		comp->type = type;
 		break;
 	case CAMERA:
-		comp = new CompCamera(this);
+		comp = new CCamera(this);
 		comp->type = type;
 		break;
 	}

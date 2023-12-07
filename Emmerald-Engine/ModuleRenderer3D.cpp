@@ -112,7 +112,7 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_COLOR_MATERIAL);
 		glewInit();
 	}
-	App->camera->cameratobedrawn = &App->camera->scenecam;
+	/*App->camera->cameratobedrawn = &App->camera->scenecam;*/
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -153,19 +153,17 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glLoadIdentity();
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(App->camera->scenecam.GetProjMatrix());
+	glLoadMatrixf(App->camera->sceneCam->GetProjectionMatrix());
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->scenecam.GetViewMatrix_());
+	glLoadMatrixf(App->camera->sceneCam->GetViewMatrix());
 
-	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
+	glBindFramebuffer(GL_FRAMEBUFFER, App->camera->sceneCam->frameBuffer);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-	glMatrixMode(0);
-
 	// light 0 on cam pos
-	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
+	lights[0].SetPos(App->camera->sceneCam->FrustumCam.pos.x, App->camera->sceneCam->FrustumCam.pos.y, App->camera->sceneCam->FrustumCam.pos.z);
 
 	for (uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
@@ -179,11 +177,24 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	//Draw test here
-	glBindBuffer(GL_FRAMEBUFFER, App->camera->scenecam.framebuffer.GetFrameBuffer());
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	App->camera->cameratobedrawn = &App->camera->scenecam;
+	if (mainCam != nullptr) {
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(mainCam->GetProjectionMatrix());
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(mainCam->GetViewMatrix());
+
+		glBindFramebuffer(GL_FRAMEBUFFER, mainCam->frameBuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+	}
 
 	/*for (int i = 0; i < ourMeshes.size(); i++) {
 
@@ -224,12 +235,10 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
+	glLoadMatrixf(App->camera->sceneCam->FrustumCam.ProjectionMatrix().Transposed().ptr());
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-	App->camera->scenecam.framebuffer.SettingUpFrameBuffer(width, height);
 }
 
 void ModuleRenderer3D::SetDepthTest(bool depth)
@@ -287,28 +296,28 @@ void ModuleRenderer3D::OnZoom()
 
 }
 
-void ModuleRenderer3D::AddDebug(/*float3* points*/)
-{
-	glUseProgram(0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->cameratobedrawn->GetViewMatrix_());
-
-	glBegin(GL_POINTS);
-
-	glColor3f(1.f, 0.f, 0.f);
-
-	glPointSize(5.0f);
-
-	glVertex3f(5.0f, 0.0f, 0.0f);
-	glVertex3f(10.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	//glVertex3f(points[6].x, points[6].y, points[6].z);
-	//glVertex3f(points[6].x, points[6].y, points[6].z); 
-	//glVertex3f(points[4].x, points[4].y, points[4].z);
-	//glVertex3f(points[4].x, points[4].y, points[4].z); 
-	//glVertex3f(points[0].x, points[0].y, points[0].z);
-
-	glEnd();
-}
+//void ModuleRenderer3D::AddDebug(/*float3* points*/)
+//{
+//	glUseProgram(0);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadMatrixf(App->camera->cameratobedrawn->GetProjMatrix());
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadMatrixf(App->camera->cameratobedrawn->GetViewMatrix_());
+//
+//	glBegin(GL_POINTS);
+//
+//	glColor3f(1.f, 0.f, 0.f);
+//
+//	glPointSize(5.0f);
+//
+//	glVertex3f(5.0f, 0.0f, 0.0f);
+//	glVertex3f(10.0f, 0.0f, 0.0f);
+//	glVertex3f(0.0f, 0.0f, 0.0f);
+//	//glVertex3f(points[6].x, points[6].y, points[6].z);
+//	//glVertex3f(points[6].x, points[6].y, points[6].z); 
+//	//glVertex3f(points[4].x, points[4].y, points[4].z);
+//	//glVertex3f(points[4].x, points[4].y, points[4].z); 
+//	//glVertex3f(points[0].x, points[0].y, points[0].z);
+//
+//	glEnd();
+//}

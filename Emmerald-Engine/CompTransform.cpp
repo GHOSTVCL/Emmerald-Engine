@@ -112,3 +112,13 @@ void CompTransform::SetNewTransform(float3 pos, float3x3 rot, float3 scale)
 	this->localScale = scale;
 
 }
+
+float4x4 CompTransform::GetTransformMatrix()
+{
+	if (comp_owner->parent == nullptr) {
+		return lTransform;
+	}
+	else {
+		return lTransform * comp_owner->parent->transform->GetTransformMatrix();
+	}
+}
