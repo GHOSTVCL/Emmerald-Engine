@@ -20,6 +20,7 @@ public:
 	void DisplayHelp();
 	bool CleanUp() override;
 	void AddFPS(const float aFPS);
+	update_status PreUpdate(float dt);
 
 	std::vector <float> mFPSLog;
 	bool fullscreen = false;

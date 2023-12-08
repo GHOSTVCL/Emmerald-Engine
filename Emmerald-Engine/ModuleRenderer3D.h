@@ -50,7 +50,6 @@ public:
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	CPlane Grid;
-	
 
 	GLuint checkersTexture;
 	GLuint texWidth, texHeight;

@@ -4,7 +4,7 @@
 #include "ModuleRenderer3D.h"
 #include "ImGui/imgui.h"
 #include "ImGui/backends/imgui_impl_opengl3.h"
-#include "ImGui/backends/imgui_impl_sdl2.h"
+#include "ImGUI/backends/imgui_impl_sdl.h"
 #include "SDL/include/SDL.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "ModuleHierarchy.h"
@@ -32,9 +32,12 @@ bool ModuleEditor::Init()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+
+   
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -94,6 +97,11 @@ void ModuleEditor::AddFPS(const float aFPS)
         }
         mFPSLog[mFPSLog.capacity() - 1] = aFPS;
     }
+}
+
+update_status ModuleEditor::PreUpdate(float dt)
+{
+    return update_status();
 }
 
 void ModuleEditor::DisplayHelp()
