@@ -160,7 +160,7 @@ bool CCamera::ContainsAaBox(MeshData* refBox)
 {
 	float3 vCorner[8];
 	int iTotalIn = 0;
-	refBox->aabb.GetCornerPoints(vCorner); // get the corners of the box into the vCorner array
+	refBox->aABB.GetCornerPoints(vCorner); // get the corners of the box into the vCorner array
 
 	Plane m_plane[6];
 	FrustumCam.GetPlanes(m_plane);

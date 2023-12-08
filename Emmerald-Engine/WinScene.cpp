@@ -8,7 +8,7 @@
 
 void WindowScene::Draw()
 {
-	std::string name = "SceneWindow";
+	std::string name = "Scene";
 	bool isEnabled = true;
 	if (ImGui::Begin(name.c_str(), &isEnabled))
 	{
@@ -66,3 +66,4 @@ void WindowScene::Draw()
 	ImGui::End();
 
 }
+

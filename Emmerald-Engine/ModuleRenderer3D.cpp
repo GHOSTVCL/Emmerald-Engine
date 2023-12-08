@@ -199,6 +199,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	plane.axis = true;
 	plane.Render();
 
+	for (int i = 0; i < compMeshes.size(); i++)
+	{
+		compMeshes[i]->Draw();
+	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -222,15 +226,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		ourMeshes.at(i)->Draw(checkersTexture);
 
 	}*/
-	for (int i = 0; i < compMeshes.size(); i++)
-	{
-		compMeshes[i]->Draw();
-	}
 	compMeshes.clear();
-
-	Grid.Render();
-
-	
 
 
 	SDL_GL_SwapWindow(App->window->window);

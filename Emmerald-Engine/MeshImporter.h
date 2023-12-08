@@ -27,13 +27,12 @@ struct MeshData {
 	bool printcheckers = false;
 	bool printFaceNormals = false;
 	bool printVertexNormals = false;
+
 	AABB localAABB;
 	AABB aABB;
 	OBB oBB;
 
-	AABB localAABB;
-	AABB aabb;
-	OBB obb;
+	
 
 };
 namespace Importer {

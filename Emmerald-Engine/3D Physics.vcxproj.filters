@@ -483,6 +483,9 @@
     <ClInclude Include="WinScene.h">
       <Filter>Sources\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="WinGame.h">
+      <Filter>Sources\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -681,6 +684,9 @@
       <Filter>Sources\Component\CompTypes</Filter>
     </ClCompile>
     <ClCompile Include="WinScene.cpp">
+      <Filter>Sources\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="WinGame.cpp">
       <Filter>Sources\Windows</Filter>
     </ClCompile>
   </ItemGroup>
