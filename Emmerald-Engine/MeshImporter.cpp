@@ -14,7 +14,7 @@
 #pragma comment (lib, "Glew/libx86/glew32.lib")
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
-void Importer::LoadMesh(const char* file_path)
+void Importer::ImportMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);

@@ -10,6 +10,8 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "ModuleHierarchy.h"
+#include "ModuleResources.h"
+
 #include<vector>
 
 enum class Logs
@@ -40,6 +42,7 @@ public:
 	ModuleEditor* editor;
 	ModuleScene* scene;
 	ModuleHierarchy* hierarchy;
+	ModuleResources* resources;
 
 	float fps = 1.0f / 60.0f;
 

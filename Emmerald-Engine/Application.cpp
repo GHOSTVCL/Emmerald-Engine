@@ -10,6 +10,7 @@ Application::Application()
 	editor = new ModuleEditor(this);
 	scene = new ModuleScene(this);
 	hierarchy = new ModuleHierarchy(this);
+	resources = new ModuleResources(this);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -18,9 +19,10 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	// Renderer last!
 	AddModule(scene);
 	AddModule(hierarchy);
+	AddModule(resources);
+	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(editor);
 

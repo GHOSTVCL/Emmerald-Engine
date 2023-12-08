@@ -37,7 +37,7 @@ struct MeshData {
 };
 namespace Importer {
 
-	void LoadMesh(const char* file_path);
+	void ImportMesh(const char* file_path);
 	void DeleteMesh(MeshData* mesh2delete);	
 
 };

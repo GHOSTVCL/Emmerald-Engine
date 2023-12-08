@@ -119,8 +119,8 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 				dropfile = e.drop.file;
-				Importer::LoadMesh(dropfile);
-				TextureImporter::LoadTexture(dropfile);
+				Importer::ImportMesh(dropfile);
+				TextureImporter::ImportTexture(dropfile);
 				SDL_free(dropfile);
 				break;
 

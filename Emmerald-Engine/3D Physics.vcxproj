@@ -203,6 +203,7 @@
     <ClInclude Include="MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="ModuleHierarchy.h" />
     <ClInclude Include="WinGame.h" />
+    <ClInclude Include="ModuleResources.h" />
     <ClInclude Include="WinInspector.h" />
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="ModuleCamera3D.h" />
@@ -273,6 +274,7 @@
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="ModuleHierarchy.cpp" />
     <ClCompile Include="WinGame.cpp" />
+    <ClCompile Include="ModuleResources.cpp" />
     <ClCompile Include="WinInspector.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
