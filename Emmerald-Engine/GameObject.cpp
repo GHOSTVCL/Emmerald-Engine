@@ -20,6 +20,7 @@ GameObject::GameObject(std::string name)
 	this->AddComponent(COMP_TYPE::MESH);
 	this->AddComponent(COMP_TYPE::TEXTURE);
 
+
 }
 
 GameObject::~GameObject()
@@ -50,7 +51,7 @@ Component* GameObject::AddComponent(COMP_TYPE type)
 		comp->type = type;
 		break;
 	case CAMERA:
-		comp = new CompCamera(this);
+		comp = new CCamera(this);
 		comp->type = type;
 		break;
 	}

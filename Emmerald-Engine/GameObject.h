@@ -7,6 +7,7 @@
 
 class Component;
 class Application;
+class CompTransform;
 
 class GameObject
 {
@@ -53,6 +54,8 @@ public:
 	std::vector<GameObject*> children;
 
 	GameObject* parent = nullptr;
+
+	CompTransform* transform_;
 
 	bool active;
 	std::string name;

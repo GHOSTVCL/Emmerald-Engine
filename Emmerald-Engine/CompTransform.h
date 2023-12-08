@@ -29,10 +29,15 @@ public:
 
     void SetNewTransform(float3 pos, float3x3 rot, float3 scale);
 
+    float4x4 GetTransformMatrix();
+
+    void SetTransformMatrix();
+
 public:
     float4x4 globalTransform;
     float4x4 localTransform;
     float4x4 identity;
+    float4x4 lTransform;
 
     float3 position, localScale, eulerRotation;
     Quat rotation;

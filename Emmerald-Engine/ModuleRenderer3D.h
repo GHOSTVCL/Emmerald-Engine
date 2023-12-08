@@ -16,6 +16,9 @@
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
 
+class CCamera;
+class ModuleCamera3;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -23,6 +26,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
+	bool Start();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
@@ -35,7 +39,7 @@ public:
 	void SetWireframe(bool wireframe);
 	void OnZoom();
 
-	void AddDebug(/*float3* points*/);
+	//void AddDebug(/*float3* points*/);
 
 public:
 
@@ -52,6 +56,9 @@ public:
 	mat4x4 ProjectionMatrix;
 	std::vector<MeshData*> ourMeshes;
 	int GOtotal;
+
+	GameObject* GameCamera;
+	//CCamera* mainCam;
 	
 	bool txt2d = false;
 	

@@ -23,11 +23,14 @@ public:
 
     void ShowGameObjects(GameObject* go);
 
+    GameObject* objSelected;
+
 private:
 
     Application* app;
 
     GameObject* goToDrop;
+    
 
     int emptycounter = 0;
 
