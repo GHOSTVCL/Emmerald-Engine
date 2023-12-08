@@ -7,6 +7,8 @@
 #include "CompMesh.h"
 #include "ModuleHierarchy.h"
 #include "Globals.h"
+#include "CompTransform.h"
+#include "MeshImporter.h"
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "glu32.lib") /* link Microsoft OpenGL lib   */
 #pragma comment (lib, "Glew/libx86/glew32.lib")
@@ -174,6 +176,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		ourMeshes.at(i)->Draw(checkersTexture);
 
 	}*/
+	for (int i = 0; i < compMeshes.size(); i++)
+	{
+		compMeshes[i]->Draw();
+	}
+	compMeshes.clear();
+
 	Grid.Render();
 
 	App->editor->DrawEditor();
@@ -225,6 +233,7 @@ void ModuleRenderer3D::SetDepthTest(bool depth)
 		glEnable(GL_DEPTH_TEST);
 	}
 }
+
 void ModuleRenderer3D::SetCullFace(bool cull)
 {
 	if (cull)
@@ -236,6 +245,7 @@ void ModuleRenderer3D::SetCullFace(bool cull)
 		glEnable(GL_CULL_FACE);
 	}
 }
+
 void ModuleRenderer3D::SetLightning(bool lights)
 {
 	if (lights)
@@ -247,6 +257,7 @@ void ModuleRenderer3D::SetLightning(bool lights)
 		glEnable(GL_LIGHTING);
 	}
 }
+
 void ModuleRenderer3D::SetWireframe(bool wireframe)
 {
 	if (wireframe)
@@ -258,6 +269,7 @@ void ModuleRenderer3D::SetWireframe(bool wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
+
 void ModuleRenderer3D::OnZoom()
 {
 	glMatrixMode(GL_PROJECTION);
@@ -266,5 +278,69 @@ void ModuleRenderer3D::OnZoom()
 	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
 	ProjectionMatrix = perspective(App->camera->Scrollzoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);
 	glLoadMatrixf(ProjectionMatrix.M);
+
+}
+
+CompMesh* ModuleRenderer3D::RayIntersects(LineSegment& line)
+{
+	std::vector<CompMesh*> meshIntersectedbyAABB;
+	for (uint i = 0; i < compMeshes.size(); i++)
+	{
+		AABB tempabb = compMeshes[i]->GetMesh()->aABB;
+		if (line.Intersects(tempabb))
+		{
+			meshIntersectedbyAABB.push_back(compMeshes[i]);
+		}
+	}
+
+	
+
+	if (meshIntersectedbyAABB.size() == 0)
+	{
+		App->scene->selectedGO = nullptr;
+		return nullptr;
+	}
+
+	for (int j = 0; j < meshIntersectedbyAABB.size(); j++)
+	{
+		//New variable to save the ray in local coordinates
+		LineSegment rayinlocalspace = line;
+
+		float4x4 meshglobalmatrix = meshIntersectedbyAABB[j]->comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix();
+
+		float4x4 meshlocalmatrix = meshglobalmatrix.Inverted();
+
+		//multiply ray's position by the inverted global matrix of the mesh in order to convert ray in global position to mesh's local space
+		rayinlocalspace.Transform(meshlocalmatrix);
+
+		MeshData* tempmesh = meshIntersectedbyAABB[j]->GetMesh();
+
+		for (uint k = 0; k < tempmesh->indices.size(); k += 3)
+		{
+			float intersectlength = 0;
+			//Creating vertices from the vertices of the mesh at the index of the indices
+			float3 vertex1 = tempmesh->ourVertex[tempmesh->indices[k]].Position;
+			float3 vertex2 = tempmesh->ourVertex[tempmesh->indices[k+1]].Position;
+			float3 vertex3 = tempmesh->ourVertex[tempmesh->indices[k+2]].Position;
+
+			//Create the triangle using the 3 vertices previously created
+			Triangle triIntersects(vertex1, vertex2, vertex3);
+
+			if (rayinlocalspace.Intersects(triIntersects, &intersectlength, nullptr))
+			{
+				trihitsdistmap[intersectlength] = meshIntersectedbyAABB[j];
+			}
+		}
+	}
+	meshIntersectedbyAABB.clear();
+
+	if (trihitsdistmap.size() == 0)
+	{
+		return nullptr;
+	}
+	else
+	{
+		return trihitsdistmap.begin()->second;
+	}
 
 }

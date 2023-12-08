@@ -7,7 +7,7 @@
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
 
-
+class GameObject;
 struct Vertex {
 	float3 Position;
 	float3 Normal;
@@ -21,10 +21,15 @@ struct MeshData {
 	unsigned int VBO = 0, EBO = 0;
 	void Draw(GLuint checkers, float4x4 matrix);
 	void InitBuffers();
+	AABB GenLocalAABB();
+	AABB GenGlobalBB(GameObject* go);
 	Texture* textid = nullptr;
 	bool printcheckers = false;
 	bool printFaceNormals = false;
 	bool printVertexNormals = false;
+	AABB localAABB;
+	AABB aABB;
+	OBB oBB;
 
 };
 namespace Importer {

@@ -23,7 +23,6 @@ update_status ModuleScene::Update(float dt)
 
 update_status ModuleScene::PostUpdate(float dt)
 {
-	DrawMesh(root);
 	return UPDATE_CONTINUE;
 }
 
@@ -39,17 +38,7 @@ void ModuleScene::UpdateGo(GameObject* goToUpdate)
 
 }
 
-void ModuleScene::DrawMesh(GameObject* goToUpdate)
-{
 
-	goToUpdate->GetComponent<CompMesh>()->Draw();
-
-	for (int i = 0; i < goToUpdate->children.size(); i++)
-	{
-		DrawMesh(goToUpdate->children[i]);
-	}
-
-}
 bool ModuleScene::CleanUp()
 {
 	return false;

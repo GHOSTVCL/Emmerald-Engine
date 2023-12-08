@@ -4,6 +4,7 @@
 #include "Assimp/include/postprocess.h"
 #include <vector>
 #include "CompMesh.h"
+#include "CompTransform.h"
 #include "Application.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "ModuleRenderer3D.h"
@@ -235,7 +236,25 @@ void MeshData::InitBuffers() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+AABB MeshData::GenLocalAABB()
+{
+	localAABB.SetNegativeInfinity();
+	localAABB.Enclose(&ourVertex.at(0).Position, ourVertex.size());
+	
+	return localAABB;
+}
 
+AABB MeshData::GenGlobalBB(GameObject* go)
+{
+
+	oBB = GenLocalAABB();
+	aABB.Transform(go->GetComponent<CompTransform>()->GetGlobalMatrix());
+
+	aABB.SetNegativeInfinity();
+	aABB.Enclose(oBB);
+
+	return aABB;
+}
 
 
 

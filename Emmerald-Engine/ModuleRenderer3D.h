@@ -11,7 +11,9 @@
 #include "glmath.h"
 #include "GameObject.h"
 #include "TextureImporter.h"
+#include "CompMesh.h"
 #include <vector>
+#include <map>
 #define MAX_LIGHTS 8
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
@@ -25,6 +27,8 @@ public:
 	bool Init();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
+	CompMesh* RayIntersects(LineSegment& line);
+
 	bool CleanUp();
 
 	void OnResize(int width, int height);
@@ -49,6 +53,9 @@ public:
 	//You won't need this after using Frustum
 	mat4x4 ProjectionMatrix;
 	std::vector<MeshData*> ourMeshes;
+	std::vector<CompMesh*> compMeshes;
+	std::map<float, CompMesh*> trihitsdistmap;
+
 	int GOtotal;
 	
 	bool txt2d = false;

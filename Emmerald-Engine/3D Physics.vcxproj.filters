@@ -471,6 +471,9 @@
     <ClInclude Include="WinInspector.h">
       <Filter>Sources\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="WinScene.h">
+      <Filter>Sources\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -657,6 +660,9 @@
       <Filter>Sources\Importers\Texture</Filter>
     </ClCompile>
     <ClCompile Include="WinInspector.cpp">
+      <Filter>Sources\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="WinScene.cpp">
       <Filter>Sources\Windows</Filter>
     </ClCompile>
   </ItemGroup>
