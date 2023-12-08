@@ -14,6 +14,7 @@ public:
     ~CompMesh();
 
     void SetMesh(MeshData* _mesh);
+    void Update() override;
     void Draw();
     MeshData* GetMesh() { return mesh; }
 

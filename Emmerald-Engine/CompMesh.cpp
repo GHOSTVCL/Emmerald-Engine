@@ -23,13 +23,20 @@ void CompMesh::SetMesh(MeshData* _mesh)
 
 }
 
+void CompMesh::Update()
+{
+	if (mesh == nullptr)
+		return;
+
+	AABB tempglobalAABB = mesh->GenGlobalBB(comp_owner);
+	App->renderer3D->compMeshes.push_back(this);
+	
+
+}
+
 void CompMesh::Draw()
 {
-	if (mesh != nullptr) 
-	{
-		mesh->Draw(App->renderer3D->checkersTexture, comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed());
-	}
-
+	mesh->Draw(App->renderer3D->checkersTexture, comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix().Transposed());
 }
 
 void CompMesh::ShowCompUI()
