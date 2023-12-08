@@ -9,7 +9,7 @@
 #pragma comment(lib, "DevIL/libx86/ILUT.lib")
 
 
-Texture* TextureImporter::LoadTexture(std::string textfile)
+Texture* TextureImporter::ImportTexture(std::string textfile)
 {
     ILenum imageToTextID;
     ILboolean done;

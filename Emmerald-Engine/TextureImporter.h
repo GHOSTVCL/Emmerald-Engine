@@ -23,6 +23,6 @@ struct Texture
 
 namespace TextureImporter {
 	
-	Texture* LoadTexture(std::string textfile);
+	Texture* ImportTexture(std::string textfile);
 
 }

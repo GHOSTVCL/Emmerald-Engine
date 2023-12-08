@@ -25,8 +25,6 @@ public:
 
 private:
 
-    Application* app;
-
     GameObject* goToDrop;
 
     int emptycounter = 0;
@@ -35,4 +33,4 @@ private:
     std::string name;
 };
 
-#endif // !__WIN_HIERARCHY_H__
+#endif // !__MODULE_HIERARCHY_H__
