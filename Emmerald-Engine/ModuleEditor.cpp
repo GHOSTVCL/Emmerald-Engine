@@ -11,6 +11,7 @@
 #include "WinInspector.h"
 #include "WinScene.h"
 #include "WinGame.h"
+#include "WinConsole.h"
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
     fullscreen = false;
@@ -63,6 +64,7 @@ void ModuleEditor::DrawEditor()
     Inspector::Draw();
     WindowScene::Draw();
     WindowGame::Draw();
+    WindowConsole::Draw();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

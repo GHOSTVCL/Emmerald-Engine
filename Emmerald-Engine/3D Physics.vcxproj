@@ -202,6 +202,8 @@
     <ClInclude Include="MathGeoLib\include\Math\TransformOps.h" />
     <ClInclude Include="MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="ModuleHierarchy.h" />
+    <ClInclude Include="WinBaseClass.h" />
+    <ClInclude Include="WinConsole.h" />
     <ClInclude Include="WinGame.h" />
     <ClInclude Include="ModuleResources.h" />
     <ClInclude Include="WinInspector.h" />
@@ -273,6 +275,8 @@
     <ClCompile Include="MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="ModuleHierarchy.cpp" />
+    <ClCompile Include="WinBaseClass.cpp" />
+    <ClCompile Include="WinConsole.cpp" />
     <ClCompile Include="WinGame.cpp" />
     <ClCompile Include="ModuleResources.cpp" />
     <ClCompile Include="WinInspector.cpp" />

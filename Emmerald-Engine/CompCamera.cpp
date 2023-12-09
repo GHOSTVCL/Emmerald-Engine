@@ -148,10 +148,10 @@ void CCamera::Inspector()
 		if (ImGui::Button("Reset Far Distance")) {
 			FrustumCam.farPlaneDistance = 500.f;
 		}
-		/*ImGui::Text("");
+		ImGui::Text("");
 		if (ImGui::Button("Set Main Camera", ImVec2(120, 50))) {
 			App->renderer3D->mainCam;
-		}*/
+		}
 	}
 }
 

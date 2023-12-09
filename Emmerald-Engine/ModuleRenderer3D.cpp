@@ -115,13 +115,21 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_COLOR_MATERIAL);
 		glewInit();
 	}
-	GameCamera = new GameObject("Main Camera");
 
+	GameCamera = new GameObject("Scene Camera");
 	//GameCamera->name = "Main Camera";
 	CCamera* cam = new CCamera(GameCamera);
 	App->camera->sceneCam = cam;
 	GameCamera->components.push_back(cam);
 	GameCamera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
+
+
+	MainCamera = new GameObject("Main Camera");
+	//GameCamera->name = "Main Camera";
+	CCamera* mcam = new CCamera(MainCamera);
+	mainCam = mcam;
+	MainCamera->components.push_back(mcam);
+	MainCamera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -207,19 +215,22 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	App->editor->DrawEditor();
-	/*glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(App->camera->sceneCam->GetProjectionMatrix());
+	if (mainCam != nullptr) 
+	{
+		/*glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->sceneCam->GetViewMatrix());
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(mainCam->GetProjectionMatrix());
 
-	glBindFramebuffer(GL_FRAMEBUFFER, App->camera->sceneCam->frameBuffer);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);*/
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(mainCam->GetViewMatrix());
 
+		glBindFramebuffer(GL_FRAMEBUFFER, mainCam->frameBuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);*/
+	}
 	glBindBuffer(GL_FRAMEBUFFER, 0);
 	/*for (int i = 0; i < ourMeshes.size(); i++) {
 
@@ -237,6 +248,9 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
+
+	delete GameCamera;
+	delete MainCamera;
 
 	for (int i = 0; i < ourMeshes.size(); i++) {
 

@@ -65,7 +65,8 @@ public:
 	int GOtotal;
 
 	GameObject* GameCamera;
-	//CCamera* mainCam;
+	GameObject* MainCamera;
+	CCamera* mainCam;
 	
 	bool txt2d = false;
 	

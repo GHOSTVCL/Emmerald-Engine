@@ -489,6 +489,12 @@
     <ClInclude Include="ModuleResources.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="WinConsole.h">
+      <Filter>Sources\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="WinBaseClass.h">
+      <Filter>Sources\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -694,6 +700,12 @@
     </ClCompile>
     <ClCompile Include="ModuleResources.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="WinConsole.cpp">
+      <Filter>Sources\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="WinBaseClass.cpp">
+      <Filter>Sources\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
