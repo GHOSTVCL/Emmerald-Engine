@@ -43,7 +43,7 @@ void CCamera::SetCam()
 	FrustumCam.verticalFov = FOV * DEGTORAD;
 	FrustumCam.horizontalFov = 2.0f * atanf(tanf(FrustumCam.verticalFov / 2.0f) * 1.7f);
 
-	FrustumCam.pos = float3(0, 0, 0);
+	FrustumCam.pos = float3(0, 3, -12);
 }
 
 void CCamera::GenBuffer()

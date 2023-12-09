@@ -16,6 +16,7 @@ struct Vertex {
 
 struct MeshData {
 
+public:
 	std::vector<unsigned int> indices;
 	std::vector<Vertex> ourVertex;
 	unsigned int VBO = 0, EBO = 0;
@@ -27,9 +28,12 @@ struct MeshData {
 	bool printcheckers = false;
 	bool printFaceNormals = false;
 	bool printVertexNormals = false;
+	bool printAABB = false;
+	AABB aABB;
+
+private:
 
 	AABB localAABB;
-	AABB aABB;
 	OBB oBB;
 
 	

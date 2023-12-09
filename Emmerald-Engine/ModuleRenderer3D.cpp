@@ -344,14 +344,13 @@ CompMesh* ModuleRenderer3D::RayIntersects(LineSegment& line)
 	std::vector<CompMesh*> meshIntersectedbyAABB;
 	for (uint i = 0; i < compMeshes.size(); i++)
 	{
-		AABB tempabb = compMeshes[i]->GetMesh()->aABB;
+		AABB tempabb = compMeshes[i]->mesh->aABB;
+
 		if (line.Intersects(tempabb))
 		{
 			meshIntersectedbyAABB.push_back(compMeshes[i]);
 		}
 	}
-
-	
 
 	if (meshIntersectedbyAABB.size() == 0)
 	{
@@ -383,6 +382,7 @@ CompMesh* ModuleRenderer3D::RayIntersects(LineSegment& line)
 
 			//Create the triangle using the 3 vertices previously created
 			Triangle triIntersects(vertex1, vertex2, vertex3);
+
 
 			if (rayinlocalspace.Intersects(triIntersects, &intersectlength, nullptr))
 			{

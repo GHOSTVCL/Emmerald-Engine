@@ -18,19 +18,19 @@ void Importer::ImportMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
-
+	
 	if (scene != nullptr && scene->HasMeshes())
 	{
-	
-		GameObject* _go;
-		if (App->renderer3D->GOtotal == 0) {
-			_go = new GameObject("GameObject");
+		std::string filePathStr(file_path);
+		size_t lastSlash = filePathStr.find_last_of("/\\");
+		std::string fileName = (lastSlash != std::string::npos) ? filePathStr.substr(lastSlash + 1) : filePathStr;
+		size_t lastDot = fileName.find_last_of(".");
+		if (lastDot != std::string::npos)
+		{
+			fileName = fileName.substr(0, lastDot);
 		}
-		else {
-			std::string goname = "GameObject ";
-			goname += std::to_string(App->renderer3D->GOtotal);
-			_go = new GameObject(goname);
-		}
+		GameObject* _go = new GameObject(fileName);
+		
 		App->renderer3D->GOtotal++;
 
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
@@ -210,6 +210,65 @@ void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 		glEnd();
 
 	}
+	if (printAABB) {
+		glColor3f(0.0f, 0.0f, 1.0f); // Color azul para AABB global
+		glLineWidth(3.0f);
+
+		glBegin(GL_LINES);
+
+		float3 minPointLocal = localAABB.minPoint;
+		float3 maxPointLocal = localAABB.maxPoint;
+		// Líneas horizontales de la base
+		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
+		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
+
+		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
+		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
+
+		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
+		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
+
+		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
+		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
+
+		// Líneas verticales
+		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
+		glVertex3f(minPointLocal.x, maxPointLocal.y, minPointLocal.z);
+
+		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
+		glVertex3f(maxPointLocal.x, maxPointLocal.y, minPointLocal.z);
+
+		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
+		glVertex3f(minPointLocal.x, maxPointLocal.y, maxPointLocal.z);
+
+		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
+		glVertex3f(maxPointLocal.x, maxPointLocal.y, maxPointLocal.z);
+
+		// Líneas superiores
+		glVertex3f(minPointLocal.x, maxPointLocal.y, minPointLocal.z);
+		glVertex3f(maxPointLocal.x, maxPointLocal.y, minPointLocal.z);
+
+		glVertex3f(minPointLocal.x, maxPointLocal.y, minPointLocal.z);
+		glVertex3f(minPointLocal.x, maxPointLocal.y, maxPointLocal.z);
+
+		glVertex3f(maxPointLocal.x, maxPointLocal.y, minPointLocal.z);
+		glVertex3f(maxPointLocal.x, maxPointLocal.y, maxPointLocal.z);
+
+		glVertex3f(minPointLocal.x, maxPointLocal.y, maxPointLocal.z);
+		glVertex3f(maxPointLocal.x, maxPointLocal.y, maxPointLocal.z);
+
+		// Líneas inferiores
+		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
+		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
+
+		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
+		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
+
+		glEnd();
+		
+	}
+	printAABB = false;
+	
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glLineWidth(1.0f);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -249,7 +308,7 @@ AABB MeshData::GenGlobalBB(GameObject* go)
 {
 
 	oBB = GenLocalAABB();
-	aABB.Transform(go->GetComponent<CompTransform>()->GetGlobalMatrix());
+	oBB.Transform(go->GetComponent<CompTransform>()->GetGlobalMatrix());
 
 	aABB.SetNegativeInfinity();
 	aABB.Enclose(oBB);

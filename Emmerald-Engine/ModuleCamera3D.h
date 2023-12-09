@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 
 	void Rotation();
-
+	float3 FindTargetRotation(GameObject* tempGO);
 	CCamera* sceneCam;
 	float mouseSens = 0.50f;
 
