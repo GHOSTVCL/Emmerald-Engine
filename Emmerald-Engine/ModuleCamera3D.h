@@ -18,6 +18,7 @@ public:
 	bool CleanUp();
 
 	void Rotation();
+	void CreateGameCamera();
 	float3 TranslatePoint(const float3& point, const float4x4& matrix);
 
 	CCamera* sceneCam;
