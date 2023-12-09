@@ -76,10 +76,17 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
-		if (App->hierarchy->objSelected != nullptr) {
-			float3 target = App->hierarchy->objSelected->transform_->position;
+		if (App->scene->selectedGO != nullptr) {
+			float3 target = FindTargetRotation(App->scene->selectedGO);
+
+			float distanceFromObject = 10.0f;
 
 			sceneCam->LookAt(target);
+
+			sceneCam->FrustumCam.pos = target - (sceneCam->FrustumCam.front * distanceFromObject);
+
+			float cameraHeight = 3.0f;
+			sceneCam->FrustumCam.pos.y = target.y + cameraHeight;
 		}
 	}
 
