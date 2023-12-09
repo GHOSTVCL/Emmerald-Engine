@@ -25,7 +25,7 @@ void WindowScene::Draw()
 		if (ImGui::IsWindowHovered())
 		{
 
-			if (ImGui::IsMouseClicked(0))
+			if (ImGui::IsMouseClicked(0) && App->input->GetKey(SDL_SCANCODE_LALT) == KEY_IDLE)
 			{
 				//ScreenPos 
 				ImVec2 mouseposinscreen = ImGui::GetMousePos();

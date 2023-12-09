@@ -17,6 +17,9 @@ bool ModuleScene::Start()
 update_status ModuleScene::Update(float dt)
 {
 	UpdateGo(root);
+	if(selectedGO != nullptr)
+	DrawAABB(selectedGO);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -38,6 +41,19 @@ void ModuleScene::UpdateGo(GameObject* goToUpdate)
 
 }
 
+
+void ModuleScene::DrawAABB(GameObject* goToDraw)
+{
+	if (goToDraw->GetComponent<CompMesh>()->mesh != nullptr) {
+		goToDraw->GetComponent<CompMesh>()->mesh->printAABB = true;
+	}
+	for (int i = 0; i < goToDraw->children.size(); i++)
+	{
+		DrawAABB(goToDraw->children[i]);
+	}
+
+
+}
 
 bool ModuleScene::CleanUp()
 {

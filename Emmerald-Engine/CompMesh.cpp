@@ -28,7 +28,7 @@ void CompMesh::Update()
 	if (mesh == nullptr)
 		return;
 
-	AABB tempglobalAABB = mesh->GenGlobalBB(comp_owner);
+	AABB tembAABB = mesh->GenGlobalBB(comp_owner);
 	App->renderer3D->compMeshes.push_back(this);
 	
 

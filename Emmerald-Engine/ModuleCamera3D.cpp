@@ -58,8 +58,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
 	{
-		if (App->hierarchy->objSelected != nullptr) {
-			float3 target = App->hierarchy->objSelected->transform_->position;
+		if (App->scene->selectedGO != nullptr) {
+			float3 target = App->scene->selectedGO->GetComponent<CompTransform>()->position;
 			sceneCam->LookAt(target);
 
 			float TargetDist = sceneCam->FrustumCam.pos.Distance(target);
