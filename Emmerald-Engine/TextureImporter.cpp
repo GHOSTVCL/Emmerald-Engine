@@ -9,7 +9,7 @@
 #pragma comment(lib, "DevIL/libx86/ILUT.lib")
 
 
-Texture* TextureImporter::ImportTexture(std::string textfile)
+Texture* TextureImporter::ImportTexture(std::string textfile, GameObject* GoToTex)
 {
     ILenum imageToTextID;
     ILboolean done;
@@ -41,11 +41,12 @@ Texture* TextureImporter::ImportTexture(std::string textfile)
         glDisable(GL_TEXTURE_2D);
      
         ilDeleteImages(1, &imageToTextID);
-        if (App->scene->selectedGO->GetComponent<CompMesh>()->mesh != NULL)
+        if (GoToTex != nullptr)
+        if (GoToTex->GetComponent<CompMesh>()->mesh != NULL)
         {
-            App->scene->selectedGO->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
-            App->scene->selectedGO->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
-            App->scene->selectedGO->GetComponent<CompTexture>()->path = textfile;
+            GoToTex->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
+            GoToTex->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
+            GoToTex->GetComponent<CompTexture>()->path = textfile;
         }
         
         return new Texture(_texture, width, height);

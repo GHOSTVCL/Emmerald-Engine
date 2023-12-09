@@ -29,9 +29,6 @@ public:
 
     void SetNewTransform(float3 pos, float3x3 rot, float3 scale);
 
-    float4x4 GetTransformMatrix();
-
-    void SetTransformMatrix();
 
 public:
     float4x4 globalTransform;

@@ -18,7 +18,8 @@ public:
 	bool CleanUp();
 
 	void Rotation();
-	float3 FindTargetRotation(GameObject* tempGO);
+	float3 TranslatePoint(const float3& point, const float4x4& matrix);
+
 	CCamera* sceneCam;
 	float mouseSens = 0.50f;
 
@@ -34,3 +35,4 @@ private:
 	bool click = false;
 
 };
+

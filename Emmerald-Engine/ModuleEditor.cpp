@@ -59,8 +59,8 @@ void ModuleEditor::DrawEditor()
     DisplayMainMenuBar();
     App->hierarchy->Draw();
     Inspector::Draw();
-    WindowScene::Draw();
     WindowGame::Draw();
+    WindowScene::Draw();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

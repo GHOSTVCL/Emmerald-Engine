@@ -7,7 +7,7 @@
 #include "CompCamera.h"
 #include "CompTransform.h"
 
-
+#include <cmath>
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -35,6 +35,7 @@ bool ModuleCamera3D::CleanUp()
 	return true;
 }
 
+
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
@@ -58,11 +59,9 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
 	{
-		if (App->scene->selectedGO != nullptr) {
-
-			float3 target = FindTargetRotation(App->scene->selectedGO);
-
-	
+		if (App->scene->selectedGO != nullptr && App->scene->selectedGO->name != "Scene") {
+			
+			float3 target = TranslatePoint(App->scene->selectedGO->GetComponent<CompTransform>()->position, App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix());
 
 			sceneCam->LookAt(target);
 
@@ -76,8 +75,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
-		if (App->scene->selectedGO != nullptr) {
-			float3 target = FindTargetRotation(App->scene->selectedGO);
+		if (App->scene->selectedGO != nullptr && App->scene->selectedGO->name != "Scene") {
+			float3 target = TranslatePoint(App->scene->selectedGO->GetComponent<CompTransform>()->position, App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix());
 
 			float distanceFromObject = 10.0f;
 
@@ -128,16 +127,15 @@ void ModuleCamera3D::Rotation()
 	sceneCam->FrustumCam.SetWorldMatrix(matrix.Float3x4Part());
 }
 
-float3 ModuleCamera3D::FindTargetRotation(GameObject* tempGO)
-{
-	float3 target;
+float3 ModuleCamera3D::TranslatePoint(const float3& point, const float4x4& matrix) {
+	// Crear un vector homogéneo con el punto (x, y, z, 1)
+	math::float4 homogenousPoint(point.x, point.y, point.z, 1.0f);
 
-	target = tempGO->GetComponent<CompTransform>()->position;
-	if (tempGO->parent != nullptr && tempGO->parent->name != "root") {
-		target = FindTargetRotation(tempGO->parent) + target;
-	}
-	return target;
+	// Multiplicar la matriz de transformación por el vector homogéneo
+	math::float4 result = matrix * homogenousPoint;
+
+	// El resultado contiene el nuevo punto trasladado
+	return { result.x/2, result.y, result.z / 2};
 }
-
 
 

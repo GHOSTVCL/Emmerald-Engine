@@ -18,109 +18,115 @@ void Importer::ImportMesh(const char* file_path)
 {
 
 	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
-	
-	if (scene != nullptr && scene->HasMeshes())
-	{
-		std::string filePathStr(file_path);
-		size_t lastSlash = filePathStr.find_last_of("/\\");
-		std::string fileName = (lastSlash != std::string::npos) ? filePathStr.substr(lastSlash + 1) : filePathStr;
-		size_t lastDot = fileName.find_last_of(".");
-		if (lastDot != std::string::npos)
-		{
-			fileName = fileName.substr(0, lastDot);
-		}
-		GameObject* _go = new GameObject(fileName);
-		
-		App->renderer3D->GOtotal++;
+	//aiMesh* AiMesh;
+	//if (scene != nullptr && scene->HasMeshes())
+	//{
+	//	std::string filePathStr(file_path);
+	//	size_t lastSlash = filePathStr.find_last_of("/\\");
+	//	std::string fileName = (lastSlash != std::string::npos) ? filePathStr.substr(lastSlash + 1) : filePathStr;
+	//	size_t lastDot = fileName.find_last_of(".");
+	//	if (lastDot != std::string::npos)
+	//	{
+	//		fileName = fileName.substr(0, lastDot);
+	//	}
 
-		// Use scene->mNumMeshes to iterate on scene->mMeshes array
-		for (int i = 0; i < scene->mNumMeshes; i++) {
+	//	GameObject* _go = new GameObject(fileName);
+	//	
+	//	App->renderer3D->GOtotal++;
 
-			MeshData* temp = new MeshData();
-			
-			for (unsigned int o = 0; o < scene->mMeshes[i]->mNumVertices; o++)
-			{
-				Vertex tempvertex;
-				float3 vector;
-				vector.x = scene->mMeshes[i]->mVertices[o].x;
-				vector.y = scene->mMeshes[i]->mVertices[o].y;
-				vector.z = scene->mMeshes[i]->mVertices[o].z;
-				tempvertex.Position = vector;
-				LOG("New mesh with %d vertices", scene->mMeshes[i]->mNumVertices);
+	//	// Use scene->mNumMeshes to iterate on scene->mMeshes array
+	//	for (int i = 0; i < scene->mNumMeshes; i++) {
 
-				if (scene->mMeshes[i]->HasNormals())
-				{
-					tempvertex.Normal.x = scene->mMeshes[i]->mNormals[o].x;
-					tempvertex.Normal.y = scene->mMeshes[i]->mNormals[o].y;
-					tempvertex.Normal.z = scene->mMeshes[i]->mNormals[o].z;
-					
-				}
-				if (scene->mMeshes[i]->HasTextureCoords(0))
-				{
-					tempvertex.TexCoords.x = scene->mMeshes[i]->mTextureCoords[0][o].x;
-					tempvertex.TexCoords.y = scene->mMeshes[i]->mTextureCoords[0][o].y;
-					
-				}
-				else
-				{
-					tempvertex.TexCoords.x = 0.0f;
-					tempvertex.TexCoords.y = 0.0f;
-				}
-				
-				temp->ourVertex.push_back(tempvertex);
-			}
+	//		MeshData* temp = new MeshData();
+	//		
+	//		for (unsigned int o = 0; o < scene->mMeshes[i]->mNumVertices; o++)
+	//		{
+	//			Vertex tempvertex;
+	//			float3 vector;
+	//			vector.x = scene->mMeshes[i]->mVertices[o].x;
+	//			vector.y = scene->mMeshes[i]->mVertices[o].y;
+	//			vector.z = scene->mMeshes[i]->mVertices[o].z;
+	//			tempvertex.Position = vector;
+	//			
+	//			LOG("New mesh with %d vertices", scene->mMeshes[i]->mNumVertices);
 
-
-			if (scene->mMeshes[i]->HasFaces())
-			{
-			
-				temp->indices.resize(scene->mMeshes[i]->mNumFaces * 3);// assume each face is a triangle
-
-				for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; y++)
-				{
-					if (scene->mMeshes[i]->mFaces[y].mNumIndices != 3)
-					{
-						LOG("WARNING, geometry face with != 3 indices!");
-					}
-					else {
-
-						memcpy(&temp->indices[y * 3], scene->mMeshes[i]->mFaces[y].mIndices, 3 * sizeof(unsigned int));
-
-					}
-				}
-			}
-			temp->textid = nullptr;
-			
-			App->renderer3D->ourMeshes.push_back(temp);
-			App->renderer3D->ourMeshes.back()->InitBuffers();
-			
-			GameObject* go;
-			std::string name = "Mesh";
-			name += std::to_string(i);
-			go = new GameObject(name);
-			go->GetComponent<CompMesh>()->SetMesh(App->renderer3D->ourMeshes.back());
-			go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
-			go->GetComponent<CompMesh>()->path = file_path;
-			go->GetComponent<CompMesh>()->_ourMeshes = App->renderer3D->ourMeshes;
-			_go->AddChild(go);
-
-		}
-		
-
-		if (App->scene->selectedGO->parent == nullptr) {
-			App->scene->root->AddChild(_go);
-		}
-		else {
-			App->scene->selectedGO->AddChild(_go);
-		}
-
-		aiReleaseImport(scene);
+	//			if (scene->mMeshes[i]->HasNormals())
+	//			{
+	//				tempvertex.Normal.x = scene->mMeshes[i]->mNormals[o].x;
+	//				tempvertex.Normal.y = scene->mMeshes[i]->mNormals[o].y;
+	//				tempvertex.Normal.z = scene->mMeshes[i]->mNormals[o].z;
+	//				
+	//			}
+	//			if (scene->mMeshes[i]->HasTextureCoords(0))
+	//			{
+	//				tempvertex.TexCoords.x = scene->mMeshes[i]->mTextureCoords[0][o].x;
+	//				tempvertex.TexCoords.y = scene->mMeshes[i]->mTextureCoords[0][o].y;
+	//				
+	//			}
+	//			else
+	//			{
+	//				tempvertex.TexCoords.x = 0.0f;
+	//				tempvertex.TexCoords.y = 0.0f;
+	//			}
+	//			
+	//			temp->ourVertex.push_back(tempvertex);
+	//		}
 
 
-	}
-	else {
+	//		if (scene->mMeshes[i]->HasFaces())
+	//		{
+	//		
+	//			temp->indices.resize(scene->mMeshes[i]->mNumFaces * 3);// assume each face is a triangle
+
+	//			for (uint y = 0; y < scene->mMeshes[i]->mNumFaces; y++)
+	//			{
+	//				if (scene->mMeshes[i]->mFaces[y].mNumIndices != 3)
+	//				{
+	//					LOG("WARNING, geometry face with != 3 indices!");
+	//				}
+	//				else {
+
+	//					memcpy(&temp->indices[y * 3], scene->mMeshes[i]->mFaces[y].mIndices, 3 * sizeof(unsigned int));
+
+	//				}
+	//			}
+	//		}
+	//		temp->textid = nullptr;
+	//		
+	//		App->renderer3D->ourMeshes.push_back(temp);
+	//		App->renderer3D->ourMeshes.back()->InitBuffers();
+	//		
+	//		GameObject* go;
+	//		std::string name = "Mesh";
+	//		name += std::to_string(i);
+	//		go = new GameObject(name);
+	//		go->GetComponent<CompMesh>()->SetMesh(App->renderer3D->ourMeshes.back());
+	//		go->GetComponent<CompMesh>()->name = ("Mesh%i", i);
+	//		go->GetComponent<CompMesh>()->path = file_path;
+	//		go->GetComponent<CompMesh>()->_ourMeshes = App->renderer3D->ourMeshes;
+
+	//		
+	//		_go->AddChild(go);
+
+
+	//		
+	//	}
+	//	
+
+	//	if (App->scene->selectedGO->parent == nullptr) {
+	//		App->scene->root->AddChild(_go);
+	//	}
+	//	else {
+	//		App->scene->selectedGO->AddChild(_go);
+	//	}
+
+	//	aiReleaseImport(scene);
+
+
+	//}
+	/*else {
 		LOG("Error loading scene % s", file_path);
-	}
+	}*/
 }
 
 void Importer::DeleteMesh(MeshData* mesh2delete)
@@ -132,6 +138,137 @@ void Importer::DeleteMesh(MeshData* mesh2delete)
 		}
 
 	}
+}
+
+void Importer::LoadMesh(const char* file_path)
+{
+	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
+
+	if (scene != nullptr && scene->HasMeshes())
+	{
+		std::string filePathStr(file_path);
+		size_t lastSlash = filePathStr.find_last_of("/\\");
+		std::string fileName = (lastSlash != std::string::npos) ? filePathStr.substr(lastSlash + 1) : filePathStr;
+		size_t lastDot = fileName.find_last_of(".");
+		if (lastDot != std::string::npos)
+		{
+			fileName = fileName.substr(0, lastDot);
+		}
+
+		GameObject* _go = new GameObject(fileName);
+
+		App->renderer3D->GOtotal++;
+		ProcessNode(scene, scene->mRootNode, _go, file_path);
+		aiReleaseImport(scene);
+
+	}
+
+
+}
+
+void Importer::ProcessNode(const aiScene* scene, aiNode* node, GameObject* GO, const char* file_path)
+{
+	if (node->mNumMeshes == 0 && node->mNumChildren == 0) return;
+
+	if (node->mNumMeshes != 0) {
+
+		for (int i = 0; i < node->mNumMeshes; i++) {
+
+			MeshData* temp = new MeshData();
+			aiMesh* AiMesh = scene->mMeshes[node->mMeshes[i]];
+			for (unsigned int o = 0; o < AiMesh->mNumVertices; o++)
+			{
+				Vertex tempvertex;
+				float3 vector;
+				vector.x = AiMesh->mVertices[o].x;
+				vector.y = AiMesh->mVertices[o].y;
+				vector.z = AiMesh->mVertices[o].z;
+				tempvertex.Position = vector;
+
+				LOG("New mesh with %d vertices", AiMesh->mNumVertices);
+
+				if (AiMesh->HasNormals())
+				{
+					tempvertex.Normal.x = AiMesh->mNormals[o].x;
+					tempvertex.Normal.y = AiMesh->mNormals[o].y;
+					tempvertex.Normal.z = AiMesh->mNormals[o].z;
+
+				}
+				if (AiMesh->HasTextureCoords(0))
+				{
+					tempvertex.TexCoords.x = AiMesh->mTextureCoords[0][o].x;
+					tempvertex.TexCoords.y = AiMesh->mTextureCoords[0][o].y;
+
+				}
+				else
+				{
+					tempvertex.TexCoords.x = 0.0f;
+					tempvertex.TexCoords.y = 0.0f;
+				}
+
+				temp->ourVertex.push_back(tempvertex);
+			}
+
+			if (AiMesh->HasFaces())
+			{
+
+				temp->indices.resize(AiMesh->mNumFaces * 3);// assume each face is a triangle
+
+				for (uint y = 0; y < AiMesh->mNumFaces; y++)
+				{
+					if (AiMesh->mFaces[y].mNumIndices != 3)
+					{
+						LOG("WARNING, geometry face with != 3 indices!");
+					}
+					else {
+
+						memcpy(&temp->indices[y * 3], AiMesh->mFaces[y].mIndices, 3 * sizeof(unsigned int));
+
+					}
+				}
+			}
+			temp->textid = nullptr;
+
+			App->renderer3D->ourMeshes.push_back(temp);
+			App->renderer3D->ourMeshes.back()->InitBuffers();
+
+			GameObject* go;
+			
+			go = new GameObject(node->mName.C_Str());
+			go->GetComponent<CompMesh>()->SetMesh(App->renderer3D->ourMeshes.back());
+			go->GetComponent<CompMesh>()->name = node->mName.C_Str();
+			go->GetComponent<CompMesh>()->path = file_path;
+			go->GetComponent<CompMesh>()->_ourMeshes = App->renderer3D->ourMeshes;
+
+
+			aiMatrix4x4 TransformMat = node->mTransformation;
+
+			aiVector3D scale, position, rotation;
+			aiQuaternion QuatRotation;
+
+			TransformMat.Decompose(scale, QuatRotation, position);
+			rotation = QuatRotation.GetEuler();
+			go->GetComponent<CompTransform>()->position = float3(position.x, position.y, position.z);
+			go->GetComponent<CompTransform>()->rotation = Quat(QuatRotation.x, QuatRotation.y, QuatRotation.z, QuatRotation.w);
+
+			GO->AddChild(go);
+
+		}
+
+		if (GO->parent == nullptr) {
+			App->scene->root->AddChild(GO);
+		}
+
+
+	}
+
+	for (int i = 0; i < node->mNumChildren; i++) {
+
+		ProcessNode(scene, node->mChildren[i], GO, file_path);
+	
+	}
+
+
 }
 
 
