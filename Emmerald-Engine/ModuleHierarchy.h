@@ -28,6 +28,7 @@ public:
 private:
 
     GameObject* goToDrop;
+  
     
 
     int emptycounter = 0;

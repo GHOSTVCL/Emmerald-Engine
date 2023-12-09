@@ -66,6 +66,7 @@ public:
 	float GetDT();
 
 	static Application* GetInstance();
+	void AddLog(Logs type, std::string msg);
 private:
 
 	void AddModule(Module* mod);

@@ -10,7 +10,9 @@ bool autoscroll = false;
 
 void WindowConsole::Draw()
 {
+
 	app = App->GetInstance();
+	app->logreports.clear();
 
 	std::string name = "Console";
 	bool isEnabled = true;
@@ -66,5 +68,6 @@ void WindowConsole::Draw()
 	}
 	ImGui::End();
 }
+
 
 

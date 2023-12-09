@@ -5,6 +5,7 @@
 #include <vector>
 #include "CompMesh.h"
 #include "CompTransform.h"
+#include "CompCamera.h"
 #include "Application.h"
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "ModuleRenderer3D.h"
@@ -282,6 +283,11 @@ void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 	glPopMatrix();
 }
 
+void MeshData::GameWindow()
+{
+	
+
+}
 void MeshData::InitBuffers() {
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -295,6 +301,7 @@ void MeshData::InitBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
+
 
 AABB MeshData::GenLocalAABB()
 {

@@ -119,7 +119,7 @@ void CCamera::TransformCam()
 	FrustumCam.front = matrix.RotatePart().Col(2).Normalized();
 }
 
-void CCamera::Inspector()
+void CCamera::ShowCompUI()
 {
 	if (ImGui::CollapsingHeader("Camera"))
 	{
@@ -150,7 +150,7 @@ void CCamera::Inspector()
 		}
 		ImGui::Text("");
 		if (ImGui::Button("Set Main Camera", ImVec2(120, 50))) {
-			App->renderer3D->mainCam;
+			App->renderer3D->mainCam = this;
 		}
 	}
 }

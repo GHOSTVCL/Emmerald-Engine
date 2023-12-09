@@ -22,6 +22,7 @@ public:
 	unsigned int VBO = 0, EBO = 0;
 	void Draw(GLuint checkers, float4x4 matrix);
 	void InitBuffers();
+	void GameWindow();
 	AABB GenLocalAABB();
 	AABB GenGlobalBB(GameObject* go);
 	Texture* textid = nullptr;

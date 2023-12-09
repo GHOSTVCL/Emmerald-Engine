@@ -18,6 +18,7 @@ public:
 	bool CleanUp();
 
 	void Rotation();
+	void CreateGameCamera();
 	float3 FindTargetRotation(GameObject* tempGO);
 	CCamera* sceneCam;
 	float mouseSens = 0.50f;
@@ -31,6 +32,7 @@ public:
 
 private:
 
+	GameObject* Camera;
 	bool click = false;
 
 };

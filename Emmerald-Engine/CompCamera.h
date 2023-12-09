@@ -24,7 +24,7 @@ public:
 
 	void TransformCam();
 
-	void Inspector();
+	void ShowCompUI() override;
 
 	bool ContainsAaBox(MeshData* refBox);
 

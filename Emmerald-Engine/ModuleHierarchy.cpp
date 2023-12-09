@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleScene.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
 #include "GameObject.h"
 #include "Globals.h"
 
@@ -75,6 +76,10 @@ void ModuleHierarchy::PrimitivesMenu()
 		if (ImGui::MenuItem("Cylinder"))
 		{
 			Importer::ImportMesh("Assets/Models/Primitives/Cylinder.fbx");
+		}
+		if (ImGui::MenuItem("Camera"))
+		{
+			App->camera->CreateGameCamera();
 		}
 
 		ImGui::EndMenu();

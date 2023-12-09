@@ -121,6 +121,7 @@ void ModuleCamera3D::Rotation()
 	sceneCam->FrustumCam.SetWorldMatrix(matrix.Float3x4Part());
 }
 
+
 float3 ModuleCamera3D::FindTargetRotation(GameObject* tempGO)
 {
 	float3 target;
@@ -132,5 +133,16 @@ float3 ModuleCamera3D::FindTargetRotation(GameObject* tempGO)
 	return target;
 }
 
+void ModuleCamera3D::CreateGameCamera()
+{
+	Camera = new GameObject("Camera");
+	//GameCamera->name = "Main Camera";
+	CCamera* cam_ = new CCamera(Camera);
+	App->renderer3D->mainCam = cam_;
+	Camera->components.push_back(cam_);
+	Camera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
+	Camera->SetParent(App->scene->root);
+
+}
 
 
