@@ -6,7 +6,7 @@
 #include "SDL/include/SDL_opengl.h"
 #include <string>
 #include "Globals.h"
-
+class GameObject;
 struct Texture
 {
 	Texture(GLuint id, uint _width, uint _height)
@@ -23,6 +23,6 @@ struct Texture
 
 namespace TextureImporter {
 	
-	Texture* ImportTexture(std::string textfile);
+	Texture* ImportTexture(std::string textfile, GameObject* GoToTex);
 
 }

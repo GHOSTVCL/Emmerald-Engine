@@ -3,6 +3,9 @@
 #include "MathGeoLib/include/MathGeoLib.h"
 #include "Glew/include/glew.h"
 #include "TextureImporter.h"
+#include "Assimp/include/cimport.h"
+#include "Assimp/include/scene.h"
+#include "Assimp/include/postprocess.h"
 #include <vector>
 #define CHECKERS_WIDTH 64
 #define CHECKERS_HEIGHT 64
@@ -44,6 +47,8 @@ namespace Importer {
 
 	void ImportMesh(const char* file_path);
 	void DeleteMesh(MeshData* mesh2delete);	
+	void LoadMesh(const char* file_path);
+	void ProcessNode(const aiScene* scene, aiNode* node, GameObject* GO, const char* file_path);
 
 };
 

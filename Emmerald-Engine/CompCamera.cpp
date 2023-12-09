@@ -112,7 +112,7 @@ void CCamera::TransformCam()
 	FrustumCam.pos = comp_owner->transform_->position;
 
 	//owner's global transform matrix
-	float4x4 matrix = comp_owner->transform_->GetTransformMatrix();
+	float4x4 matrix = comp_owner->transform_->GetLocalMatrix();
 
 	//Column 0 -> eix X -> worldRight || Column 1 -> eix Y -> up || Column 2  -> eix Z -> front || Column 3 -> pos
 	FrustumCam.up = matrix.RotatePart().Col(1).Normalized();

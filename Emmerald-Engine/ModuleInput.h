@@ -11,7 +11,7 @@ enum KEY_STATE
 	KEY_REPEAT,
 	KEY_UP
 };
-
+class GameObject;
 class ModuleInput : public Module
 {
 public:
@@ -21,6 +21,7 @@ public:
 	bool quitinput = false;
 	bool Init();
 	update_status PreUpdate(float dt);
+	void SetGoTextures(GameObject* GoTo);
 	bool CleanUp();
 
 	KEY_STATE GetKey(int id) const

@@ -160,7 +160,7 @@ bool ModuleRenderer3D::Init()
 
 
 	Grid.axis = true;
-	Importer::ImportMesh("Assets/Models/BakerHouse.fbx");
+	Importer::LoadMesh("Assets/Models/BakerHouse.fbx");
 	
 	ilInit();
 	return ret;

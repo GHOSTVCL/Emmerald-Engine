@@ -5,7 +5,7 @@
 #include "MeshImporter.h"
 #include "TextureImporter.h"
 #include "ImGUI/backends/imgui_impl_sdl.h"
-
+#include "GameObject.h"
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -119,8 +119,11 @@ update_status ModuleInput::PreUpdate(float dt)
 
 			case SDL_DROPFILE:
 				dropfile = e.drop.file;
-				Importer::ImportMesh(dropfile);
-				TextureImporter::ImportTexture(dropfile);
+				Importer::LoadMesh(dropfile);
+
+				if(App->scene->selectedGO != nullptr)
+				SetGoTextures(App->scene->selectedGO);
+
 				SDL_free(dropfile);
 				break;
 
@@ -139,6 +142,17 @@ update_status ModuleInput::PreUpdate(float dt)
 	}
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleInput::SetGoTextures(GameObject* GoTo)
+{
+	TextureImporter::ImportTexture(dropfile, GoTo);
+	if (GoTo->children.size() != 0) {
+		for (int i = 0; i < GoTo->children.size(); i++)
+		{
+			SetGoTextures(GoTo->children[i]);
+		}
+	}
 }
 
 
