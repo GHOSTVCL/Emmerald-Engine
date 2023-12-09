@@ -312,9 +312,6 @@
     <ClInclude Include="ImGUI\backends\imgui_impl_opengl3_loader.h">
       <Filter>Sources\ImGUI\backends</Filter>
     </ClInclude>
-    <ClInclude Include="ImGUI\backends\imgui_impl_sdl2.h">
-      <Filter>Sources\ImGUI\backends</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
@@ -495,6 +492,9 @@
     <ClInclude Include="WinBaseClass.h">
       <Filter>Sources\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="ImGUI\backends\imgui_impl_sdl.h">
+      <Filter>Sources\ImGUI\backends</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -647,9 +647,6 @@
     <ClCompile Include="ImGUI\backends\imgui_impl_opengl3.cpp">
       <Filter>Sources\ImGUI\backends</Filter>
     </ClCompile>
-    <ClCompile Include="ImGUI\backends\imgui_impl_sdl2.cpp">
-      <Filter>Sources\ImGUI\backends</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -706,6 +703,9 @@
     </ClCompile>
     <ClCompile Include="WinBaseClass.cpp">
       <Filter>Sources\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\backends\imgui_impl_sdl.cpp">
+      <Filter>Sources\ImGUI\backends</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

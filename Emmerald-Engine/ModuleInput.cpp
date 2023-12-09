@@ -4,7 +4,7 @@
 #include "ModuleScene.h"
 #include "MeshImporter.h"
 #include "TextureImporter.h"
-#include "ImGUI/backends/imgui_impl_sdl2.h"
+#include "ImGUI/backends/imgui_impl_sdl.h"
 
 #define MAX_KEYS 300
 
