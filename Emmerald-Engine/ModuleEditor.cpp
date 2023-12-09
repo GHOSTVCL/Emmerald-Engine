@@ -56,11 +56,6 @@ bool ModuleEditor::Init()
 void ModuleEditor::DrawEditor()
 {
     // Start the Dear ImGui frame
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplSDL2_NewFrame();
-    ImGui::NewFrame();
-
-
     DisplayMainMenuBar();
     App->hierarchy->Draw();
     Inspector::Draw();
@@ -101,6 +96,30 @@ void ModuleEditor::AddFPS(const float aFPS)
 
 update_status ModuleEditor::PreUpdate(float dt)
 {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    ImGui::NewFrame();
+
+    ImGuiWindowFlags flags = ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoNavFocus;
+
+    const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+    ImGui::SetNextWindowPos(main_viewport->WorkPos);
+    ImGui::SetNextWindowSize(main_viewport->Size);
+    ImGui::SetNextWindowViewport(main_viewport->ID);
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
+    ImGui::Begin("DockingInv", nullptr, flags);
+
+    ImGui::PopStyleVar(3);
+
+    ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+    ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+
+    ImGui::End();
     return update_status();
 }
 
