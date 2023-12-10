@@ -123,7 +123,6 @@ bool ModuleRenderer3D::Init()
 	MainCamera->components.push_back(mcam);
 	MainCamera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
 	MainCamera->SetParent(App->scene->root);
-
 	GameCamera = new GameObject("Scene Camera");
 	//GameCamera->name = "Main Camera";
 	CCamera* cam = new CCamera(GameCamera);
@@ -160,9 +159,12 @@ bool ModuleRenderer3D::Init()
 
 
 	Grid.axis = true;
-	Importer::LoadMesh("Assets/Models/BakerHouse.fbx");
-	
 	ilInit();
+
+	Importer::LoadMesh("Assets/Models/BakerHouse.fbx");
+	streetToLoad = Importer::LoadMesh("Assets/Models/scene.DAE");
+	streetToLoad->GetComponent<CompTransform>()->eulerRotation.x = -90;
+	streetToLoad->GetComponent<CompTransform>()->GetGlobalMatrix();
 	return ret;
 }
 

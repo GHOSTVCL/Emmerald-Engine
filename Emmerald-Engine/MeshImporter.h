@@ -25,7 +25,6 @@ public:
 	unsigned int VBO = 0, EBO = 0;
 	void Draw(GLuint checkers, float4x4 matrix);
 	void InitBuffers();
-	void GameWindow();
 	AABB GenLocalAABB();
 	AABB GenGlobalBB(GameObject* go);
 	Texture* textid = nullptr;
@@ -47,8 +46,9 @@ namespace Importer {
 
 	void ImportMesh(const char* file_path);
 	void DeleteMesh(MeshData* mesh2delete);	
-	void LoadMesh(const char* file_path);
+	GameObject* LoadMesh(const char* file_path);
 	void ProcessNode(const aiScene* scene, aiNode* node, GameObject* GO, const char* file_path);
+	std::string GetPathFromScene(const aiScene* scene, int index, std::string path);
 
 };
 

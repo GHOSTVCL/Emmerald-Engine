@@ -141,9 +141,9 @@ void Importer::DeleteMesh(MeshData* mesh2delete)
 	}
 }
 
-void Importer::LoadMesh(const char* file_path)
+GameObject* Importer::LoadMesh(const char* file_path)
 {
-	const aiScene* scene = aiImportFile(file_path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
@@ -162,6 +162,7 @@ void Importer::LoadMesh(const char* file_path)
 		ProcessNode(scene, scene->mRootNode, _go, file_path);
 		aiReleaseImport(scene);
 
+		return _go;
 	}
 
 
@@ -254,6 +255,7 @@ void Importer::ProcessNode(const aiScene* scene, aiNode* node, GameObject* GO, c
 
 			GO->AddChild(go);
 
+			TextureImporter::ImportTexture(GetPathFromScene(scene, node->mMeshes[i], file_path), go);
 		}
 
 		if (GO->parent == nullptr) {
@@ -367,11 +369,6 @@ void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 	glPopMatrix();
 }
 
-void MeshData::GameWindow()
-{
-	
-
-}
 void MeshData::InitBuffers() {
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -407,5 +404,51 @@ AABB MeshData::GenGlobalBB(GameObject* go)
 	return aABB;
 }
 
+std::string Importer::GetPathFromScene(const aiScene* scene, int index, std::string path)
+{
 
+	if (scene->HasMaterials())
+	{
+		aiMaterial* MaterialIndex = scene->mMaterials[scene->mMeshes[index]->mMaterialIndex];
+		if (MaterialIndex->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+
+			aiString TextPath;
+			MaterialIndex->GetTexture(aiTextureType_DIFFUSE, 0, &TextPath);
+
+			for (int i = 0; i < path.size(); i++)
+			{
+				if (path[i] == '\\')
+				{
+					path[i] = '/';
+				}
+			}
+
+			std::string NormTextPath = TextPath.C_Str();
+
+			for (int i = 0; i < NormTextPath.size(); i++)
+			{
+				if (NormTextPath[i] == '\\')
+				{
+					NormTextPath[i] = '/';
+				}
+			}
+
+			std::string AssetsPath = path;
+			uint AssetsPos = AssetsPath.find("Assets/");
+
+			if (AssetsPos < AssetsPath.size())
+			AssetsPath = AssetsPath.substr(AssetsPos, AssetsPath.find_last_of("/") - AssetsPos);
+
+			if (AssetsPos < AssetsPath.size()) 
+			AssetsPath = AssetsPath.substr(AssetsPos, AssetsPath.find_last_of("/") - AssetsPos);
+
+			AssetsPath.append("/Textures/").append(TextPath.C_Str());
+
+			return AssetsPath;
+		}
+	}
+
+	return "";
+
+}
 

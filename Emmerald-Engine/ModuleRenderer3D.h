@@ -66,7 +66,8 @@ public:
 
 	GameObject* GameCamera;
 	GameObject* MainCamera;
-	
+	GameObject* streetToLoad;
+
 	CCamera* mainCam;
 	
 	bool txt2d = false;
