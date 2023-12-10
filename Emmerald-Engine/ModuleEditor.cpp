@@ -271,7 +271,7 @@ void ModuleEditor::PlayStop()
 {
     ImGui::SameLine(ImGui::GetWindowWidth() / 2 - 37);
     {
-        if (ImGui::Button(">", ImVec2(20, 20)))
+        if (ImGui::Button("PLAY"))
         {
             if (App->IsRunning()) {
                 App->SetState(GameState::STOP);
@@ -285,7 +285,7 @@ void ModuleEditor::PlayStop()
             //App->SetGameDT();
         }
         ImGui::SameLine();
-        if (ImGui::Button("[]", ImVec2(20, 20)))
+        if (ImGui::Button("STOP"))
         {
             if (App->IsRunning()) {
                 App->SetState(GameState::STOP);
@@ -295,7 +295,7 @@ void ModuleEditor::PlayStop()
             //App->StopGameDT();
         }
         ImGui::SameLine();
-        if (ImGui::Button("||", ImVec2(20, 20)))
+        if (ImGui::Button("PAUSE"))
         {
             if (App->IsRunning()) {
                 App->SetState(GameState::PAUSE);

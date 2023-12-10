@@ -42,7 +42,7 @@ update_status ModuleCamera3D::Update(float dt)
 	int wheel = -App->input->GetMouseZ();
 	float speed = 8.0f * dt;
 
-	App->renderer3D->MainCamera->GetComponent<CompTransform>()->position += {0.5f * App->dtG, 0.5f * App->dtG, 0.5f * App->dtG};
+	App->renderer3D->MainCamera->GetComponent<CompTransform>()->position += {-0.3f * App->dtG, 0.0f * App->dtG, 0.0f * App->dtG};
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * 2 * dt;
