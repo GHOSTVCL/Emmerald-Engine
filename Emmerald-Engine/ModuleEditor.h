@@ -17,6 +17,7 @@ public:
 	void DrawEditor();
 	void DisplayMainMenuBar();
 	void DisplayConfigMenu();
+	void PlayStop();
 	void DisplayHelp();
 	bool CleanUp() override;
 	void AddFPS(const float aFPS);

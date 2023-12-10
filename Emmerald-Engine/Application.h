@@ -23,6 +23,13 @@ enum class Logs
 
 };
 
+enum class GameState
+{
+	PLAY,
+	PAUSE,
+	STOP
+};
+
 struct logReport
 {
 	logReport(Logs type, std::string msg);
@@ -50,8 +57,9 @@ public:
 
 private:
 
-	Timer	ms_timer;
-	float	dt;
+	Timer ms_timer;
+	Timer game_timer;
+	float gamedt;
 	std::vector<Module*> list_modules;
 
 public:
@@ -63,10 +71,24 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool quitapp = false;
+	float	dt;
+
 	float GetDT();
+	float GetGameDT();
+	void SetGameDT();
+	void StopGameDT();
+	void PauseGameDT();
 
 	static Application* GetInstance();
 	void AddLog(Logs type, std::string msg);
+	void SetDT(float dt);
+	float DTG();
+	bool IsRunning();
+	bool IsPaused();
+	GameState GetState();
+	void SetState(GameState gameState);
+	float dtG;
+	GameState gameState = GameState::STOP;
 private:
 
 	void AddModule(Module* mod);

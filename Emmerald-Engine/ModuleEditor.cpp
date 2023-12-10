@@ -267,7 +267,44 @@ void ModuleEditor::DisplayConfigMenu()
         ImGui::EndMenu();
     }
 }
-
+void ModuleEditor::PlayStop()
+{
+    ImGui::SameLine(ImGui::GetWindowWidth() / 2 - 37);
+    {
+        if (ImGui::Button(">", ImVec2(20, 20)))
+        {
+            if (App->IsRunning()) {
+                App->SetState(GameState::STOP);
+                ImGui::SetWindowFocus("Scene");
+            }
+            else {
+                App->SetState(GameState::PLAY);
+                ImGui::SetWindowFocus("Game");
+            }
+            LOG("Play");
+            //App->SetGameDT();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("[]", ImVec2(20, 20)))
+        {
+            if (App->IsRunning()) {
+                App->SetState(GameState::STOP);
+                ImGui::SetWindowFocus("Scene");
+            }
+            LOG("Stop");
+            //App->StopGameDT();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("||", ImVec2(20, 20)))
+        {
+            if (App->IsRunning()) {
+                App->SetState(GameState::PAUSE);
+            }
+            LOG("Pause");
+            //App->PauseGameDT();
+        }
+    }
+}
 void ModuleEditor::DisplayMainMenuBar()
 {
     if (ImGui::BeginMainMenuBar())
@@ -293,6 +330,8 @@ void ModuleEditor::DisplayMainMenuBar()
         if (ImGui::Button("Quit")) {
             exit(0);
         }
+        PlayStop();
+
         ImGui::EndMainMenuBar();
     }
 }

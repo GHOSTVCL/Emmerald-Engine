@@ -42,6 +42,8 @@ update_status ModuleCamera3D::Update(float dt)
 	int wheel = -App->input->GetMouseZ();
 	float speed = 8.0f * dt;
 
+	App->renderer3D->MainCamera->GetComponent<CompTransform>()->position += {0.5f * App->dtG, 0.5f * App->dtG, 0.5f * App->dtG};
+
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * 2 * dt;
 
@@ -91,6 +93,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (wheel != 0) sceneCam->FrustumCam.pos += sceneCam->FrustumCam.front * 10 * -wheel;
 
+	
 	
 
 	return UPDATE_CONTINUE;
