@@ -23,7 +23,7 @@ void CompTransform::Update()
 {
 
 
-	//GetGlobalMatrix();
+	GetGlobalMatrix();
 }
 
 void CompTransform::ShowCompUI()

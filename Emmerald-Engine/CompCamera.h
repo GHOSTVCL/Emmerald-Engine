@@ -27,6 +27,7 @@ public:
 	void ShowCompUI() override;
 	void Update() override;
 	bool ContainsAaBox(MeshData* refBox);
+	float3 TranslateePoint(const float3& point, const float4x4& matrix);
 
 	Frustum FrustumCam;
 	float4x4 viewMatrix;
@@ -41,3 +42,4 @@ private:
 
 	unsigned int renderObjBuffer;
 };
+

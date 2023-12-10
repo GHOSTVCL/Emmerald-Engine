@@ -44,7 +44,6 @@ private:
 };
 namespace Importer {
 
-	void ImportMesh(const char* file_path);
 	void DeleteMesh(MeshData* mesh2delete);	
 	GameObject* LoadMesh(const char* file_path);
 	void ProcessNode(const aiScene* scene, aiNode* node, GameObject* GO, const char* file_path);

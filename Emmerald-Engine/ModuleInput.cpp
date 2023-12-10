@@ -135,7 +135,7 @@ update_status ModuleInput::PreUpdate(float dt)
 		return UPDATE_STOP;
 	}
 	
-	if (App->scene->selectedGO != nullptr) {
+	if (App->scene->selectedGO != nullptr && App->scene->selectedGO->name != "Main Camera") {
 		if (keyboard[SDL_SCANCODE_DELETE] == KEY_UP) {
 			App->scene->selectedGO->Delete();
 		}

@@ -88,7 +88,7 @@ void ModuleHierarchy::PrimitivesMenu()
 	{
 		if (ImGui::MenuItem("Delete"))
 		{
-			if (App->scene->selectedGO != nullptr)
+			if (App->scene->selectedGO != nullptr && App->scene->selectedGO->name != "Main Camera")
 			{
 				App->scene->selectedGO->Delete();
 			}

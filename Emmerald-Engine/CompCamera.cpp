@@ -109,14 +109,16 @@ void CCamera::TransformCam()
 	if (comp_owner == nullptr) return;
 
 	//if not, move with gameObj transform
-	FrustumCam.pos = comp_owner->GetComponent<CompTransform>()->position;
 	
 	//owner's global transform matrix
-	float4x4 matrix = comp_owner->GetComponent<CompTransform>()->GetLocalMatrix();
+	float4x4 matrix = comp_owner->GetComponent<CompTransform>()->GetGlobalMatrix();
+	FrustumCam.pos = TranslateePoint(comp_owner->GetComponent<CompTransform>()->position, matrix);
 
+	float4x4 Lmatrix = comp_owner->GetComponent<CompTransform>()->GetLocalMatrix();
 	//Column 0 -> eix X -> worldRight || Column 1 -> eix Y -> up || Column 2  -> eix Z -> front || Column 3 -> pos
-	FrustumCam.up = matrix.RotatePart().Col(1).Normalized();
-	FrustumCam.front = matrix.RotatePart().Col(2).Normalized();
+	FrustumCam.up = Lmatrix.RotatePart().Col(1).Normalized();
+	FrustumCam.front = Lmatrix.RotatePart().Col(2).Normalized();
+
 }
 
 void CCamera::ShowCompUI()
@@ -186,3 +188,12 @@ bool CCamera::ContainsAaBox(MeshData* refBox)
 		return true;
 }
 
+float3 CCamera::TranslateePoint(const float3& point, const float4x4& matrix) {
+
+	math::float4 homogenousPoint(point.x, point.y, point.z, 1.0f);
+
+	math::float4 result = matrix * homogenousPoint;
+
+	return { result.x, result.y, result.z};
+
+}

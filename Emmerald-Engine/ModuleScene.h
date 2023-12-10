@@ -12,7 +12,6 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	void UpdateGo(GameObject* goToUpdate);
-	void DrawMesh(GameObject* goToUpdate);
 	void DrawAABB(GameObject* goToDraw);
 	bool CleanUp();
 	GameObject* selectedGO;

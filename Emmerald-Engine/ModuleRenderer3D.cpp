@@ -216,12 +216,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	{
 		compMeshes[i]->Draw();
 	}
-	CCamera* tempCam = mainCam;
-	if (tempCam != nullptr) {
-		float3 corners[8];
-		tempCam->FrustumCam.GetCornerPoints(corners);
-		glLineWidth(5.0f);
-		DrawBox(corners, float3(1, .2, .4));
+	if (mainCam != nullptr) {
+		CCamera* tempCam = mainCam;
+		if (tempCam != nullptr) {
+			float3 corners[8];
+			tempCam->FrustumCam.GetCornerPoints(corners);
+			glLineWidth(5.0f);
+			DrawBox(corners, float3(1, .2, .4));
+		}
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
