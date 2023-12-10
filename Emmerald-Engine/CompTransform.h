@@ -34,7 +34,6 @@ public:
     float4x4 globalTransform;
     float4x4 localTransform;
     float4x4 identity;
-    float4x4 lTransform;
 
     float3 position, localScale, eulerRotation;
     Quat rotation;

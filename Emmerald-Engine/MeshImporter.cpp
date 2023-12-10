@@ -324,85 +324,32 @@ void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 		glBegin(GL_LINES);
 
 		for (unsigned int i = 0; i < indices.size(); i += 3) {
-			// Obtener los �ndices de los v�rtices de la cara
 			unsigned int index1 = indices[i];
 			unsigned int index2 = indices[i + 1];
 			unsigned int index3 = indices[i + 2];
 
-			// Calcular el punto medio de la cara (usamos la posici�n promedio de los v�rtices)
 			float3 midPoint = (ourVertex[index1].Position + ourVertex[index2].Position + ourVertex[index3].Position) / 3.0f;
 
-			// Obtener la normal de la cara
 			float3 faceNormal = (ourVertex[index2].Position - ourVertex[index1].Position).Cross(ourVertex[index3].Position - ourVertex[index1].Position);
 
-			// Normalizar la normal de la cara
 			faceNormal = faceNormal.Normalized();
 
-			// Punto inicial de la l�nea en el punto medio de la cara
 			glVertex3f(midPoint.x, midPoint.y, midPoint.z);
 
-			// Punto final de la l�nea desplazado seg�n la normal de la cara
-			float scale = 0.1f;  // Factor de escala para las l�neas de las normales
+			float scale = 0.1f; 
 			glVertex3f(midPoint.x + scale * faceNormal.x, midPoint.y + scale * faceNormal.y, midPoint.z + scale * faceNormal.z);
 		}
 		glEnd();
 
 	}
 	if (printAABB) {
-		glColor3f(0.0f, 0.0f, 1.0f); // Color azul para AABB global
-		glLineWidth(3.0f);
+	
+		float3 corners1[8];
+		localAABB.GetCornerPoints(corners1);
+		glLineWidth(5.0f);
+		App->renderer3D->DrawBox(corners1, { 0.0f, 0.0f, 1.0f });
 
-		glBegin(GL_LINES);
 
-		float3 minPointLocal = localAABB.minPoint;
-		float3 maxPointLocal = localAABB.maxPoint;
-		// Líneas horizontales de la base
-		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
-		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
-
-		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
-		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
-
-		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
-		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
-
-		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
-		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
-
-		// Líneas verticales
-		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
-		glVertex3f(minPointLocal.x, maxPointLocal.y, minPointLocal.z);
-
-		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
-		glVertex3f(maxPointLocal.x, maxPointLocal.y, minPointLocal.z);
-
-		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
-		glVertex3f(minPointLocal.x, maxPointLocal.y, maxPointLocal.z);
-
-		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
-		glVertex3f(maxPointLocal.x, maxPointLocal.y, maxPointLocal.z);
-
-		// Líneas superiores
-		glVertex3f(minPointLocal.x, maxPointLocal.y, minPointLocal.z);
-		glVertex3f(maxPointLocal.x, maxPointLocal.y, minPointLocal.z);
-
-		glVertex3f(minPointLocal.x, maxPointLocal.y, minPointLocal.z);
-		glVertex3f(minPointLocal.x, maxPointLocal.y, maxPointLocal.z);
-
-		glVertex3f(maxPointLocal.x, maxPointLocal.y, minPointLocal.z);
-		glVertex3f(maxPointLocal.x, maxPointLocal.y, maxPointLocal.z);
-
-		glVertex3f(minPointLocal.x, maxPointLocal.y, maxPointLocal.z);
-		glVertex3f(maxPointLocal.x, maxPointLocal.y, maxPointLocal.z);
-
-		// Líneas inferiores
-		glVertex3f(minPointLocal.x, minPointLocal.y, minPointLocal.z);
-		glVertex3f(maxPointLocal.x, minPointLocal.y, minPointLocal.z);
-
-		glVertex3f(minPointLocal.x, minPointLocal.y, maxPointLocal.z);
-		glVertex3f(maxPointLocal.x, minPointLocal.y, maxPointLocal.z);
-
-		glEnd();
 		
 	}
 	printAABB = false;

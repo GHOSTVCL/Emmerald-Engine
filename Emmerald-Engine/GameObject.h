@@ -55,8 +55,6 @@ public:
 
 	GameObject* parent = nullptr;
 
-	CompTransform* transform_;
-
 	bool active;
 	std::string name;
 

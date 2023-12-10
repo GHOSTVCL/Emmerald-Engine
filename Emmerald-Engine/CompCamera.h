@@ -25,7 +25,7 @@ public:
 	void TransformCam();
 
 	void ShowCompUI() override;
-
+	void Update() override;
 	bool ContainsAaBox(MeshData* refBox);
 
 	Frustum FrustumCam;

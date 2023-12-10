@@ -41,6 +41,7 @@ public:
 	void SetCullFace(bool cull);
 	void SetLightning(bool setlights);
 	void SetWireframe(bool wireframe);
+	void DrawBox(float3* corners, float3 color);
 	void OnZoom();
 
 	//void AddDebug(/*float3* points*/);

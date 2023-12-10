@@ -459,9 +459,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Sources\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Sources\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="FrameBuffer.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
@@ -679,9 +676,6 @@
     </ClCompile>
     <ClCompile Include="WinInspector.cpp">
       <Filter>Sources\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Sources\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Sources\Helpers</Filter>

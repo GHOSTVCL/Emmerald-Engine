@@ -131,13 +131,10 @@ void ModuleCamera3D::Rotation()
 }
 
 float3 ModuleCamera3D::TranslatePoint(const float3& point, const float4x4& matrix) {
-	// Crear un vector homog�neo con el punto (x, y, z, 1)
 	math::float4 homogenousPoint(point.x, point.y, point.z, 1.0f);
 
-	// Multiplicar la matriz de transformaci�n por el vector homog�neo
 	math::float4 result = matrix * homogenousPoint;
 
-	// El resultado contiene el nuevo punto trasladado
 	return { result.x/2, result.y, result.z / 2};
 }
 

@@ -31,7 +31,9 @@ CCamera::~CCamera()
 	glDeleteFramebuffers(1, &renderObjBuffer);
 }
 
-
+void CCamera::Update() {
+	TransformCam();
+}
 void CCamera::SetCam()
 {
 	FrustumCam.type = FrustumType::PerspectiveFrustum;
@@ -109,10 +111,10 @@ void CCamera::TransformCam()
 	if (comp_owner == nullptr) return;
 
 	//if not, move with gameObj transform
-	FrustumCam.pos = comp_owner->transform_->position;
-
+	FrustumCam.pos = comp_owner->GetComponent<CompTransform>()->position;
+	
 	//owner's global transform matrix
-	float4x4 matrix = comp_owner->transform_->GetLocalMatrix();
+	float4x4 matrix = comp_owner->GetComponent<CompTransform>()->GetLocalMatrix();
 
 	//Column 0 -> eix X -> worldRight || Column 1 -> eix Y -> up || Column 2  -> eix Z -> front || Column 3 -> pos
 	FrustumCam.up = matrix.RotatePart().Col(1).Normalized();
