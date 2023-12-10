@@ -10,7 +10,6 @@ CCamera::CCamera() : Component(nullptr)
 {
 	type = COMP_TYPE::CAMERA;
 	comp_owner = nullptr;
-	printCount = 0;
 	SetCam();
 	GenBuffer();
 }
@@ -19,7 +18,6 @@ CCamera::CCamera(GameObject* owner) : Component(owner)
 {
 	type = COMP_TYPE::CAMERA;
 	this->comp_owner = owner;
-	printCount = 0;
 	SetCam();
 	GenBuffer();
 }
@@ -125,9 +123,7 @@ void CCamera::ShowCompUI()
 {
 	if (ImGui::CollapsingHeader("Camera"))
 	{
-		ImGui::Text("");
-		ImGui::Text("Rendered objects: %d", printCount);
-		ImGui::Text("");
+		ImGui::Text("");	
 
 		if (ImGui::SliderInt("FOV", &FOV, 5, 180)) {
 			FrustumCam.verticalFov = FOV * DEGTORAD;
@@ -140,7 +136,6 @@ void CCamera::ShowCompUI()
 			FrustumCam.horizontalFov = 2.0f * atanf(tanf(FrustumCam.verticalFov / 2.0f) * 1.7f);
 		}
 
-
 		ImGui::SliderFloat("Near Distance", &FrustumCam.nearPlaneDistance, 0.1f, FrustumCam.farPlaneDistance);
 		if (ImGui::Button("Reset Near Distance")) {
 			FrustumCam.nearPlaneDistance = 0.1f;
@@ -151,7 +146,7 @@ void CCamera::ShowCompUI()
 			FrustumCam.farPlaneDistance = 500.f;
 		}
 		ImGui::Text("");
-		if (ImGui::Button("Set Main Camera", ImVec2(120, 50))) {
+		if (ImGui::Button("Set as Main Camera")) {
 			App->renderer3D->mainCam = this;
 		}
 	}

@@ -72,8 +72,8 @@ void Application::FinishUpdate()
 update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
-	if (gameState == GameState::PLAY) dtG = dt;
-	else dtG = 0;
+	if (game_State == GameState::PLAY) dt_game = dt;
+	else dt_game = 0;
 	PrepareUpdate();
 	
 	for (std::vector<Module*>::const_iterator it = list_modules.cbegin(); it != list_modules.cend() && ret == UPDATE_CONTINUE; ++it)
@@ -114,24 +114,24 @@ float Application::GetDT()
 
 float Application::GetGameDT()
 {
-	return gamedt;
+	return game_dt;
 }
 void Application::SetGameDT()
 {
 	game_timer.Start();
-	gamedt = ((float)game_timer.Read() / 1000.0f);
+	game_dt = ((float)game_timer.Read() / 1000.0f);
 }
 void Application::StopGameDT()
 {
 	game_timer.Stop();
-	gamedt = 0;
+	game_dt = 0;
 }
 void Application::PauseGameDT()
 {
-	if (gamedt == 0)
-		gamedt = ((float)game_timer.Read() / 1000.0f);
+	if (game_dt == 0)
+		game_dt = ((float)game_timer.Read() / 1000.0f);
 	else
-		gamedt = 0;
+		game_dt = 0;
 }
 
 void Application::AddModule(Module* mod)
@@ -175,21 +175,21 @@ void Application::SetDT(float dt)
 }
 float Application::DTG()
 {
-	return dtG;
+	return dt_game;
 }
 bool Application::IsRunning()
 {
-	return gameState == GameState::PLAY;
+	return game_State == GameState::PLAY;
 }
 bool Application::IsPaused()
 {
-	return gameState == GameState::PAUSE;
+	return game_State == GameState::PAUSE;
 }
 GameState Application::GetState()
 {
-	return gameState;
+	return game_State;
 }
 void Application::SetState(GameState gameState)
 {
-	this->gameState = gameState;
+	this->game_State = gameState;
 }

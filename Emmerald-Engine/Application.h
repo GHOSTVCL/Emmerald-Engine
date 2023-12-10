@@ -57,7 +57,7 @@ private:
 
 	Timer ms_timer;
 	Timer game_timer;
-	float gamedt;
+	float game_dt;
 	std::vector<Module*> list_modules;
 
 public:
@@ -69,7 +69,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool quitapp = false;
-	float	dt;
+	float dt;
 
 	float GetDT();
 	float GetGameDT();
@@ -85,8 +85,8 @@ public:
 	bool IsPaused();
 	GameState GetState();
 	void SetState(GameState gameState);
-	float dtG;
-	GameState gameState = GameState::STOP;
+	float dt_game;
+	GameState game_State = GameState::STOP;
 private:
 
 	void AddModule(Module* mod);

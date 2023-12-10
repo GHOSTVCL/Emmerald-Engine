@@ -31,7 +31,8 @@ ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Modul
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
-{}
+{
+}
 
 // Called before render is available
 
@@ -124,12 +125,12 @@ bool ModuleRenderer3D::Init()
 	MainCamera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
 	MainCamera->SetParent(App->scene->root);
 	GameCamera = new GameObject("Scene Camera");
+
 	//GameCamera->name = "Main Camera";
 	CCamera* cam = new CCamera(GameCamera);
 	App->camera->sceneCam = cam;
 	GameCamera->components.push_back(cam);
 	GameCamera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
-
 
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -156,8 +157,6 @@ bool ModuleRenderer3D::Init()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
 
-
-
 	Grid.axis = true;
 	ilInit();
 
@@ -170,10 +169,9 @@ bool ModuleRenderer3D::Init()
 
 bool ModuleRenderer3D::Start()
 {
+
 	LOG("Render Start");
 	bool ret = true;
-
-	
 
 	return ret;
 }

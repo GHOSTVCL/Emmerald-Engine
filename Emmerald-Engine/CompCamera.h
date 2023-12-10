@@ -32,8 +32,6 @@ public:
 	float4x4 viewMatrix;
 	float4x4 projectionMatrix;
 
-	int printCount;
-
 	int FOV = 60.0f;
 
 	unsigned int cameraBuffer;

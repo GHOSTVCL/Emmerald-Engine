@@ -269,7 +269,7 @@ void ModuleEditor::DisplayConfigMenu()
 }
 void ModuleEditor::PlayStop()
 {
-    ImGui::SameLine(ImGui::GetWindowWidth() / 2 - 37);
+    ImGui::SameLine(ImGui::GetWindowWidth() / 2 - 27);
     {
         if (ImGui::Button("PLAY"))
         {
@@ -282,7 +282,6 @@ void ModuleEditor::PlayStop()
                 ImGui::SetWindowFocus("Game");
             }
             LOG("Play");
-            //App->SetGameDT();
         }
         ImGui::SameLine();
         if (ImGui::Button("STOP"))
@@ -291,8 +290,7 @@ void ModuleEditor::PlayStop()
                 App->SetState(GameState::STOP);
                 ImGui::SetWindowFocus("Scene");
             }
-            LOG("Stop");
-            //App->StopGameDT();
+            LOG("Stop"); 
         }
         ImGui::SameLine();
         if (ImGui::Button("PAUSE"))
@@ -300,8 +298,7 @@ void ModuleEditor::PlayStop()
             if (App->IsRunning()) {
                 App->SetState(GameState::PAUSE);
             }
-            LOG("Pause");
-            //App->PauseGameDT();
+            LOG("Pause");  
         }
     }
 }
