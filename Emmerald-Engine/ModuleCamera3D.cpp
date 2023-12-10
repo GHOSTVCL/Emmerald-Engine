@@ -68,7 +68,6 @@ update_status ModuleCamera3D::Update(float dt)
 		if (App->scene->selectedGO != nullptr && App->scene->selectedGO->name != "Scene") {
 			
 			float3 target = TranslatePoint(App->scene->selectedGO->GetComponent<CompTransform>()->position, App->scene->selectedGO->GetComponent<CompTransform>()->GetGlobalMatrix());
-
 			sceneCam->LookAt(target);
 
 			float TargetDist = sceneCam->FrustumCam.pos.Distance(target);
