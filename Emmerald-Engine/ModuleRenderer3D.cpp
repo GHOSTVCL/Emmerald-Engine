@@ -358,17 +358,6 @@ void ModuleRenderer3D::DrawBox(float3* corners, float3 color)
 
 }
 
-void ModuleRenderer3D::OnZoom()
-{
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	//todo: USE MATHGEOLIB here BEFORE 1st delivery! (TIP: Use MathGeoLib/Geometry/Frustum.h, view and projection matrices are managed internally.)
-	ProjectionMatrix = perspective(50.0f, (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.125f, 512.0f);
-	glLoadMatrixf(ProjectionMatrix.M);
-
-}
-
 CompMesh* ModuleRenderer3D::RayIntersects(LineSegment& line)
 {
 	std::vector<CompMesh*> meshIntersectedbyAABB;

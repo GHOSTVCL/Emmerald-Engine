@@ -107,33 +107,6 @@ bool Application::CleanUp()
 	return ret;
 }
 
-float Application::GetDT()
-{
-	return dt;
-}
-
-float Application::GetGameDT()
-{
-	return game_dt;
-}
-void Application::SetGameDT()
-{
-	game_timer.Start();
-	game_dt = ((float)game_timer.Read() / 1000.0f);
-}
-void Application::StopGameDT()
-{
-	game_timer.Stop();
-	game_dt = 0;
-}
-void Application::PauseGameDT()
-{
-	if (game_dt == 0)
-		game_dt = ((float)game_timer.Read() / 1000.0f);
-	else
-		game_dt = 0;
-}
-
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
@@ -167,6 +140,11 @@ logReport::logReport(Logs type, std::string msg)
 {
 	this->message = msg;
 	this->type = type;
+}
+
+float Application::GetDT()
+{
+	return dt;
 }
 
 void Application::SetDT(float dt)
