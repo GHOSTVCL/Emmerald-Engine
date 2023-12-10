@@ -3,6 +3,8 @@
 
 #include "Module.h"
 #include "SDL/include/SDL.h"
+#include "JsonParser.h"
+#include "parson.h"
 
 class Application;
 
@@ -26,6 +28,9 @@ public:
 	void SetBrightness(float brightness);
 	void SetScreenSize(int w, int h);
 	void GetScreenSize(int* wi, int* he);
+
+	bool SaveConfig(JsonParser& node) const;
+	bool LoadConfig(JsonParser& node);
 
 public:
 	//The window we'll be rendering to

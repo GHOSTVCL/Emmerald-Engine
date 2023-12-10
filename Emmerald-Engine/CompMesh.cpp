@@ -2,6 +2,8 @@
 #include "CompTransform.h"
 #include "ImGui/imgui.h"
 #include "Application.h"
+#include "ModuleCamera3D.h"
+#include "CompCamera.h"
 CompMesh::CompMesh(GameObject* _go) : Component(_go), mesh() {
 
 	this->name = "Mesh_Component";
@@ -29,6 +31,8 @@ void CompMesh::Update()
 		return;
 
 	AABB tembAABB = mesh->GenGlobalBB(comp_owner);
+
+	/*if(App->camera->sceneCam->FrustrumContainsBB(tembAABB))*/
 	App->renderer3D->compMeshes.push_back(this);
 	
 

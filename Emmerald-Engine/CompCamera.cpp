@@ -197,3 +197,40 @@ float3 CCamera::TranslateePoint(const float3& point, const float4x4& matrix) {
 	return { result.x, result.y, result.z};
 
 }
+
+bool CCamera::FrustrumContainsBB(AABB& globalBB)
+{
+	bool isBBcontained = false;
+
+	float3 OBBCornerpoints[8];
+	Plane camerafrustrumplanes[6];
+	int iTotalIn = 0;
+	
+	FrustumCam.GetPlanes(camerafrustrumplanes);
+	globalBB.GetCornerPoints(OBBCornerpoints); // get the corners of the box into the vCorner array
+	// test all 8 corners against the 6 sides
+	// if all points are behind 1 specific plane, we are out
+	// if we are in with all points, then we are fully in
+	for (int p = 0; p < 6; ++p) {
+		int iInCount = 8;
+		int iPtIn = 1;
+		for (int i = 0; i < 8; ++i) {
+			// test this point against the planes
+			if (camerafrustrumplanes[p].IsOnPositiveSide(OBBCornerpoints[i])) {
+				iPtIn = 0;
+				--iInCount;
+			}
+		}
+		// were all the points outside of plane p?
+		if (iInCount == 0)
+		{
+			isBBcontained = false;
+			return isBBcontained;
+		}
+		// check if they were all on the right side of the plane
+		iTotalIn += iPtIn;
+	}
+
+	isBBcontained = true;
+	return isBBcontained;
+}

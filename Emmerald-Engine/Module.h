@@ -4,6 +4,7 @@ class Application;
 struct PhysBody3D;
 
 #include "Globals.h"
+#include"JsonParser.h"
 
 class Module
 {
@@ -12,8 +13,8 @@ private :
 
 public:
 	Application* App;
-
-	Module(Application* parent, bool start_enabled = true) : App(parent)
+	const char* name;
+	Module(Application* parent, bool start_enabled = true) : App(parent), enabled(start_enabled), name("notNamed")
 	{}
 
 	virtual ~Module()
@@ -47,6 +48,14 @@ public:
 	virtual bool CleanUp() 
 	{ 
 		return true; 
+	}
+	virtual bool LoadConfig(JsonParser& node)
+	{
+		return true;
+	}
+	virtual bool SaveConfig(JsonParser& node) const
+	{
+		return true;
 	}
 
 	virtual void OnCollision(PhysBody3D* body1, PhysBody3D* body2)

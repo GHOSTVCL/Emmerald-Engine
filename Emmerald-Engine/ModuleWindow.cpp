@@ -6,6 +6,8 @@ ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, s
 {
 	window = NULL;
 	screen_surface = NULL;
+	name = "Window";
+
 }
 
 // Destructor
@@ -141,4 +143,54 @@ void ModuleWindow::SetScreenSize(int w, int h)
 void ModuleWindow::GetScreenSize(int* wi, int* he)
 {
 	SDL_GetWindowSize(window, wi, he);
+}
+
+bool ModuleWindow::SaveConfig(JsonParser& node) const
+{
+
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "width", App->editor->winWidth);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "height", App->editor->winHeight);
+	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "brightness", App->editor->setbrightness);
+
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "fullscreen", App->editor->fullscreen);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "borderless", App->editor->bordered);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "resizable", App->editor->resizeable);
+
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "depthEnabled", App->editor->depthEnabled);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "cullEnabled", App->editor->cullEnabled);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "lightsEnabled", App->editor->lightsEnabled);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wireframeEnabled", App->editor->wireframeEnabled);
+
+	return true;
+}
+
+bool ModuleWindow::LoadConfig(JsonParser& node)
+{
+	App->editor->winWidth = (int)node.JsonValToNumber("width") * SCREEN_SIZE;
+	App->editor->winHeight = (int)node.JsonValToNumber("height") * SCREEN_SIZE;
+	App->editor->setbrightness = (float)node.JsonValToNumber("brightness");
+
+	App->editor->fullscreen = node.JsonValToBool("fullscreen");
+	App->editor->bordered = node.JsonValToBool("borderless");
+	App->editor->resizeable = node.JsonValToBool("resizable");
+
+	App->editor->depthEnabled = node.JsonValToBool("depthEnabled");
+	App->editor->cullEnabled = node.JsonValToBool("cullEnabled");
+	App->editor->lightsEnabled = node.JsonValToBool("lightsEnabled");
+	App->editor->wireframeEnabled = node.JsonValToBool("wireframeEnabled");
+	
+	
+	SetScreenSize(App->editor->winWidth, App->editor->winHeight);
+	SetBrightness(App->editor->setbrightness);
+
+	SetFullscreen(App->editor->fullscreen);
+	SetBorder(App->editor->bordered);
+	SetResizable(App->editor->resizeable);
+
+	App->renderer3D->SetDepthTest(App->editor->depthEnabled);
+	App->renderer3D->SetCullFace(App->editor->cullEnabled);
+	App->renderer3D->SetLightning(App->editor->lightsEnabled);
+	App->renderer3D->SetWireframe(App->editor->wireframeEnabled);
+
+	return true;
 }

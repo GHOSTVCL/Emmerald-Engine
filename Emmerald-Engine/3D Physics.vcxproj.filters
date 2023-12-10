@@ -489,6 +489,9 @@
     <ClInclude Include="ImGUI\backends\imgui_impl_sdl.h">
       <Filter>Sources\ImGUI\backends</Filter>
     </ClInclude>
+    <ClInclude Include="JsonParser.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -694,6 +697,9 @@
     </ClCompile>
     <ClCompile Include="ImGUI\backends\imgui_impl_sdl.cpp">
       <Filter>Sources\ImGUI\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonParser.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

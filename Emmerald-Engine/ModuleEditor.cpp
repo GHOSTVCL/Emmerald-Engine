@@ -23,6 +23,7 @@ ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, s
     colorMaterialEnabled = false;
     textureMappingEnabled = false;
     wireframeEnabled = false;
+    name = "Editor";
 }
 
 ModuleEditor::~ModuleEditor()

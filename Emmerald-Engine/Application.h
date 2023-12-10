@@ -10,6 +10,7 @@
 #include "ModuleEditor.h"
 #include "ModuleScene.h"
 #include "ModuleHierarchy.h"
+#include "JsonParser.h"
 
 #include<vector>
 
@@ -77,6 +78,13 @@ public:
 	void StopGameDT();
 	void PauseGameDT();
 
+	bool saveRequested;
+	bool loadRequested;
+	JsonParser jsonFile;
+
+	void SaveConfigRequest() { saveRequested = true; };
+	void LoadConfigRequest() { loadRequested = true; };
+
 	static Application* GetInstance();
 	void AddLog(Logs type, std::string msg);
 	void SetDT(float dt);
@@ -85,6 +93,10 @@ public:
 	bool IsPaused();
 	GameState GetState();
 	void SetState(GameState gameState);
+
+	void LoadConfig();
+	void SaveConfig();
+
 	float dt_game;
 	GameState game_State = GameState::STOP;
 private:

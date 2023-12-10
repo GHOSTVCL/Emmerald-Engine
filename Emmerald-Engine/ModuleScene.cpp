@@ -6,7 +6,7 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	root = new GameObject("Scene");
 	root->parent = nullptr;
 	selectedGO = root;
-
+	name = "Scene";
 }
 
 bool ModuleScene::Start()

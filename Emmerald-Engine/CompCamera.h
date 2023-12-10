@@ -28,7 +28,7 @@ public:
 	void Update() override;
 	bool ContainsAaBox(MeshData* refBox);
 	float3 TranslateePoint(const float3& point, const float4x4& matrix);
-
+	bool FrustrumContainsBB(AABB& globalBB);
 	Frustum FrustumCam;
 	float4x4 viewMatrix;
 	float4x4 projectionMatrix;

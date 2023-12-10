@@ -24,6 +24,9 @@ Application::Application()
 	AddModule(renderer3D);
 	AddModule(editor);
 
+	loadRequested = true;
+	saveRequested = false;
+
 }
 
 Application::~Application()
@@ -38,7 +41,14 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+	JSON_Value* root = jsonFile.FileToValue("config.json");
 
+	if (jsonFile.GetRootValue() == NULL)
+	{
+		ret = false;
+	}
+
+	JsonParser application = jsonFile.GetChild(root, "App");
 	// Call Init() in all modules
 	for (std::vector<Module*>::const_iterator it = list_modules.cbegin(); it != list_modules.cend() && ret; ++it)
 	{
@@ -66,6 +76,15 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (loadRequested)
+	{
+		LoadConfig();
+	}
+
+	if (saveRequested)
+	{
+		SaveConfig();
+	}
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -139,14 +158,6 @@ void Application::AddModule(Module* mod)
 	list_modules.push_back(mod);
 }
 
-//void Application::AddLog(Logs type, std::string msg)
-//{
-//
-//	logReport temp(type, msg);
-//
-//	logreports.push_back(temp);
-//}
-
 Application* Application::GetInstance()
 {
 
@@ -192,4 +203,42 @@ GameState Application::GetState()
 void Application::SetState(GameState gameState)
 {
 	this->game_State = gameState;
+}
+
+void Application::SaveConfig()
+{
+	LOG("Saving configuration");
+
+	JSON_Value* root = jsonFile.GetRootValue();
+
+	JsonParser application = jsonFile.SetChild(root, "App");
+
+	// Call SaveConfig() in all modules
+	std::vector<Module*>::iterator item;
+
+	for (item = list_modules.begin(); item != list_modules.end(); ++item)
+	{
+		(*item)->SaveConfig(jsonFile.SetChild(root, (*item)->name));
+	}
+
+	jsonFile.SerializeFile(root, "config.json");
+	saveRequested = false;
+}
+
+void Application::LoadConfig()
+{
+	LOG("Loading configurations");
+
+	JSON_Value* root = jsonFile.GetRootValue();
+
+	JsonParser application = jsonFile.GetChild(root, "App");
+
+	std::vector<Module*>::iterator item;
+
+	for (item = list_modules.begin(); item != list_modules.end(); ++item)
+	{
+		(*item)->LoadConfig(jsonFile.GetChild(root, (*item)->name));
+	}
+
+	loadRequested = false;
 }
