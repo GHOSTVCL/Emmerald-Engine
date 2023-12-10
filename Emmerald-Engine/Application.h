@@ -57,7 +57,6 @@ public:
 private:
 
 	Timer ms_timer;
-	Timer game_timer;
 	float game_dt;
 	std::vector<Module*> list_modules;
 
@@ -73,10 +72,6 @@ public:
 	float dt;
 
 	float GetDT();
-	float GetGameDT();
-	void SetGameDT();
-	void StopGameDT();
-	void PauseGameDT();
 
 	bool saveRequested;
 	bool loadRequested;

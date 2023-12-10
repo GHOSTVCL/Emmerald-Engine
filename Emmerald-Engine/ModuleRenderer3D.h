@@ -28,7 +28,6 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
-	bool Start();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	CompMesh* RayIntersects(LineSegment& line);
@@ -42,9 +41,7 @@ public:
 	void SetLightning(bool setlights);
 	void SetWireframe(bool wireframe);
 	void DrawBox(float3* corners, float3 color);
-	void OnZoom();
 
-	//void AddDebug(/*float3* points*/);
 
 public:
 
