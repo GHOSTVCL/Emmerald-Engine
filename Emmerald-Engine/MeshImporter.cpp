@@ -177,7 +177,7 @@ void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 	if (textid != nullptr) {
 		glBindTexture(GL_TEXTURE_2D, textid->textID);
 	}
-	else if(printcheckers){
+	if(printcheckers){
 		glBindTexture(GL_TEXTURE_2D, checkers);
 
 	}

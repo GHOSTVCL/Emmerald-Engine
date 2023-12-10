@@ -276,6 +276,7 @@
     <ClCompile Include="MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="ModuleHierarchy.cpp" />
+    <ClCompile Include="parson.c" />
     <ClCompile Include="WinBaseClass.cpp" />
     <ClCompile Include="WinConsole.cpp" />
     <ClCompile Include="WinGame.cpp" />

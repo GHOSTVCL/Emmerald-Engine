@@ -33,7 +33,7 @@ public:
 	float4x4 viewMatrix;
 	float4x4 projectionMatrix;
 
-	int FOV = 60.0f;
+	int FOV;
 
 	unsigned int cameraBuffer;
 	GLuint frameBuffer;

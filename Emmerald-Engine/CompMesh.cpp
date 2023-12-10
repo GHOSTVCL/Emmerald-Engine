@@ -31,10 +31,13 @@ void CompMesh::Update()
 		return;
 
 	AABB tembAABB = mesh->GenGlobalBB(comp_owner);
-
-	/*if(App->camera->sceneCam->FrustrumContainsBB(tembAABB))*/
-	App->renderer3D->compMeshes.push_back(this);
 	
+	if (App->renderer3D->mainCam->FrustrumContainsBB(tembAABB)) {
+		App->renderer3D->compMeshes.push_back(this);
+	}
+	else if (App->GetState() != GameState::PLAY) {
+		App->renderer3D->compMeshes.push_back(this);
+	}
 
 }
 

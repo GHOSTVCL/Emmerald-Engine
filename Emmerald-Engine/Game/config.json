@@ -1,0 +1,21 @@
+{
+    "App": {},
+    "Window": {
+        "width": 1770,
+        "height": 1001,
+        "brightness": 1,
+        "fullscreen": false,
+        "borderless": true,
+        "resizable": true,
+        "depthEnabled": false,
+        "cullEnabled": false,
+        "lightsEnabled": true,
+        "wireframeEnabled": false
+    },
+    "Camera": {},
+    "Input": {},
+    "Scene": {},
+    "notNamed": {},
+    "Renderer": {},
+    "Editor": {}
+}

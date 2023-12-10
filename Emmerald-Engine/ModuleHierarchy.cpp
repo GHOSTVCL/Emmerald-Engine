@@ -79,7 +79,7 @@ void ModuleHierarchy::PrimitivesMenu()
 		}
 		if (ImGui::MenuItem("Camera"))
 		{
-			App->camera->CreateGameCamera();
+			App->camera->CreateGameCamera("Camera");
 		}
 
 		ImGui::EndMenu();

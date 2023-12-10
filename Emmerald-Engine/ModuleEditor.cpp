@@ -208,6 +208,10 @@ void ModuleEditor::DisplayConfigMenu()
 {
     if (ImGui::BeginMenu("Configuration"))
     {
+        if (ImGui::Button("Save"))App->SaveConfigRequest();
+        ImGui::SameLine();
+        if (ImGui::Button("Load"))App->LoadConfigRequest();
+
         if (ImGui::BeginMenu("Application")) {
 
 

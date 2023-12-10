@@ -22,6 +22,8 @@ ModuleCamera3D::~ModuleCamera3D()
 bool ModuleCamera3D::Start()
 {
 	LOG("Setting up the camera");
+	
+
 	bool ret = true;
 
 	return ret;
@@ -43,9 +45,9 @@ update_status ModuleCamera3D::Update(float dt)
 	int wheel = -App->input->GetMouseZ();
 	float speed = 8.0f * dt;
 
-	if(App->renderer3D->MainCamera != nullptr)
-	App->renderer3D->MainCamera->GetComponent<CompTransform>()->position += {-0.3f * App->dt_game, 0.0f * App->dt_game, 0.0f * App->dt_game};
-
+	if(Camera != nullptr)
+		Camera->GetComponent<CompTransform>()->position += {-1.3f * App->dt_game, 0.0f * App->dt_game, 0.0f * App->dt_game};
+	
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * 2 * dt;
 
@@ -140,10 +142,9 @@ float3 ModuleCamera3D::TranslatePoint(const float3& point, const float4x4& matri
 	return { result.x/2, result.y, result.z / 2};
 }
 
-void ModuleCamera3D::CreateGameCamera()
+void ModuleCamera3D::CreateGameCamera(const char* Name)
 {
-	Camera = new GameObject("Camera");
-	//GameCamera->name = "Main Camera";
+	Camera = new GameObject(Name);
 	CCamera* cam_ = new CCamera(Camera);
 	App->renderer3D->mainCam = cam_;
 	Camera->components.push_back(cam_);

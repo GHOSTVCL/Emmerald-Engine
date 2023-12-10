@@ -49,6 +49,7 @@ bool Application::Init()
 	}
 
 	JsonParser application = jsonFile.GetChild(root, "App");
+
 	// Call Init() in all modules
 	for (std::vector<Module*>::const_iterator it = list_modules.cbegin(); it != list_modules.cend() && ret; ++it)
 	{
@@ -207,7 +208,6 @@ void Application::SetState(GameState gameState)
 
 void Application::SaveConfig()
 {
-	LOG("Saving configuration");
 
 	JSON_Value* root = jsonFile.GetRootValue();
 
@@ -227,7 +227,6 @@ void Application::SaveConfig()
 
 void Application::LoadConfig()
 {
-	LOG("Loading configurations");
 
 	JSON_Value* root = jsonFile.GetRootValue();
 

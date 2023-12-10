@@ -60,12 +60,12 @@ public:
 	mat4x4 ProjectionMatrix;
 	std::vector<MeshData*> ourMeshes;
 	std::vector<CompMesh*> compMeshes;
+
 	std::map<float, CompMesh*> trihitsdistmap;
 
 	int GOtotal;
 
 	GameObject* GameCamera;
-	GameObject* MainCamera;
 	GameObject* streetToLoad;
 
 	CCamera* mainCam;

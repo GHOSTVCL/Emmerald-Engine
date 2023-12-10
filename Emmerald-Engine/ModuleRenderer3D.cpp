@@ -119,16 +119,10 @@ bool ModuleRenderer3D::Init()
 		glewInit();
 	}
 
-	MainCamera = new GameObject("Main Camera");
-	//GameCamera->name = "Main Camera";
-	CCamera* mcam = new CCamera(MainCamera);
-	mainCam = mcam;
-	MainCamera->components.push_back(mcam);
-	MainCamera->GetComponent<CompTransform>()->position = float3(0, 2, -10);
-	MainCamera->SetParent(App->scene->root);
-	GameCamera = new GameObject("Scene Camera");
 
-	//GameCamera->name = "Main Camera";
+
+
+	GameCamera = new GameObject("Scene Camera");
 	CCamera* cam = new CCamera(GameCamera);
 	App->camera->sceneCam = cam;
 	GameCamera->components.push_back(cam);
@@ -171,7 +165,7 @@ bool ModuleRenderer3D::Init()
 
 bool ModuleRenderer3D::Start()
 {
-
+	App->camera->CreateGameCamera("Main Camera");
 	LOG("Render Start");
 	bool ret = true;
 
@@ -266,7 +260,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	}*/
 	compMeshes.clear();
 
-
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
 }
@@ -277,7 +270,6 @@ bool ModuleRenderer3D::CleanUp()
 	LOG("Destroying 3D Renderer");
 
 	delete GameCamera;
-	delete MainCamera;
 
 	for (int i = 0; i < ourMeshes.size(); i++) {
 

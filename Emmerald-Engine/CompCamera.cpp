@@ -10,6 +10,7 @@ CCamera::CCamera() : Component(nullptr)
 {
 	type = COMP_TYPE::CAMERA;
 	comp_owner = nullptr;
+	FOV = 60.0f;
 	SetCam();
 	GenBuffer();
 }
@@ -18,6 +19,7 @@ CCamera::CCamera(GameObject* owner) : Component(owner)
 {
 	type = COMP_TYPE::CAMERA;
 	this->comp_owner = owner;
+	FOV = 60.0f;
 	SetCam();
 	GenBuffer();
 }
@@ -106,7 +108,9 @@ void CCamera::LookAt(const float3& target)
 void CCamera::TransformCam()
 {
 	//if is the scene cam it will move with input controls (ModuleCamera3D)
-	if (comp_owner == nullptr) return;
+	if (comp_owner == nullptr) {
+		return;
+	}
 
 	//if not, move with gameObj transform
 	

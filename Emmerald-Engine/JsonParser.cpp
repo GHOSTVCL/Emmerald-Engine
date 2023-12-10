@@ -1,8 +1,6 @@
 #include "Globals.h"
 #include "JsonParser.h"
 
-
-
 JsonParser::JsonParser()
 {
 	rootValue = nullptr;

@@ -166,8 +166,8 @@ bool ModuleWindow::SaveConfig(JsonParser& node) const
 
 bool ModuleWindow::LoadConfig(JsonParser& node)
 {
-	App->editor->winWidth = (int)node.JsonValToNumber("width") * SCREEN_SIZE;
-	App->editor->winHeight = (int)node.JsonValToNumber("height") * SCREEN_SIZE;
+	App->editor->winWidth = (int)node.JsonValToNumber("width");
+	App->editor->winHeight = (int)node.JsonValToNumber("height");
 	App->editor->setbrightness = (float)node.JsonValToNumber("brightness");
 
 	App->editor->fullscreen = node.JsonValToBool("fullscreen");

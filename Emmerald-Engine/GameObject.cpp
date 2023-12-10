@@ -10,6 +10,7 @@
 
 GameObject::GameObject(std::string name)
 {
+	parent = nullptr;
 	if (name == "")
 	{
 		name = "GameObject";
