@@ -167,15 +167,6 @@ bool ModuleRenderer3D::Init()
 	return ret;
 }
 
-bool ModuleRenderer3D::Start()
-{
-
-	LOG("Render Start");
-	bool ret = true;
-
-	return ret;
-}
-
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {

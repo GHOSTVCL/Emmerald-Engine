@@ -28,7 +28,6 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
-	bool Start();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	CompMesh* RayIntersects(LineSegment& line);
