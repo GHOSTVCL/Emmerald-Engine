@@ -13,7 +13,8 @@ enum COMP_TYPE
 	MESH,
 	TEXTURE,
 	CAMERA,
-	BILLBOARD
+	BILLBOARD,
+	PARTICLES
 };
 
 class Component

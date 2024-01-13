@@ -12,21 +12,19 @@
 
 CompParticles::CompParticles(GameObject* _go) :Component(_go)
 {
-	this->type = COMP_TYPE::PARTICLE_SYSTEM;
+	this->type = COMP_TYPE::PARTICLES;
 	this->name = "Particle_System";
 
-	app = Application::GetInstance();
 
 	AddParticleEmitter();
 
-	app->renderer3D->particleSystems.push_back(this);
+	App->renderer3D->particleSystems.push_back(this);
 
 }
 
 CompParticles::~CompParticles()
 {
 
-	RELEASE(particleShaders);
 
 	for (int i = 0; i < emitters.size(); i++)
 	{
@@ -35,12 +33,12 @@ CompParticles::~CompParticles()
 
 	emitters.clear();
 
-	for (int i = 0; i < app->renderer3D->particleSystems.size(); i++)
+	for (int i = 0; i < App->renderer3D->particleSystems.size(); i++)
 	{
 		CompParticles* temp = App->renderer3D->particleSystems[i];
 		if (temp == this)
 		{
-			app->renderer3D->particleSystems.erase(app->renderer3D->particleSystems.begin() + i);
+			App->renderer3D->particleSystems.erase(App->renderer3D->particleSystems.begin() + i);
 		}
 
 	}
@@ -52,10 +50,10 @@ void CompParticles::Update()
 	//DO WE REALLY NEED A VECTOR OF EMITTERS IN A PARTICLE SYSTEM?
 	for each (ParticleEmitter * parrticleemitter in emitters)
 	{
-		parrticleemitter->AttachEmitterOnGameObject(comp_owner->GetComponent<Comp_Transform>());
-		if (SimulationTime::playing)
+		parrticleemitter->AttachEmitterOnGameObject(comp_owner->GetComponent<CompTransform>());
+		if (App->game_State == GameState::STOP)
 		{
-			parrticleemitter->Update(SimulationTime::dt);
+			parrticleemitter->Update(App->dt_game);
 		}
 	}
 
@@ -87,7 +85,7 @@ void CompParticles::ShowCompUI()
 
 void CompParticles::Draw()
 {
-	if (comp_owner->GetComponent<Comp_BillBoarding>() == nullptr)
+	if (comp_owner->GetComponent<CompBillBoarding>() == nullptr)
 	{
 		comp_owner->AddComponent(COMP_TYPE::BILLBOARD);
 	}
@@ -95,7 +93,7 @@ void CompParticles::Draw()
 
 	for each (ParticleEmitter * parrticleemitter in emitters)
 	{
-		parrticleemitter->Draw(particleShaders, comp_owner->GetComponent<Comp_BillBoarding>()->GetBBRotation());
+		parrticleemitter->Draw(comp_owner->GetComponent<CompBillBoarding>()->GetBBRotation());
 	}
 }
 

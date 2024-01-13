@@ -495,6 +495,15 @@
     <ClInclude Include="CompBillboarding.h">
       <Filter>Sources\Component\CompTypes</Filter>
     </ClInclude>
+    <ClInclude Include="CompParticles.h">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmitter.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -709,6 +718,15 @@
     </ClCompile>
     <ClCompile Include="CompBillboarding.cpp">
       <Filter>Sources\Component\CompTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="CompParticles.cpp">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

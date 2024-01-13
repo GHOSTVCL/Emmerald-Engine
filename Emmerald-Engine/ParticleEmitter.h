@@ -26,7 +26,7 @@ public:
 
 	void Update(float dt);
 
-	void Draw(Shaders* shader, Quat BBrot);
+	void Draw(Quat BBrot);
 
 	void InitBuffers();
 
@@ -42,7 +42,6 @@ public:
 
 	void AttachEmitterOnGameObject(CompTransform* comp_owner_transform);
 
-	void SaveParticle(Particle& particleToSave);
 
 private:
 
@@ -70,6 +69,10 @@ private:
 
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
+
+	uint id_indices = 0;
+	uint id_vertices = 0;
+	uint textID = 0;
 
 	GLuint texture;
 

@@ -20,6 +20,7 @@
 
 class CCamera;
 class ModuleCamera3;
+class CompParticles;
 
 class ModuleRenderer3D : public Module
 {
@@ -58,7 +59,7 @@ public:
 	mat4x4 ProjectionMatrix;
 	std::vector<MeshData*> ourMeshes;
 	std::vector<CompMesh*> compMeshes;
-	std::vector<CompParticles*>particleSystems;
+	std::vector<CompParticles*> particleSystems;
 
 	std::map<float, CompMesh*> trihitsdistmap;
 

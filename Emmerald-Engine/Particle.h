@@ -1,7 +1,10 @@
 #ifndef __PARTICLE_H__
 #define __PARTICLE_H__
 
-#include "MathGeoLib/include/Math/MathAll.h"
+#include "Globals.h"
+#include "MathGeoLib/include/MathGeoLib.h"
+
+
 
 struct ParticleProperties 
 {

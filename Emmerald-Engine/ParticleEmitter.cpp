@@ -74,46 +74,38 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 void ParticleEmitter::InitBuffers()
 {
 
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+	uint indices[]
+	{
+		0, 1, 2,
+		2, 3, 0,
+	};
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	float vertices[]
+	{
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, //0
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, //1
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, //2
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f, //3
 
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+	};
 
-	// vertex positions
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-	// vertex normals
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
-	// vertex texture coords
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+	//Fill buffers with vertices
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glGenBuffers(1, (GLuint*)&(id_vertices));
+	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4 * 5, vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+	//Fill buffers with indices
+	glGenBuffers(1, (GLuint*)&(id_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * 6, indices, GL_STATIC_DRAW);
 
-
-	texture = text->textID;
-
-	glBindVertexArray(0);
+	glDisableClientState(GL_VERTEX_ARRAY);
 
 }
 
 ParticleEmitter::~ParticleEmitter()
 {
-	SaveParticle(particlesInEmitter[lastActiveParticle]);
-
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
-	glDeleteVertexArrays(1, &VAO);
-
-	VAO = 0;
-	VBO = 0;
-	EBO = 0;
 	
 	particlesInEmitter.clear();
 
@@ -170,19 +162,28 @@ void ParticleEmitter::Update(float dt)
 	}
 }
 
-void ParticleEmitter::Draw(Shaders* shader, Quat BBrot)
+void ParticleEmitter::Draw(Quat BBrot)
 {
-	//DRAW WITH THE BUFFERS CREATED AT CONSTRUCTOR
+	//Vertices
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 
-	shader->UseProgram();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
+	//bind and use other buffers
 
-	shader->Set1Int("texture0", 0);
 
-	shader->SetMat4fv("viewMatrix", app->camera->cameratobedrawn->GetViewMatrix());
-	shader->SetMat4fv("projectionMatrix", app->camera->cameratobedrawn->GetProjMatrix());
-	
+	if (text) {
+
+		glBindTexture(GL_TEXTURE_2D, textID);
+
+	}
+
+	//Indices
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
+
 
 	for (Particle& particleInPool : particlesInEmitter)
 	{
@@ -191,32 +192,36 @@ void ParticleEmitter::Draw(Shaders* shader, Quat BBrot)
 			continue;
 		}
 
-		float3 zAxis = { 0.0f,0.0f,1.0f };
-		float partRotationInRad = DegToRad(particleInPool.rotation);
-
-		//ROTATION NECESSARY AROUND Z AXIS TO ACHIEVE BILLBOARDING
-		//Quat rotation = Quat::RotateAxisAngle(zAxis, partRotationInRad);
 		Quat BBRotAroundZ = BBrot * Quat::RotateAxisAngle({ 0.0f,0.0f,1.0f }, DegToRad(particleInPool.rotation));
 
 		float percentageOfLife = particleInPool.remainingLifetime / particleInPool.maxLifetime;
 
 		float4 currentcolor = math::Lerp(particleInPool.endColor, particleInPool.startColor, percentageOfLife);
 
-		shader->Set4Float("partcolor", currentcolor.ptr());
-
 		float currentsize = math::Lerp(particleInPool.endSize, particleInPool.startSize, percentageOfLife);
-		
+
 		//Gather pos & rotation &scale
-		float4x4 transform = float4x4::FromTRS(particleInPool.position, BBRotAroundZ, { currentsize,currentsize ,1.0f}).Transposed();
+		float4x4 transform = float4x4::FromTRS(particleInPool.position, BBRotAroundZ, { currentsize,currentsize ,1.0f }).Transposed();
 
-		shader->SetMat4fv("modelMatrix", transform.ptr());
 
-		glBindVertexArray(VAO);
+		if (!text) {
+			glColor4f(currentcolor.x, currentcolor.y, currentcolor.z, currentcolor.w);
+		}
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		
-		glBindVertexArray(0);
+		glPushMatrix();
+
+		glMultMatrixf(transform.ptr());
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+
+		glPopMatrix();
 	}
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	//cleaning texture
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_COORD_ARRAY);
 	
 }
 

@@ -38,7 +38,6 @@ private:
 
 	Application* app;
 
-	Shaders* particleShaders;
 
 	//Timer insert
 
