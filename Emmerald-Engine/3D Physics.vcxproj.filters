@@ -492,6 +492,9 @@
     <ClInclude Include="JsonParser.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="CompBillboarding.h">
+      <Filter>Sources\Component\CompTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -703,6 +706,9 @@
     </ClCompile>
     <ClCompile Include="parson.c">
       <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="CompBillboarding.cpp">
+      <Filter>Sources\Component\CompTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

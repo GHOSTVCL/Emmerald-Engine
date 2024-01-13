@@ -58,6 +58,7 @@ public:
 	mat4x4 ProjectionMatrix;
 	std::vector<MeshData*> ourMeshes;
 	std::vector<CompMesh*> compMeshes;
+	std::vector<CompParticles*>particleSystems;
 
 	std::map<float, CompMesh*> trihitsdistmap;
 

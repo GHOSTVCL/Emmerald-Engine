@@ -12,7 +12,8 @@ enum COMP_TYPE
 	TRANSFORM,
 	MESH,
 	TEXTURE,
-	CAMERA
+	CAMERA,
+	BILLBOARD
 };
 
 class Component

@@ -115,9 +115,11 @@
     <ClInclude Include="Assimp\Assimp\include\vector3.h" />
     <ClInclude Include="Assimp\Assimp\include\version.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="CompBillboarding.h" />
     <ClInclude Include="CompCamera.h" />
     <ClInclude Include="CompMesh.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CompParticles.h" />
     <ClInclude Include="CompTexture.h" />
     <ClInclude Include="CompTransform.h" />
     <ClInclude Include="DevIL\include\devil_cpp_wrapper.hpp" />
@@ -204,6 +206,8 @@
     <ClInclude Include="MathGeoLib\include\Math\TransformOps.h" />
     <ClInclude Include="MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="ModuleHierarchy.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleEmitter.h" />
     <ClInclude Include="WinBaseClass.h" />
     <ClInclude Include="WinConsole.h" />
     <ClInclude Include="WinGame.h" />
@@ -224,9 +228,11 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="CompBillboarding.cpp" />
     <ClCompile Include="CompCamera.cpp" />
     <ClCompile Include="CompMesh.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CompParticles.cpp" />
     <ClCompile Include="CompTexture.cpp" />
     <ClCompile Include="CompTransform.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -277,6 +283,8 @@
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="ModuleHierarchy.cpp" />
     <ClCompile Include="parson.c" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="WinBaseClass.cpp" />
     <ClCompile Include="WinConsole.cpp" />
     <ClCompile Include="WinGame.cpp" />

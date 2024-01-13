@@ -11,7 +11,23 @@
 #define CHECKERS_HEIGHT 64
 
 class GameObject;
-struct Vertex {
+struct Vertex
+{
+	Vertex()
+	{
+
+	}
+	Vertex(float3 pos, float3 normals, float2 texcoords)
+	{
+		this->Position = pos;
+		this->Normal = normals;
+		this->TexCoords = texcoords;
+
+	}
+	~Vertex()
+	{
+
+	}
 	float3 Position;
 	float3 Normal;
 	float2 TexCoords;
