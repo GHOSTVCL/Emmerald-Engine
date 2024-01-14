@@ -161,9 +161,9 @@ void ParticleEmitter::Draw(Quat BBrot)
 	//bind and use other buffers
 
 
-	if (text) {
+	if (text != nullptr) {
 
-		glBindTexture(GL_TEXTURE_2D, textID);
+		glBindTexture(GL_TEXTURE_2D, text->textID);
 
 	}
 
@@ -190,7 +190,7 @@ void ParticleEmitter::Draw(Quat BBrot)
 		float4x4 transform = float4x4::FromTRS(particleInPool.position, BBRotAroundZ, { currentsize,currentsize ,1.0f }).Transposed();
 
 
-		if (!text) {
+		if (text == nullptr) {
 			glColor4f(currentcolor.x, currentcolor.y, currentcolor.z, currentcolor.w);
 		}
 
