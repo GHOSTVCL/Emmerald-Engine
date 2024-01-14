@@ -23,8 +23,6 @@ GameObject::GameObject(std::string name)
 	this->AddComponent(COMP_TYPE::TRANSFORM);
 	this->AddComponent(COMP_TYPE::MESH);
 	this->AddComponent(COMP_TYPE::TEXTURE);
-	this->AddComponent(COMP_TYPE::BILLBOARD);
-	this->AddComponent(COMP_TYPE::PARTICLES);
 
 
 }

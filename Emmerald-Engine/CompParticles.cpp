@@ -9,7 +9,7 @@
 #include "ImGui/imgui.h"
 #include "Globals.h"
 #include "Module.h"
-
+#include "CompParticles.h"
 CompParticles::CompParticles(GameObject* _go) :Component(_go)
 {
 	this->type = COMP_TYPE::PARTICLES;
@@ -49,7 +49,7 @@ void CompParticles::Update()
 	for each (ParticleEmitter * parrticleemitter in emitters)
 	{
 		parrticleemitter->AttachEmitterOnGameObject(comp_owner->GetComponent<CompTransform>());
-		if (App->game_State == GameState::STOP)
+		if (App->game_State == GameState::PLAY)
 		{
 			parrticleemitter->Update(App->dt_game);
 		}
@@ -86,6 +86,7 @@ void CompParticles::Draw()
 	if (comp_owner->GetComponent<CompBillBoarding>() == nullptr)
 	{
 		comp_owner->AddComponent(COMP_TYPE::BILLBOARD);
+		comp_owner->GetComponent<CompBillBoarding>()->typeofBBoard = SCREENALIGN; 
 	}
 
 

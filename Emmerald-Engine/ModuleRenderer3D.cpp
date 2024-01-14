@@ -10,7 +10,7 @@
 #include "ModuleHierarchy.h"
 #include "ModuleCamera3D.h"
 #include "WinScene.h"
-
+#include "CompParticles.h"
 #include "Globals.h"
 #include "CompTransform.h"
 #include "MeshImporter.h"
@@ -211,6 +211,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	for (int i = 0; i < compMeshes.size(); i++)
 	{
 		compMeshes[i]->Draw();
+	}
+	for (int i = 0; i < particleSystems.size(); i++)
+	{
+
+		particleSystems[i]->Draw();
+
 	}
 	if (mainCam != nullptr) {
 		CCamera* tempCam = mainCam;

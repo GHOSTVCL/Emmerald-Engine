@@ -37,6 +37,7 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 		propertiesOfTheParticle.endColor = float4(0.6f, 0.6f, 0.6f, 0.0f);
 
 		break;
+
 	default:
 
 		propertiesOfTheParticle.position = { random.Float() * 5,3.0f,random.Float() };
@@ -75,6 +76,7 @@ void ParticleEmitter::InitBuffers()
 
 	//Fill buffers with vertices
 	glEnableClientState(GL_VERTEX_ARRAY);
+
 	glGenBuffers(1, (GLuint*)&(id_vertices));
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4 * 5, vertices, GL_STATIC_DRAW);

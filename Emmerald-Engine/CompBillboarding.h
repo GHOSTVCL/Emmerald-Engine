@@ -33,10 +33,10 @@ public:
 
     Quat GetBBRotation();
 
+    BILLBOARDTYPE typeofBBoard;
 private:
 
 
-    BILLBOARDTYPE typeofBBoard;
 
     std::string BBtype[4] = { "Screen Align","World Align","Axis Align","No Align" };
 

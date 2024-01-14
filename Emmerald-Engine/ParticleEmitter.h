@@ -1,10 +1,12 @@
-#ifndef __PARTICLE_EMITTER_H__
-#define __PARTICLE_EMITTER_H__
+#pragma once
+
 
 #include "Particle.h"
 #include "MeshImporter.h"
 #include "TextureImporter.h"
+#include "MathGeoLib/include/MathGeoLib.h"
 
+#include <vector>
 
 enum TYPES_OF_PARTICLES
 {
@@ -13,7 +15,6 @@ enum TYPES_OF_PARTICLES
 };
 
 class CompTransform;
-class Shaders;
 class Application;
 struct Vertex;
 
@@ -42,6 +43,12 @@ public:
 
 	void AttachEmitterOnGameObject(CompTransform* comp_owner_transform);
 
+	uint id_indices = 0;
+	uint id_vertices = 0;
+	uint textID = 0;
+	GLuint texture;
+
+	Texture* text;
 
 private:
 
@@ -63,13 +70,7 @@ private:
 
 	//Open GL
 
-	uint id_indices = 0;
-	uint id_vertices = 0;
-	uint textID = 0;
 
-	GLuint texture;
-
-	Texture* text;
 
 	//MathGeoLIB RANDOM
 	LCG random;
@@ -77,5 +78,3 @@ private:
 	friend class CompParticles;
 
 };
-
-#endif // !__PARTICLE_EMITTER_H__
