@@ -63,13 +63,6 @@ private:
 
 	//Open GL
 
-	GLuint VAO;
-	GLuint VBO;
-	GLuint EBO;
-
-	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
-
 	uint id_indices = 0;
 	uint id_vertices = 0;
 	uint textID = 0;

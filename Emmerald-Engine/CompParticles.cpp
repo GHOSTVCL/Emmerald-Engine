@@ -15,9 +15,7 @@ CompParticles::CompParticles(GameObject* _go) :Component(_go)
 	this->type = COMP_TYPE::PARTICLES;
 	this->name = "Particle_System";
 
-
 	AddParticleEmitter();
-
 	App->renderer3D->particleSystems.push_back(this);
 
 }

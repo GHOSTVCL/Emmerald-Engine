@@ -256,6 +256,7 @@ void MeshData::Draw(GLuint checkers, float4x4 matrix) {
 }
 
 void MeshData::InitBuffers() {
+
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * ourVertex.size(), &ourVertex[0], GL_STATIC_DRAW);

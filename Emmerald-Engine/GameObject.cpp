@@ -7,6 +7,8 @@
 #include "CompTransform.h"
 #include "CompCamera.h"
 #include "CompBillboarding.h"
+#include "CompParticles.h"
+
 #include <string>
 
 GameObject::GameObject(std::string name)
@@ -22,6 +24,7 @@ GameObject::GameObject(std::string name)
 	this->AddComponent(COMP_TYPE::MESH);
 	this->AddComponent(COMP_TYPE::TEXTURE);
 	this->AddComponent(COMP_TYPE::BILLBOARD);
+	this->AddComponent(COMP_TYPE::PARTICLES);
 
 
 }
@@ -59,6 +62,10 @@ Component* GameObject::AddComponent(COMP_TYPE type)
 		break;
 	case BILLBOARD:
 		comp = new CompBillBoarding(this);
+		comp->type = type;
+		break;
+	case PARTICLES:
+		comp = new CompParticles(this);
 		comp->type = type;
 		break;
 	}

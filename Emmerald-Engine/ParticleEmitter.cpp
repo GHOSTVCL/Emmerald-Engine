@@ -16,23 +16,8 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 
 	SetParticlePoolSize(2000);
 
-	Vertex quadvertices[]
-	{
-		//POS               //Normals                               //Texture Coords
-		Vertex(float3{-0.5f, -0.5f, 0.0f},float3{0.0f, 0.0f, 0.0f}, float2{0.0f, 0.0f}),
-		Vertex(float3{0.5f, -0.5f, 0.0f},float3{0.0f, 0.0f, 0.0f}, float2{1.0f, 0.0f}),
-		Vertex(float3{0.5f,  0.5f, 0.0f},float3{0.0f, 0.0f, 0.0f}, float2{1.0f, 1.0f}),
-		Vertex(float3{-0.5f,  0.5f, 0.0f},float3{0.0f, 0.0f, 0.0f}, float2{0.0f, 1.0f}),
-	};
-
-	uint quadindices[]
-	{
-		0,1,2,2,3,0
-	};
-
-	SetData(quadvertices, 4, quadindices, 6);
-
-	text = TextureImporter::ImportTexture("Assets/smoke.png", NULL);
+	ilInit();
+	text = TextureImporter::ImportTexture("Assets/Textures/smoke.png", NULL);
 	//INIT BUFFERS
 
 	InitBuffers();
@@ -73,7 +58,6 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 
 void ParticleEmitter::InitBuffers()
 {
-
 	uint indices[]
 	{
 		0, 1, 2,
@@ -308,17 +292,7 @@ void ParticleEmitter::SettingUpParticlePool(Particle& particlePoolRef)
 
 }
 
-void ParticleEmitter::SetData(const Vertex* vertices, const uint numvertices, const GLuint* indices, const uint numindices)
-{
-	for (uint i = 0; i < numvertices; i++)
-	{
-		this->vertices.push_back(vertices[i]);
-	}
-	for (uint i = 0; i < numindices; i++)
-	{
-		this->indices.push_back(indices[i]);
-	}
-}
+
 
 void ParticleEmitter::AttachEmitterOnGameObject(CompTransform* comp_owner_transform)
 {
