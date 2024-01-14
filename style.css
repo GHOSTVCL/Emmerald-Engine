@@ -2,17 +2,46 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
+.intro-section {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
 h1 {
     color: #444;
+    margin-bottom: 20px;
 }
 
-@media (max-width: 600px) {
-    body {
-        background-color: #e4e4e4;
-    }
+p {
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-a:hover {
-    color: #000;
+.photo-section {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.photo-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.photo-section p {
+    text-align: justify;
+    margin-top: 10px;
 }
