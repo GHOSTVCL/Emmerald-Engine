@@ -7,9 +7,11 @@ body {
 }
 
 .intro-section, .photo-section, .core-subsystems, .latest-assignment, .video-container, .repository-link, .license-section {
-    max-width: 800px;
+    width: 100%; 
+    display: block; 
     margin: 20px auto;
     padding: 20px;
+    box-sizing: border-box; 
     background-color: white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 10px;
