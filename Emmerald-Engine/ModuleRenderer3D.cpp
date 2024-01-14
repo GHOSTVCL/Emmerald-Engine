@@ -221,6 +221,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 			glLineWidth(5.0f);
 			DrawBox(corners, float3(1, .2, .4));
 		}
+		for (int i = 0; i < particleSystems.size(); i++)
+		{
+
+			particleSystems[i]->Draw();
+
+		}
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
