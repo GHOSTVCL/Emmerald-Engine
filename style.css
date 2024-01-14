@@ -4,42 +4,31 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-}
-
-.intro-section, .photo-section, .core-subsystems, .latest-assignment, .video-container, .repository-link, .license-section {
-    width: 100%; 
-    display: block; 
-    margin: 20px auto;
-    padding: 20px;
-    box-sizing: border-box; 
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 10px;
+    line-height: 1.6;
 }
 
 h1, h2 {
     color: #444;
     text-align: center;
+    margin-top: 20px;
 }
 
-p {
+p, a {
     font-size: 16px;
-    line-height: 1.6;
+    text-align: justify;
+    margin: 10px auto;
+    display: block;
+    max-width: 800px;
 }
 
-.photo-section img, .latest-assignment img {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 5px;
-}
 
-.video-container video {
+img, video {
     width: 100%;
     height: auto;
     display: block;
     margin: 20px auto;
 }
+
 
 .repository-link a {
     color: #0066cc;
@@ -48,9 +37,4 @@ p {
 
 .repository-link a:hover {
     text-decoration: underline;
-}
-
-.license-section {
-    background-color: #e8e8e8;
-    font-size: 14px;
 }
