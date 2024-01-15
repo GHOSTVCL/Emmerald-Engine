@@ -232,6 +232,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	if (mainCam != nullptr)
 	{
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 
@@ -244,12 +245,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glBindFramebuffer(GL_FRAMEBUFFER, mainCam->frameBuffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		for (int i = 0; i < particleSystems.size(); i++)
-		{
 
-			particleSystems[i]->Draw();
-
-		}
 		CPlane plane;
 		plane.axis = true;
 		plane.Render();
@@ -258,7 +254,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		{
 			compMeshes[i]->Draw();
 		}
+		for (int i = 0; i < particleSystems.size(); i++)
+		{
 
+			particleSystems[i]->Draw();
+
+		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 

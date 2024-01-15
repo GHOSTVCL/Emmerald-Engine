@@ -22,21 +22,32 @@ Texture* TextureImporter::ImportTexture(std::string textfile, GameObject* GoToTe
     if (done == IL_TRUE) {
         ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
-        GLuint _texture;
+        GLuint _texture = 0;
 
         GLuint width = ilGetInteger(IL_IMAGE_WIDTH);
         GLuint height = ilGetInteger(IL_IMAGE_HEIGHT);
         ILubyte* textdata = ilGetData();
 
         glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glGenTextures(1, &_texture);
         glBindTexture(GL_TEXTURE_2D, _texture);
+
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textdata);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height,
+            0, GL_RGBA, GL_UNSIGNED_BYTE, textdata);
+
+        glGenerateMipmap(GL_TEXTURE_2D);
+
         glBindTexture(GL_TEXTURE_2D, 0);
         glDisable(GL_TEXTURE_2D);
      

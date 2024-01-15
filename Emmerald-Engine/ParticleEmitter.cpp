@@ -150,7 +150,6 @@ void ParticleEmitter::Update(float dt)
 
 void ParticleEmitter::Draw(Quat BBrot)
 {
-	//Vertices
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -158,7 +157,6 @@ void ParticleEmitter::Draw(Quat BBrot)
 
 	glVertexPointer(3, GL_FLOAT, sizeof(float) * 5, NULL);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(float) * 5, (void*)(sizeof(float) * 3));
-	//bind and use other buffers
 
 
 	if (text != nullptr) {
@@ -167,7 +165,6 @@ void ParticleEmitter::Draw(Quat BBrot)
 
 	}
 
-	//Indices
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 
 
@@ -204,7 +201,6 @@ void ParticleEmitter::Draw(Quat BBrot)
 	}
 
 	glDisableClientState(GL_VERTEX_ARRAY);
-	//cleaning texture
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_TEXTURE_COORD_ARRAY);
