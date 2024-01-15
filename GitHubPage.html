@@ -63,16 +63,14 @@
       </div>
     </section>
     <section class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-clearfix u-palette-2-base u-section-3" id="carousel_e98f">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <div class="u-clearfix u-sheet u-sheet-1">
         <div class="custom-expanded data-layout-selected u-clearfix u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
+          <div class="u-layout" style="">
+            <div class="u-layout-row" style="">
               <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
-                <div class="u-container-layout u-valign-top u-container-layout-1">
+                <div class="u-container-layout u-container-layout-1">
                   <h2 class="u-text u-text-1">Main core sub-systems</h2>
-                  <p class="u-text u-text-2">
-                    <span style="text-decoration: underline !important;">GameObjects &amp; Components<span style="font-size: 0.875rem;"></span>
-                    </span>
+                  <p class="u-text u-text-2"> GameObjects &amp; Components<span style="font-size: 0.875rem;"></span>
                     <br>
                     <span style="font-size: 0.875rem;">
                       <span style="font-size: 1rem;">E</span>
@@ -80,21 +78,41 @@
                     </span>
                     <span style="font-size: 1rem;">uses a GameObject and Component system that makes it easier to understand how entities work for anyone.</span>
                     <br>
-                    <br>
-                    <span style="text-decoration: underline !important;">Scene &amp; Game ViewPorts</span>
-                    <br>
+                    <br>Scene &amp; Game ViewPorts<br>
                     <span style="font-size: 1rem;"></span>
                     <span style="font-size: 1rem;">To facilitate simultaneous rendering of multiple viewports, Emmerald Engine incorporates a camera component equipped with an internal framebuffer. Given that the camera functions as a component, this implies that any game object possessing this camera component has the potential to act as a new viewport.</span>
                     <br>
-                    <br>
-                    <span style="text-decoration: underline !important;">Particle System Component</span>
-                    <br>
+                    <br>Particle System Component<br>
                     <span style="font-size: 1rem;">You can add a particle system component to any game object, enabling the generation of particles based on configurations set in the inspector. Additionally, all these settings are conveniently saved in a JSON file.</span>
                     <br>
-                    <br>
-                    <span style="text-decoration: underline !important;">Camera Frustum Culling</span>
-                    <br>
+                    <br>Camera Frustum Culling<br>
                     <span style="font-size: 1rem;">To enhance performance in both scene and game scenes, the camera is designed to discard all game objects whose Axis-Aligned Bounding Boxes (AABB) fall outside the vision frustum of the active camera. This optimizes rendering efficiency by focusing only on elements within the camera's field of view.</span>
+                    <br>
+                    <br>Camera Controls<br>
+                    <span style="font-size: 1rem;">-</span>
+                    <span style="font-size: 1rem;">Right Click on scene window to rotate the camera<br>- W/A/S/D to move the camera<br>- On scene window press Q/E for going UP/DOWN<br>- Hold Shift + W/A/S/D to move faster<br>- Press F to focus camera position to the center<br>- Alt + Left Click to rotate around the center<br>- Scroll up and down to move the camera in and out
+                    </span>
+                    <br>
+                    <br>Inspector<br>
+                    <span style="font-size: 1rem;">Displays components and properties of selected GameObjects.</span>
+                    <br>
+                    <br> Serialization<br>
+                    <span style="font-size: 1rem;">All configuration can be Saved and Loaded through a json file, for example: Brightness, Show/Hide Wireframe... </span>
+                    <br>
+                    <br>Windows<br>
+                    <span style="font-size: 1rem;">The editor has 2 windows one with the scene(editor view) and another captured from a gameobject with a camera component(main game camera), each one has its own framebuffer and the user can visualize both at the same time.<br>The user also can Star / Stop / Pause the simulation.
+                    </span>
+                    <br>
+                    <br>Components<br>
+                    <span style="font-size: 1rem;">-</span>
+                    <span style="font-size: 1rem;"> Component Transform<br>- Component Mesh<br>- Component Material<br>- Component Camera
+                    </span>
+                    <br>
+                    <br>Drag And Drop<br>&nbsp;<span style="font-size: 1rem;"> - This engine can handle the import of an fbx.<br>- This engine handles the import of a PNG/DDS convert it into a texture and apply it on a gameobject, but the gameobject has to be selected first.
+                    </span>
+                    <br>
+                    <br>
+                    <br>
                     <br>
                   </p>
                 </div>
