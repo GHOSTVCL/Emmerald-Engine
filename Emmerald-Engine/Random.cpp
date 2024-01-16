@@ -12,3 +12,8 @@ float Random::RandomFloat()
 
 	return r;
 }
+
+float Random::AnyRandomFloat() {
+	// Random number from -1.0 to 1.0
+	return 2.0f * RandomFloat() - 1.0f;
+}

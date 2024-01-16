@@ -10,4 +10,5 @@ public:
 
 	static float RandomFloat();
 
+	static float AnyRandomFloat();
 };

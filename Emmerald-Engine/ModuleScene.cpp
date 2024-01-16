@@ -47,11 +47,9 @@ update_status ModuleScene::Update(float dt)
 				if (!fireWorkVector[i]->GetComponent<CompParticles>()->hasExploded) {
 
 					fireWorkVector[i]->speed = float3::zero;
-					fireWorkVector[i]->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.velocity = float3(1.0f, 1.0f, 1.0f);
-					fireWorkVector[i]->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.acceleration = float3(50.0f, 50.0f, 50.0f);
 					fireWorkVector[i]->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.MaxLifetime = 10.0f;
 					fireWorkVector[i]->GetComponent<CompParticles>()->hasExploded = true;
-					fireWorkVector[i]->LifeTime = 2.5f;
+					fireWorkVector[i]->LifeTime = 0.5f;
 
 				}
 				else {
@@ -59,6 +57,11 @@ update_status ModuleScene::Update(float dt)
 					fireWorkVector[i]->GetComponent<CompParticles>()->active = false;
 					continue;
 				}
+			}
+			if (fireWorkVector[i]->GetComponent<CompParticles>()->hasExploded) {
+				float explosionspeed = 15.0f;
+				fireWorkVector[i]->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.velocity = float3(Random::AnyRandomFloat() * explosionspeed, Random::AnyRandomFloat() * explosionspeed, Random::AnyRandomFloat() * explosionspeed);
+
 			}
 
 			float DTspd = App->dt_game;
@@ -113,7 +116,7 @@ void ModuleScene::castFirework() {
 
 	GameObject* fw = new GameObject("FireWork");
 	fw->AddComponent(PARTICLES);
-
+	fw->SetParent(root);
 	float posX = Random::RandomFloat() * 10;
 	float posZ = Random::RandomFloat() * 10;
 	fw->GetComponent<CompTransform>()->position = float3(posX, 0.0f, posZ);
@@ -139,14 +142,14 @@ void ModuleScene::castFirework() {
 		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
 		break;
 	}
-	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.velocity = float3(0.0f, 10.0f, 0.0f);
+	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.velocity = float3(0.0f, 0.1f, 0.0f);
 	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.acceleration = float3(1.0f, 1.0f, 1.0f);
-	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.MaxLifetime = 5.0f;
-	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.startsize = 10.0f;
-	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.endsize = 10.0f;
+	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.MaxLifetime = 0.6f;
+	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.startsize = 2.0f;
+	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.endsize = 2.0f;
 
-	fw->LifeTime = 5.0f;
-	float GOspeed = Random::RandomFloat() * 1;
+	fw->LifeTime = 1.5f;
+	float GOspeed = (Random::RandomFloat() + 1) * 10;
 
 	fw->speed = float3(0.0f, GOspeed, 0.0f);
 
