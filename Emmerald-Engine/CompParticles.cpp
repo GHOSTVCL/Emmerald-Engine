@@ -10,6 +10,7 @@
 #include "Globals.h"
 #include "Module.h"
 #include "CompParticles.h"
+#include "CompTexture.h"
 CompParticles::CompParticles(GameObject* _go) :Component(_go)
 {
 	this->type = COMP_TYPE::PARTICLES;
@@ -18,6 +19,8 @@ CompParticles::CompParticles(GameObject* _go) :Component(_go)
 	AddParticleEmitter();
 	App->renderer3D->particleSystems.push_back(this);
 	this->readytoremove = false;
+
+	this->comp_owner->GetComponent<CompTexture>()->texture = TextureImporter::ImportTexture("Assets/Particles/smoke.png", NULL);
 }
 
 CompParticles::~CompParticles()
@@ -49,6 +52,9 @@ void CompParticles::Update()
 	for each (ParticleEmitter * parrticleemitter in emitters)
 	{
 		parrticleemitter->AttachEmitterOnGameObject(comp_owner->GetComponent<CompTransform>());
+
+		parrticleemitter->text = comp_owner->GetComponent<CompTexture>()->texture;
+
 		if (App->game_State == GameState::PLAY)
 		{
 			parrticleemitter->Update(App->dt_game);

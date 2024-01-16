@@ -17,7 +17,8 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 	SetParticlePoolSize(2000);
 
 	ilInit();
-	text = TextureImporter::ImportTexture("Assets/Particles/smoke.png", NULL);
+	
+	
 	//INIT BUFFERS
 
 	InitBuffers();
@@ -52,7 +53,7 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 	}
 
 	currentparticle = particlesInEmitter.size() - 1;
-
+	text = nullptr;
 	EmitParticles(5);
 
 }

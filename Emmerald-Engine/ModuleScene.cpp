@@ -5,6 +5,7 @@
 #include "ParticleEmitter.h"
 #include "CompTransform.h"
 #include "Random.h"
+#include "CompTexture.h"
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	root = new GameObject("Scene");
@@ -71,6 +72,8 @@ update_status ModuleScene::Update(float dt)
 
 				}
 				else {
+
+					fireWorkVector[i]->GetComponent<CompTexture>()->texture = nullptr;
 					fireWorkVector[i]->GetComponent<CompParticles>()->readytoremove = true;
 					fireWorkVector[i]->active = false;
 					fireWorkVector[i]->GetComponent<CompParticles>()->active = false;
@@ -159,22 +162,22 @@ void ModuleScene::castFirework() {
 	int randomText = 1 + (rand() % 5);
 	switch (randomText) {
 	case 1:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex1;
+		fw->GetComponent<CompTexture>()->texture = tex1;
 		break;
 	case 2:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex2;
+		fw->GetComponent<CompTexture>()->texture = tex2;
 		break;
 	case 3:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
+		fw->GetComponent<CompTexture>()->texture = tex3;
 		break;
 	case 4:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex4;
+		fw->GetComponent<CompTexture>()->texture = tex4;
 		break;
 	case 5:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex5;
+		fw->GetComponent<CompTexture>()->texture = tex5;
 		break;
 	default:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
+		fw->GetComponent<CompTexture>()->texture = tex3;
 		break;
 	}
 	fw->GetComponent<CompParticles>()->emitters[0]->propertiesOfTheParticle.velocity = float3(0.0f, 0.1f, 0.0f);

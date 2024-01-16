@@ -52,12 +52,16 @@ Texture* TextureImporter::ImportTexture(std::string textfile, GameObject* GoToTe
      
         ilDeleteImages(1, &imageToTextID);
 
-        if (GoToTex != nullptr)
-        if (GoToTex->GetComponent<CompMesh>()->mesh != NULL)
-        {
-            GoToTex->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
+        if (GoToTex != nullptr) {
+
             GoToTex->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
-            GoToTex->GetComponent<CompTexture>()->path = textfile;
+
+            if (GoToTex->GetComponent<CompMesh>()->mesh != NULL)
+            {
+                GoToTex->GetComponent<CompMesh>()->mesh->textid = new Texture(_texture, width, height);
+                GoToTex->GetComponent<CompTexture>()->SetTexture(new Texture(_texture, width, height));
+                GoToTex->GetComponent<CompTexture>()->path = textfile;
+            }
         }
         
         return new Texture(_texture, width, height);

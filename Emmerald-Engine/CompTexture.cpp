@@ -6,7 +6,9 @@ CompTexture::CompTexture(GameObject* _go) : Component(_go), texture(nullptr) {
 
 	this->name = "Texture_Component";
 	this->type = COMP_TYPE::TEXTURE;
-
+	this->texture = nullptr;
+	this->path = "  ";
+	
 }
 
 CompTexture::~CompTexture()
