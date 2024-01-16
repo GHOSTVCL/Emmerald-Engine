@@ -49,7 +49,6 @@ struct Particle
 	//Angular velocity of the particle
 	float rotationSpeed;
 
-	//OPTIONAL?
 	float3 acceleration;
 
 	bool Active;

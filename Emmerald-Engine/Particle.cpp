@@ -25,6 +25,5 @@ Particle::Particle():startColor(0.0f, 1.0f, 0.0f, 1.0f)
 Particle::~Particle()
 {
 
-	//LOG("PARTICLE DESTROYED")
 
 }

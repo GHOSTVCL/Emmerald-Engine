@@ -11,16 +11,12 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 {
 
 	this->name = "smokeparticle";
-	//TODO UPGRADE
-	//Compute how many particles are being emited each second and multiply by lifetime of each particle and set that as poolsize
+
 
 	SetParticlePoolSize(2000);
 
 	ilInit();
 	
-	
-	//INIT BUFFERS
-
 	InitBuffers();
 
 	switch (typeofpart)
@@ -104,7 +100,6 @@ void ParticleEmitter::Update(float dt)
 	{
 		lastActiveParticle = SearchNotActiveParticle();
 
-		//TODO REWORK THIS IN ORDER TO CHANGE HOW RESPAWN PARTICLES WORK
 		SettingUpParticlePool(particlesInEmitter[lastActiveParticle]); 
 		numOfParticlesToRespawn--;
 	}
@@ -113,12 +108,10 @@ void ParticleEmitter::Update(float dt)
 
 	for (int i = 0; i < particlesInEmitter.size(); i++)
 	{
-		//No Active means it is available to be remplace
 		if (particlesInEmitter[i].Active == false)
 		{
 			continue;
 		}
-		//No remainingLifetime means it is dead therefore, is not active
 		if (particlesInEmitter[i].remainingLifetime < 0.0f)
 		{
 			numOfParticlesToRespawn++;
@@ -128,18 +121,14 @@ void ParticleEmitter::Update(float dt)
 		else
 		{
 
-			//Compute all the calculus needed to move the particles
 
-			//Remaining life minus dt
 			particlesInEmitter[i].remainingLifetime -= dt;
 
 			
 			if (particlesInEmitter[i].remainingLifetime > 0.0f)
 			{
-				// velocity = acceleration * dt
 				particlesInEmitter[i].velocity += particlesInEmitter[i].acceleration * dt ;
 
-				// pos += velocity * dt
 				particlesInEmitter[i].position += particlesInEmitter[i].velocity * dt;
 
 				
@@ -211,20 +200,14 @@ void ParticleEmitter::Draw(Quat BBrot)
 void ParticleEmitter::SetParticlePoolSize(uint size)
 {
 	particlesInEmitter.resize(size);
-	/*for (int i = 0; i< particlesInEmitter.size();i++)
-	{
-		SettingUpParticlePool(particlesInEmitter[i]);
-	}*/
+
 }
 
 int ParticleEmitter::SearchNotActiveParticle()
 {
 
-	// Search the last particle that was used or a particle that has not been used yet 
-	//and returns its index in particlesInEmitter Pool
 
 	int maxParticles = particlesInEmitter.size();
-	//First we check from the index of the last active particle
 
 	for (int i = lastActiveParticle; i < maxParticles; ++i)
 	{
@@ -234,7 +217,6 @@ int ParticleEmitter::SearchNotActiveParticle()
 		}
 	}
 
-	//If the first for doesn't return anything we check from the index num 0 till last active
 	for (int i = 0; i < lastActiveParticle; ++i)
 	{
 		if (particlesInEmitter[i].remainingLifetime < 0.0f && particlesInEmitter[i].Active == false)
@@ -246,12 +228,11 @@ int ParticleEmitter::SearchNotActiveParticle()
 
 
 	lastActiveParticle = 0;
-	return 0; // If All particles are Active return the index of the first one and override it
+	return 0;
 }
 
 void ParticleEmitter::EmitParticles(int numOfparticles)
 {
-	//SET UP PARTICLE
 
 	for (int i = 0; i < numOfparticles;i++)
 	{
@@ -295,7 +276,7 @@ void ParticleEmitter::SettingUpParticlePool(Particle& particlePoolRef)
 
 void ParticleEmitter::AttachEmitterOnGameObject(CompTransform* comp_owner_transform)
 {
-	//Pass gameobject position to emitter pos
+
 	this->position = comp_owner_transform->GetGlobalMatrix().TranslatePart();
 }
 

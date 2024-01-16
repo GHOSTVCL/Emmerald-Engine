@@ -67,13 +67,6 @@ private:
 
 	int currentparticle;
 
-	//Add Particles efects;
-
-	//Open GL
-
-
-
-	//MathGeoLIB RANDOM
 	LCG random;
 
 	friend class CompParticles;

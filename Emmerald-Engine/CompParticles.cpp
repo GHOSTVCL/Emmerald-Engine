@@ -48,7 +48,6 @@ CompParticles::~CompParticles()
 
 void CompParticles::Update()
 {
-	//DO WE REALLY NEED A VECTOR OF EMITTERS IN A PARTICLE SYSTEM?
 	for each (ParticleEmitter * parrticleemitter in emitters)
 	{
 		parrticleemitter->AttachEmitterOnGameObject(comp_owner->GetComponent<CompTransform>());
@@ -71,7 +70,6 @@ void CompParticles::ShowCompUI()
 		ImGui::Text("Particle Settings:");
 		ImGui::Separator();
 
-		//CHANGE THIS IN ORDER TO HANDLE MULTIPLE EMITTERS IN ONE PARTICLE SYSTEM
 		ImGui::DragFloat3("Velocity", emitters[0]->propertiesOfTheParticle.velocity.ptr(), 0.1f, 0.0f, 1000.0f);
 		ImGui::DragFloat3("Acceleration", emitters[0]->propertiesOfTheParticle.acceleration.ptr(), 0.1f, 0.0f, 1000.0f);
 
