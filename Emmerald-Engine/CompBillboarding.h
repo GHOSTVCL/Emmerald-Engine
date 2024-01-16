@@ -8,6 +8,7 @@ enum BILLBOARDTYPE
     SCREENALIGN,
     WORLDALIGN,
     AXISALIGN,
+    SCENECAMALIGN,
 };
 
 class Application;
@@ -26,6 +27,8 @@ public:
     void ShowCompUI() override;
 
     Quat ScreenAlignBBoard();
+
+    Quat SceneCamAlignBBoard();
 
     Quat WorldAlignBBoard();
 

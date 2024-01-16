@@ -35,6 +35,6 @@ private:
 
 	GameObject* Camera;
 	bool click = false;
-
+	float3 FireWorksView;
 };
 

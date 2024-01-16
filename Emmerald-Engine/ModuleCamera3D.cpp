@@ -93,9 +93,36 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if (wheel != 0) sceneCam->FrustumCam.pos += sceneCam->FrustumCam.front * 10 * -wheel;
 
-	
-	
+	//Camera TP
+	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN) {
+		float3 fwPos(0.0f, 3.0f, -19.0f);
+		float3 fwRot(-14.0f, 0.0f, 0.0f);
 
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->position = fwPos;
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->eulerRotation = fwRot;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
+		float3 fwPos(-2.0f, 2.0f, -7.0f);
+		float3 fwRot(-2.0f, 32.0f, 0.0f);
+
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->position = fwPos;
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->eulerRotation = fwRot;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) {
+		float3 fwPos(194.0f, 2.0f, -72.0f);
+		float3 fwRot(-7.0f, -520.0f, 0.0f);
+
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->position = fwPos;
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->eulerRotation = fwRot;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+
+		float3 fwPos(-12, 5.0f, -28.0f);
+		float3 fwRot(0.0f, 31.0f, 0.0f);
+
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->position = fwPos;
+		App->renderer3D->mainCam->comp_owner->GetComponent<CompTransform>()->eulerRotation = fwRot;
+	}
 	return UPDATE_CONTINUE;
 }
 

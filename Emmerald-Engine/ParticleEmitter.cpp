@@ -28,10 +28,10 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 	case (SMOKE):
 
 		propertiesOfTheParticle.position = { 0.0f,1.0f,0.0f };
-		propertiesOfTheParticle.startsize = 0.5f;
-		propertiesOfTheParticle.endsize = 0.2f;
-		propertiesOfTheParticle.MaxLifetime = 14.0f;
-		propertiesOfTheParticle.velocity = { 0.01f,0.01f,0.0f };
+		propertiesOfTheParticle.startsize = 0.3f;
+		propertiesOfTheParticle.endsize = 1.0f;
+		propertiesOfTheParticle.MaxLifetime = 7.5f;
+		propertiesOfTheParticle.velocity = { 0.01f,0.410,0.0f };
 		propertiesOfTheParticle.acceleration = { 0.1f,0.1f,0.0f };
 		propertiesOfTheParticle.startColor = float4(1.0f, 1.0f, 1.0f, 1.0f);
 		propertiesOfTheParticle.endColor = float4(0.6f, 0.6f, 0.6f, 0.0f);
@@ -53,7 +53,7 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 
 	currentparticle = particlesInEmitter.size() - 1;
 
-	EmitParticles(10);
+	EmitParticles(5);
 
 }
 

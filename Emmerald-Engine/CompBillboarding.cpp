@@ -27,19 +27,23 @@ void CompBillBoarding::Update()
 
 	case SCREENALIGN:
 
-		//Screen Align CODE
 
 		ScreenAlignBBoard();
 
 		break;
 	case WORLDALIGN:
 
-		//World Align CODE
+		WorldAlignBBoard();
 
 		break;
 	case AXISALIGN:
 
-		//Screen Align CODE
+		AxisAlignBBoard();
+
+		break;
+	case SCENECAMALIGN:
+
+		SceneCamAlignBBoard();
 
 		break;
 
@@ -67,6 +71,10 @@ void CompBillBoarding::ShowCompUI()
 			else if (ImGui::MenuItem("Axis Align BillBoard"))
 			{
 				typeofBBoard = BILLBOARDTYPE::AXISALIGN;
+			}
+			else if (ImGui::MenuItem("Scene Camera Align BillBoard"))
+			{
+				typeofBBoard = BILLBOARDTYPE::SCENECAMALIGN;
 			}
 			else if (ImGui::MenuItem("No Align BillBoard"))
 			{
@@ -111,7 +119,31 @@ Quat CompBillBoarding::ScreenAlignBBoard()
 
 	//comp_owner->GetComponent<Comp_Transform>()->SetNewRotation(quatBBoard);
 }
+Quat CompBillBoarding::SceneCamAlignBBoard()
+{
+	//GET INFO ABOUT CAM AXIS
+	
+	float3 activecamfront = App->camera->sceneCam->FrustumCam.front;
+	float3 activecamup = App->camera->sceneCam->FrustumCam.up;
 
+	//Z-AXIS MUST BE INVERTED 
+	zBBoardAxis = -activecamfront;
+	//Y-AXIS KEEPS THE SAME VALUE
+	yBBoardAxis = activecamup;
+
+	//COMPUTE CROSS PRODUCT IN ORDER TO GET THE REMAINING AXIS
+	xBBoardAxis = yBBoardAxis.Cross(zBBoardAxis).Normalized();
+
+	//Gather the axis into a 3x3 matrix
+	float3x3 rotBBoard;
+	rotBBoard.Set(xBBoardAxis.x, xBBoardAxis.y, xBBoardAxis.z, yBBoardAxis.x, yBBoardAxis.y, yBBoardAxis.z, zBBoardAxis.x, zBBoardAxis.y, zBBoardAxis.z);
+
+	rotation = rotBBoard.Inverted().ToQuat();
+
+	return rotation;
+
+	//comp_owner->GetComponent<Comp_Transform>()->SetNewRotation(quatBBoard);
+}
 Quat CompBillBoarding::WorldAlignBBoard()
 {
 	//Vector from gameobject to cam

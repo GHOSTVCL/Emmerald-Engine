@@ -20,6 +20,10 @@ public:
 	void castFirework();
 	GameObject* selectedGO;
 	GameObject* root;
+	GameObject* Chimney1;
+	GameObject* Chimney2;
+	GameObject* Chimney3;
+
 	std::vector<GameObject*> fireWorkVector;
 	Texture* tex1;
 	Texture* tex2;

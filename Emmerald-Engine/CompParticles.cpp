@@ -17,7 +17,7 @@ CompParticles::CompParticles(GameObject* _go) :Component(_go)
 	this->hasExploded = false;
 	AddParticleEmitter();
 	App->renderer3D->particleSystems.push_back(this);
-
+	this->readytoremove = false;
 }
 
 CompParticles::~CompParticles()
@@ -76,6 +76,8 @@ void CompParticles::ShowCompUI()
 
 		ImGui::DragFloat("Start Size ", &emitters[0]->propertiesOfTheParticle.startsize, 0.1f, 0.1f, 50.0f);
 		ImGui::DragFloat("End Size ", &emitters[0]->propertiesOfTheParticle.endsize, 0.1f, 0.1f, 50.0f);
+
+		ImGui::Checkbox("Is Active", &this->active);
 
 	}
 

@@ -30,13 +30,13 @@ public:
 	std::vector<ParticleEmitter*> emitters;
 	bool hasExploded;
 	float maxDuration = 0.0f;
+	bool readytoremove = false;
 private:
 
 	bool systemActive;
 	//emitter vector
 
 	bool looping = false;
-
 
 	//Timer insert
 

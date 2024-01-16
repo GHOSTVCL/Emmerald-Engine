@@ -31,7 +31,6 @@ Texture* TextureImporter::ImportTexture(std::string textfile, GameObject* GoToTe
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glGenTextures(1, &_texture);
         glBindTexture(GL_TEXTURE_2D, _texture);
@@ -52,6 +51,7 @@ Texture* TextureImporter::ImportTexture(std::string textfile, GameObject* GoToTe
         glDisable(GL_TEXTURE_2D);
      
         ilDeleteImages(1, &imageToTextID);
+
         if (GoToTex != nullptr)
         if (GoToTex->GetComponent<CompMesh>()->mesh != NULL)
         {

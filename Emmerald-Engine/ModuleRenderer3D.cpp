@@ -223,8 +223,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		}
 		for (int i = 0; i < particleSystems.size(); i++)
 		{
+			glDepthMask(GL_FALSE);
 
-			particleSystems[i]->Draw();
+			if(particleSystems[i]->active == true){
+				particleSystems[i]->Draw();
+			}
+			glDepthMask(GL_TRUE);
 
 		}
 	}
@@ -256,8 +260,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		}
 		for (int i = 0; i < particleSystems.size(); i++)
 		{
+			glDepthMask(GL_FALSE);
 
-			particleSystems[i]->Draw();
+			if (particleSystems[i]->active == true) {
+				particleSystems[i]->Draw();
+			}
+
+			glDepthMask(GL_TRUE);
+
 
 		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
