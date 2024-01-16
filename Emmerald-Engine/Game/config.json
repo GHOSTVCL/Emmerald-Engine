@@ -8,7 +8,7 @@
         "borderless": true,
         "resizable": true,
         "depthEnabled": false,
-        "cullEnabled": false,
+        "cullEnabled": true,
         "lightsEnabled": true,
         "wireframeEnabled": false
     },

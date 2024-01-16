@@ -504,6 +504,9 @@
     <ClInclude Include="ParticleEmitter.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -726,6 +729,9 @@
       <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Sources\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>

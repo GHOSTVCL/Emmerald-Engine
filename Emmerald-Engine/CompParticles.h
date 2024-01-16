@@ -27,16 +27,15 @@ public:
 
 	void AddParticleEmitter();
 
+	std::vector<ParticleEmitter*> emitters;
+	bool hasExploded;
+	float maxDuration = 0.0f;
 private:
 
 	bool systemActive;
 	//emitter vector
-	std::vector<ParticleEmitter*> emitters;
 
 	bool looping = false;
-	float maxDuration = 0.0f;
-
-	Application* app;
 
 
 	//Timer insert

@@ -45,10 +45,13 @@ public:
 
 	uint id_indices = 0;
 	uint id_vertices = 0;
-	uint textID = 0;
 	GLuint texture;
 
 	Texture* text;
+
+	std::vector<Particle> particlesInEmitter;
+
+	ParticleProperties propertiesOfTheParticle;
 
 private:
 
@@ -56,9 +59,7 @@ private:
 
 	float3 position;
 
-	std::vector<Particle> particlesInEmitter;
 
-	ParticleProperties propertiesOfTheParticle;
 
 	int lastActiveParticle = 0;
 

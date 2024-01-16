@@ -4,6 +4,7 @@
 #include "Component.h"
 #include <vector>
 #include <string>
+#include "MathGeoLib/include/MathGeoLib.h"
 
 class Component;
 class Application;
@@ -58,6 +59,8 @@ public:
 	bool active;
 	std::string name;
 
+	float LifeTime;
+	float3 speed;
 
 	bool transparent;
 

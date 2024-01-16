@@ -104,73 +104,73 @@ void ModuleHierarchy::PrimitivesMenu()
 
 void ModuleHierarchy::ShowGameObjects(GameObject* go)
 {
+	if (go->active == true) {
+		ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_None;
+		nodeFlags += ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnArrow;
 
-	ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_None;
-	nodeFlags += ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnArrow;
+		if (go->children.size() == 0)
+		{
+			nodeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+		}
 
-	if (go->children.size() == 0)
-	{
-		nodeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-	}
+		if (go == App->scene->selectedGO)
+		{
+			nodeFlags |= ImGuiTreeNodeFlags_Selected;
+		};
 
-	if (go == App->scene->selectedGO)
-	{
-		nodeFlags |= ImGuiTreeNodeFlags_Selected;
-	};
+		bool nodeOpen = ImGui::TreeNodeEx(go->name.c_str(), nodeFlags);
+		if (go->children.size() == 0)nodeOpen = false;
 
-	bool nodeOpen = ImGui::TreeNodeEx(go->name.c_str(), nodeFlags);
-	if (go->children.size() == 0)nodeOpen = false;
+		if (ImGui::IsItemClicked(0))
+		{
+			if (go->parent != nullptr)
+			{
+				App->scene->selectedGO = go;
+			}
+		}
 
-	if (ImGui::IsItemClicked(0))
-	{
 		if (go->parent != nullptr)
 		{
-			App->scene->selectedGO = go;
+			if (ImGui::BeginDragDropSource())
+			{
+				ImGui::SetDragDropPayload("GameObject", go, sizeof(GameObject*));
+
+				goToDrop = go;
+
+				ImGui::Text("Where do you want to drop this in the hierarchy ? ");
+
+				ImGui::EndDragDropSource();
+			}
+		}
+
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("GameObject"))
+			{
+				//Not working as intended
+				GameObject* temp = (GameObject*)payload->Data;
+
+				goToDrop->SetParent(go);
+
+				goToDrop = nullptr;
+			}
+
+			ImGui::EndDragDropTarget();
+		}
+
+		if (nodeOpen && go->children.size() != 0)
+		{
+
+			for (int i = 0; i < go->children.size(); i++)
+			{
+				ShowGameObjects(go->children[i]);
+			}
+
+			if (go->children.size() != 0)
+			{
+				ImGui::TreePop();
+			}
 		}
 	}
-
-	if (go->parent != nullptr)
-	{
-		if (ImGui::BeginDragDropSource())
-		{
-			ImGui::SetDragDropPayload("GameObject", go, sizeof(GameObject*));
-
-			goToDrop = go;
-
-			ImGui::Text("Where do you want to drop this in the hierarchy ? ");
-
-			ImGui::EndDragDropSource();
-		}
-	}
-
-	if (ImGui::BeginDragDropTarget())
-	{
-		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("GameObject"))
-		{
-			//Not working as intended
-			GameObject* temp = (GameObject*)payload->Data;
-
-			goToDrop->SetParent(go);
-
-			goToDrop = nullptr;
-		}
-
-		ImGui::EndDragDropTarget();
-	}
-
-	if (nodeOpen && go->children.size() != 0)
-	{
-
-		for (int i = 0; i < go->children.size(); i++)
-		{
-			ShowGameObjects(go->children[i]);
-		}
-
-		if (go->children.size() != 0)
-		{
-			ImGui::TreePop();
-		}
-	}
-
 
 }

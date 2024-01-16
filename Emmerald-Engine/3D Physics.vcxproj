@@ -208,6 +208,7 @@
     <ClInclude Include="ModuleHierarchy.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleEmitter.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="WinBaseClass.h" />
     <ClInclude Include="WinConsole.h" />
     <ClInclude Include="WinGame.h" />
@@ -285,6 +286,7 @@
     <ClCompile Include="parson.c" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="WinBaseClass.cpp" />
     <ClCompile Include="WinConsole.cpp" />
     <ClCompile Include="WinGame.cpp" />

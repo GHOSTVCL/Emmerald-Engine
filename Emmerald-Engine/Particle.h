@@ -18,6 +18,7 @@ struct ParticleProperties
 	float startsize;
 	float endsize;
 	float MaxLifetime = 1.0f;
+
 };
 
 

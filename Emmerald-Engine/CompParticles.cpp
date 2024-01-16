@@ -14,7 +14,7 @@ CompParticles::CompParticles(GameObject* _go) :Component(_go)
 {
 	this->type = COMP_TYPE::PARTICLES;
 	this->name = "Particle_System";
-
+	this->hasExploded = false;
 	AddParticleEmitter();
 	App->renderer3D->particleSystems.push_back(this);
 
@@ -92,6 +92,7 @@ void CompParticles::Draw()
 
 	for each (ParticleEmitter * parrticleemitter in emitters)
 	{
+		if(comp_owner->active == true)
 		parrticleemitter->Draw(comp_owner->GetComponent<CompBillBoarding>()->GetBBRotation());
 	}
 }
