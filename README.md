@@ -29,7 +29,7 @@ The engine is being developed by:
 
 * Billboarding Component
   
-* Screen Align billboard, World Align billboard, Axis Align billboard and Scene Camera billoard.
+* Screen Align billboard, World Align billboard, Axis Align billboard and Scene Camera billboard.
   
 * Textures (including the particle ones) drawing with transparency
 
