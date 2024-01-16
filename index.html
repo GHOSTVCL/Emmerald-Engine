@@ -52,25 +52,28 @@
       </div>
     </section>
     <section class="u-align-center u-clearfix u-white u-section-2" id="carousel_87be">
-      <div class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
+      <div class="u-clearfix u-sheet u-sheet-1">
         <h1 class="u-align-center u-text u-text-1">Team Members</h1>
         <img class="custom-expanded u-image u-image-1" src="images/Joan.jpg" data-image-width="1886" data-image-height="2634">
         <img class="custom-expanded u-image u-image-contain u-image-2" src="images/Xavi1.jpg" data-image-width="1110" data-image-height="1600">
         <p class="u-align-center u-text u-text-2">Joan Giol</p>
         <p class="u-align-center u-text u-text-3">Xavi Prats</p>
-        <p class="u-align-center u-text u-text-4">Joan Giol is one of the team members, he worked on cameras, docking, engine ui, play/stop and github page.</p>
-        <p class="u-align-center u-text u-text-5">The other component of the group is Xavi Prats, who worked on</p>
+        <p class="u-align-center u-text u-text-4">Joan Giol is one of the team members, he worked on cameras, docking, engine ui, renderer configurations, play/stop, display options and github page.</p>
+        <p class="u-align-center u-text u-text-5">The other component of the group is Xavi Prats, who worked on, Game Objects with the components: Transform, Texture, Mesh, Particles and Billboarding. Hierarchy organitzation, all the 3d Render methods. Importers (FBX and Textures). Particles implementation (Emmiters and particle class). Scene setup (with the particles, 3d models with textures and other items in place), firework scripting. Mousepicking and configuration (with Save/Load).</p>
       </div>
     </section>
     <section class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-clearfix u-palette-2-base u-section-3" id="carousel_e98f">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+    <section class="u-align-center-xs u-clearfix u-section-4" src="" id="carousel_f160">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="custom-expanded data-layout-selected u-clearfix u-layout-wrap u-layout-wrap-1">
           <div class="u-layout" style="">
             <div class="u-layout-row" style="">
               <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
                 <div class="u-container-layout u-container-layout-1">
-                  <h2 class="u-text u-text-1">Main core sub-systems</h2>
-                  <p class="u-text u-text-2"> GameObjects &amp; Components<span style="font-size: 0.875rem;"></span>
+                  <h2 class="u-text u-text-body-alt-color u-text-1">Main core sub-systems</h2>
+                  <p class="u-text u-text-body-alt-color u-text-2"> GameObjects &amp; Components<span style="font-size: 0.875rem;"></span>
                     <br>
                     <span style="font-size: 0.875rem;">
                       <span style="font-size: 1.125rem;">Emmerald Engine&nbsp;</span>
@@ -119,17 +122,17 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="u-align-center-xs u-clearfix u-section-4" src="" id="carousel_f160">
-      <div class="u-clearfix u-sheet u-valign-bottom u-sheet-1">
         <div class="u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
-          <div class="u-container-layout u-valign-top u-container-layout-1">
-            <h1 class="u-text u-text-1">Particle sub-systems</h1>
-            <p class="u-align-justify u-large-text u-text u-text-variant u-text-2"> The Emmerald Engine includes a sophisticated particle subsystem, designed to facilitate particle generation within its environment.&nbsp;<br>This subsystem is structured as follows: It begins with a basic unit, the particle, defined by a set of necessary variables. This particle is a part of an Emitter, which maintains a collection (vector) of such particles. In turn, the Emitter is an element of the Particle System Component, which itself contains a vector of Emitters.&nbsp;<br>Each particle is formed as a 'struct', holding various attributes.<br>The Emitter's primary function is to control the placement and rendering of each particle in every frame, ensuring dynamic and accurate visual representation.&nbsp;<br>A notable feature of the Emitter is its approach to particle instantiation. It creates all particles simultaneously, allowing for the pre-allocation of resources. This method eliminates concerns regarding memory allocation during runtime, as all particles are already allocated. In instances where the number of emitted particles exceeds the pre-allocated quantity, the system will overwrite the oldest emitted particles, thus maintaining memory efficiency.&nbsp;<br>The Particle System Component is responsible for the update and rendering of each Emitter. It also incorporates a billboard component, designed to create an illusion of depth, making the two-dimensional particles appear three-dimensional.&nbsp;<br>Users are provided with extensive control over the system, enabling them to configure particle parameters and select the desired billboard style, thus offering a versatile tool for creating a wide range of particle effects.<br>The engine starts with two smoke emmiters in two different chimneys and if the user presses "1" a firework spawns.
+          <div class="u-container-layout u-valign-top u-container-layout-2">
+            <h1 class="u-text u-text-3">Particle sub-systems</h1>
+            <p class="u-align-justify u-large-text u-text u-text-variant u-text-4"> The Emmerald Engine includes a sophisticated particle subsystem, designed to facilitate particle generation within its environment.&nbsp;<br>This subsystem is structured as follows: It begins with a basic unit, the particle, defined by a set of necessary variables. This particle is a part of an Emitter, which maintains a collection (vector) of such particles. In turn, the Emitter is an element of the Particle System Component, which itself contains a vector of Emitters.&nbsp;<br>Each particle is formed as a 'struct', holding various attributes.<br>The Emitter's primary function is to control the placement and rendering of each particle in every frame, ensuring dynamic and accurate visual representation.&nbsp;<br>A notable feature of the Emitter is its approach to particle instantiation. It creates all particles simultaneously, allowing for the pre-allocation of resources. This method eliminates concerns regarding memory allocation during runtime, as all particles are already allocated. In instances where the number of emitted particles exceeds the pre-allocated quantity, the system will overwrite the oldest emitted particles, thus maintaining memory efficiency.&nbsp;<br>The Particle System Component is responsible for the update and rendering of each Emitter. It also incorporates a billboard component, designed to create an illusion of depth, making the two-dimensional particles appear three-dimensional.&nbsp;<br>Users are provided with extensive control over the system, enabling them to configure particle parameters and select the desired billboard style, thus offering a versatile tool for creating a wide range of particle effects.<br>The engine starts with three smoke emmiters in ​three different chimneys and if the user presses "1" a firework spawns.
             </p>
           </div>
         </div>
+        <p class="u-text u-text-default u-text-5">In this gif we can see the smoke particles</p>
+        <img class="u-image u-image-default u-image-1" src="images/Gif1.gif" alt="" data-image-width="852" data-image-height="480">
+        <p class="u-text u-text-default u-text-6">In this gif we can see the fireworks particles</p>
+        <img class="u-image u-image-default u-image-2" src="images/Gif2.gif" alt="" data-image-width="852" data-image-height="480">
       </div>
     </section>
     <section class="u-align-right u-clearfix u-palette-2-base u-section-5" id="carousel_68b7">
@@ -138,7 +141,7 @@
           <div class="u-container-layout u-valign-middle u-container-layout-1">
             <div class="custom-expanded u-align-center u-video u-video-1">
               <div class="embed-responsive embed-responsive-1">
-                <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" class="embed-responsive-item" src="https://www.youtube.com/embed/L-hm3S1aSnI?mute=0&amp;showinfo=0&amp;controls=0&amp;start=0" frameborder="0" allowfullscreen=""></iframe>
+                <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" class="embed-responsive-item" src="https://www.youtube.com/embed/Om1DY9TRBk8?mute=0&amp;showinfo=0&amp;controls=0&amp;start=0" frameborder="0" allowfullscreen=""></iframe>
               </div>
             </div>
           </div>
