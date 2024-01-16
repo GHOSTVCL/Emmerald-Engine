@@ -25,9 +25,9 @@ The engine is being developed by:
 
 ## 3rd assignment
 
-* Particle Component
+* Particle Component, to see the particles working the engine must be in "Play" state
 
-* Billboarding Component
+* Billboarding Component, the user can select diferent tipes of billboarding
   
 * Screen Align billboard, World Align billboard, Axis Align billboard and Scene Camera billboard.
   
@@ -54,7 +54,13 @@ The engine is being developed by:
 * Alt + Left Click to rotate around the center
 
 * Scroll up and down to move the camera in and out
-
+  
+### Camera tp keys:
+* U - Fireworks view
+* I - Bakerhouse smoke ("Smoke1") view
+* O - "Smoke2" view
+* P - "Smoke3" view
+  
 ## Hierarchy:
 
 * In Objects window, Hover to open the primitive menu, click to create one
@@ -67,8 +73,11 @@ The engine is being developed by:
 
 * This engine can handle the import of an fbx
 
-* This engine handles the import of a PNG/DDS convert it into a texture and apply it on a gameobject, but the gameobject has to be selected first
+* This engine handles the import of a PNG/DDS convert it into a texture and apply it on a gameobject, but the gameobject has to be selected first, it also works with particles
 
+## Others
+
+* Pressing "1" spawns a random firework.
 
 ## License
 
