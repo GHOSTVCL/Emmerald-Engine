@@ -17,7 +17,7 @@ ParticleEmitter::ParticleEmitter(TYPES_OF_PARTICLES typeofpart)
 	SetParticlePoolSize(2000);
 
 	ilInit();
-	text = TextureImporter::ImportTexture("Assets/Textures/smoke.png", NULL);
+	text = TextureImporter::ImportTexture("Assets/Particles/smoke.png", NULL);
 	//INIT BUFFERS
 
 	InitBuffers();

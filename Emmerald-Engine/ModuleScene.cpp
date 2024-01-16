@@ -117,8 +117,8 @@ void ModuleScene::castFirework() {
 	GameObject* fw = new GameObject("FireWork");
 	fw->AddComponent(PARTICLES);
 	fw->SetParent(root);
-	float posX = Random::RandomFloat() * 10;
-	float posZ = Random::RandomFloat() * 10;
+	float posX = Random::AnyRandomFloat() * 10;
+	float posZ = Random::AnyRandomFloat() * 10;
 	fw->GetComponent<CompTransform>()->position = float3(posX, 0.0f, posZ);
 
 	int randomText = 1 + (rand() % 5);
@@ -133,10 +133,10 @@ void ModuleScene::castFirework() {
 		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
 		break;
 	case 4:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
+		fw->GetComponent<CompParticles>()->emitters[0]->text = tex4;
 		break;
 	case 5:
-		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
+		fw->GetComponent<CompParticles>()->emitters[0]->text = tex5;
 		break;
 	default:
 		fw->GetComponent<CompParticles>()->emitters[0]->text = tex3;
