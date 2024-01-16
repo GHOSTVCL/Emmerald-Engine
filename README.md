@@ -21,69 +21,21 @@ The engine is being developed by:
 
 # Features
 
-**Emmeral-Engine v.0.66:**
+**Emmeral-Engine v.1.0:**
 
-## 1st assignment
+## 3rd assignment
 
-* GameObject Hierarchy & Inspector
+* Particle Component
 
-* Mesh, Texture & Trasform components
+* Billboarding Component
+  
+* Screen Align billboard, World Align billboard, Axis Align billboard and Scene Camera billoard.
+  
+* Textures (including the particle ones) drawing with transparency
 
-* Drag&Drop texture & FBX importer
-
-* Unity-like camera Movement
-
-* Configuration for window, rendering & FPS
-
-* Delete not working as expected, sorry about that
-
-* When creating a primitive since you can't delete the house, you will not be able to see it until you go inside the house
-
-## 2nd assignment
-
-### Inspector:
-
-The user should can use the inspector to modify a GameObject:
-* Hierarchy: delete, reparent, create empty and create children
-* Transform: translate, rotate and scale Game Objects
-* Mesh: select or drop any imported mesh
-* Texture: select or drop any imported texture
-* Camera is a component with settings that can be modified
-
-### GameObjects:
-
-* Drag andDrop texture & FBX importer in the Hierarchy
-* Create game objects with Objects Menu
-* Delete game objects by pressing Objects/Delete GameObjects/Delete 
-* Delete selected game object at Hierarchy by pressing Delete
-* Move the GameObjects through the Hierarchy by dragging and dropping them
-* GameObjects can be picked using the mouse
-
-### Frustum:
-
-All meshes use a bounding volume (AABB) and can be discarded using Frustum Culling. This can be visualized in the editor (debug raycast and boxes)
-
-### Frustum Culling:
-
-While playing, the engine only draws the meshes that can be seen by the main camera frustum. That can be seen if you press the "play" button
-
-### Serialization:
-
-All configuration can be Saved and Loaded through a json file, for example: Brightness, Show/Hide Wireframe...
-
-### Windows:
-
-The editor has 2 windows one with the scene(editor view) and another captured from a gameobject with a camera component(main game camera), each one has its own framebuffer and the user can visualize both at the same time
-
-The user also can Star / Stop / Pause the simulation
-
-### Components:
-
-* Component Transform
-* Component Mesh
-* Component Material
-* Component Camera
-
+* Particle textures can be changed by drop and dragging
+  
+* Particles impementation examples with fireworks and smoke 
 
 # Controls:
 
